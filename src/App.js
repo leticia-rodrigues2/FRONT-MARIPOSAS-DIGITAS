@@ -4,6 +4,7 @@ import Login from "./Pages/Login/index.js"
 import Cadastro from "./Pages/Cadastro/index.js" 
 import Home from "./Pages/Home/index.js"
 import Reset from "./Pages/ResetPassword/ResetPassword.js"
+import Forgot from "./Pages/Forgot/Forgot.js"
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="home" element={<Home />} />
         <Route path="cadastro" element={<Cadastro />} />
         <Route path="reset" element={<Reset />} />
+        <Route path="forgot" element={<Forgot />} />
 
       </Routes>
     </BrowserRouter>

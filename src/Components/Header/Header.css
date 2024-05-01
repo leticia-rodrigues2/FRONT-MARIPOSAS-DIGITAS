@@ -1,0 +1,14 @@
+.header {
+    background-color: #80BBD9; 
+    height: 70px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 200px;
+    height: auto;
+    margin-top: 15px;
+  }
+  

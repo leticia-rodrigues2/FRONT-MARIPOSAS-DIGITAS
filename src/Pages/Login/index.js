@@ -44,24 +44,22 @@ function Login() {
   };
 
   return (
-    <Conteiner
+   <Conteiner
       titulo="SEJA BEM VINDA, MARIPOSA!"
       paragrafo="Nosso objetivo é apoiar e capacitar mulheres na área da tecnologia. É fantástico tê-la conosco!"
       textoBotao="ENTRAR"
-      textoLink={
-        <>
-          Não tem uma conta? <span className="bold">Inscrever-se aqui!</span>
-        </>
-      }
+      textoLink={<>
+        Não tem uma conta?<span className="bold">Inscrever-se aqui!</span>
+      </>}
       link="/cadastro"
     >
-    
-     
+
+
       <div className="input-row">
-        <TextField id="username" label="Email" variant="outlined" defaultValue="Normal" size="small" color="secondary"  fullWidth={true} value={email} onChange={handleEmailChange} />
+        <TextField id="username" label="Email" variant="outlined" defaultValue="Normal" size="small" color="secondary" fullWidth={true} value={email} onChange={handleEmailChange} />
       </div>
       <div className="input-row">
-        <TextField id="password" label="Senha" variant="outlined" defaultValue="Normal" size="small"color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
+        <TextField id="password" label="Senha" variant="outlined" defaultValue="Normal" size="small" color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
       </div>
 
       <div className="signup-link2">

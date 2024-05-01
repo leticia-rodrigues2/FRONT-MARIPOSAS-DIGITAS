@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import { useNavigate } from "react-router-dom"; // Importando useNavigate
+import { useNavigate } from "react-router-dom";
+import Conteiner from "../../Components/Conteiner/Conteiner.js";
 import "./login.css";
 
 function Login() {
@@ -43,31 +44,31 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <h2>Bem vinda!</h2>
-      <p>Este site tem o intuito de ajudar mulheres na tecnologia. É ótimo te ver aqui!</p>
+    <Conteiner
+      titulo="SEJA BEM VINDA, MARIPOSA!"
+      paragrafo="Nosso objetivo é apoiar e capacitar mulheres na área da tecnologia. É fantástico tê-la conosco!"
+      textoBotao="ENTRAR"
+      textoLink={
+        <>
+          Não tem uma conta? <span className="bold">Inscrever-se aqui!</span>
+        </>
+      }
+      link="/cadastro"
+    >
+    
+     
       <div className="input-row">
-        <TextField id="username" label="Email" variant="standard" fullWidth={true} value={email} onChange={handleEmailChange} />
+        <TextField id="username" label="Email" variant="outlined" defaultValue="Normal" size="small" color="secondary"  fullWidth={true} value={email} onChange={handleEmailChange} />
       </div>
       <div className="input-row">
-        <TextField id="password" label="Senha" variant="standard" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
+        <TextField id="password" label="Senha" variant="outlined" defaultValue="Normal" size="small"color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
       </div>
 
-      <div className="forgot-password">
-        <Link href="#" color="inherit">
-          Esqueceu a senha?
-        </Link>
+      <div className="signup-link2">
+        <a href="#" className="signup2">Esqueci minha senha</a>
       </div>
 
-      <div className="login-row">
-        <button type="submit" onClick={handleSubmit}>Login</button>
-      </div>
-
-      <div className="signup-link">
-        <a href="/cadastro" className="signup">Não tem uma conta? <strong>Inscrever-se aqui!</strong></a>
-      </div>
-
-    </div>
+    </Conteiner>
   );
 }
 

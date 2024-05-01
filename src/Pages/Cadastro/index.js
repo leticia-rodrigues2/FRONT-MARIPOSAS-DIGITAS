@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Checkbox from '@mui/material/Checkbox';
-import ErrorModal from '../../ErrorModal/index.js';
+import ErrorModal from '../../Components/ErrorModal/index.js';
 import "./cadastro.css";
 
 import Conteiner from "../../Components/Conteiner/Conteiner.js";

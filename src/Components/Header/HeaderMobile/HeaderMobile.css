@@ -1,0 +1,25 @@
+.header {
+  background-color: #80BBD9; 
+  height: 70px; 
+ 
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.items {
+  align-items: center;
+  height: auto;
+  margin: 0 auto;
+  display: block; 
+  background-color: #80BBD9;
+}
+
+.css-1wfyvro-MuiPaper-root-MuiAppBar-root {
+    box-shadow:0px !important;
+}

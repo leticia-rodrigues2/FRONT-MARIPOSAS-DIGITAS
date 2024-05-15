@@ -1,9 +1,8 @@
 import React from "react";
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Header from "../../Components/Header/Header.js";
 import { useNavigate } from "react-router-dom"; // Importando useNavigate
 import "./StyleContainer.css";
+import ResponsiveNavbar from "../Menu/NavBar.js";
+import HeaderMobile from "../Header/HeaderMobile/HeaderMobile.js";
 
 function Conteiner({ titulo, paragrafo='', textoBotao, textoLink, link ,children}) {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ function Conteiner({ titulo, paragrafo='', textoBotao, textoLink, link ,children
   };
 
   return (
-    <><Header /><div className="container">
+    <><HeaderMobile /><div className="container">
           <div className="login-container">
               <img src="images/logo.png" alt="" className="borda-imagem" />
               <h2>{titulo}</h2>

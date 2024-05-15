@@ -42,51 +42,47 @@ function Help() {
         navigate('/Home'); 
       } else {
         console.log('Credenciais inválidas.');
-        // Mostrar mensagem de erro para o usuário
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
-      // Mostrar mensagem de erro para o usuário
     }
   };
 
   return (
-   
-      <Conteiner
-        titulo="ACONTECEU ALGO? SOLICITE AJUDA!"
-        paragrafo
-        textoBotao="ENVIAR"
-        textoLink
-        link
-      >
-      
+ <Conteiner
+      titulo="ACONTECEU ALGO? SOLICITE AJUDA!"
+      paragrafo
+      textoBotao="ENVIAR"
+      textoLink
+      link
+    >
+
       <div className="input-row">
-          <TextField id="password" label="Insira seu nome completo" variant="outlined" defaultValue="Normal" size="small"color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
-        </div>
-        <div className="input-row">
-          <TextField id="password" label="Insira seu e-mail" variant="outlined" defaultValue="Normal" size="small" color="secondary"  fullWidth={true} value={email} onChange={handleEmailChange} />
-        </div>
-        <div className="input-row3">
-          <Checkbox id="madrinha"  color="secondary" onChange={handleCheckboxChange} />
-          <label htmlFor="madrinha" className="checkbox-label">Sou mentora</label>
-        </div>
-        <div className="input-row4">
-          <Checkbox id="aluna" color="secondary" onChange={handleCheckboxChange} />
-          <label htmlFor="aluna" className="checkbox-label">Sou mentorada</label>
-        </div>
-     
-        <TextField
-          id="outlined-multiline-static"
-          label="Digite sua mensagem"
-          color="secondary" 
-          multiline
-          rows={4}
-          defaultValue=""
-          variant="outlined"
-        />
-        
-      
-      </Conteiner>
+        <TextField id="password" label="Insira seu nome completo" variant="outlined" defaultValue="Normal" size="small" color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
+      </div>
+      <div className="input-row">
+        <TextField id="password" label="Insira seu e-mail" variant="outlined" defaultValue="Normal" size="small" color="secondary" fullWidth={true} value={email} onChange={handleEmailChange} />
+      </div>
+      <div className="input-row3">
+        <Checkbox id="madrinha" color="secondary" onChange={handleCheckboxChange} />
+        <label htmlFor="madrinha" className="checkbox-label">Sou mentora</label>
+      </div>
+      <div className="input-row4">
+        <Checkbox id="aluna" color="secondary" onChange={handleCheckboxChange} />
+        <label htmlFor="aluna" className="checkbox-label">Sou mentorada</label>
+      </div>
+
+      <TextField
+        id="outlined-multiline-static"
+        label="Digite sua mensagem"
+        color="secondary"
+        multiline
+        rows={4}
+        defaultValue=""
+        variant="outlined" />
+
+
+    </Conteiner>
 
   );
 }

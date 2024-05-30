@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: #f0f0f0; 
     display: flex; 
     justify-content: center; 
@@ -7,24 +7,29 @@ body {
     overflow-y: scroll;
     overflow-x: hidden;
     margin-bottom: 0;
-    margin-top: 0;
-}
+} */
 .bold {
     font-weight: bold;
     color:#D457D2;
   }
 
-.input-row {
-    width: 90%;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+.input-row3 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    width: 100%;
+    
+}
 
 .input-row input {
     width: 100%;
 }
-
 
 
 .forgot-password {
@@ -32,25 +37,19 @@ body {
     margin-left: auto;
 }
 
-.signup-link2 {
+.signup-link-termos {
+    color: gray;
     width: 100%;
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 10px;
     margin-bottom: 10px;
-    margin-left: 70%;
-    text-align: right , !important; /* Alinha o texto à direita */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
-.signup2 {
-    text-decoration: none;
-    color: #D457D2; 
-    margin-bottom: 0;
-}
 
-.signup2:hover {
-    text-decoration: underline;
-    color: gray;
-    margin-bottom: 0;
-}
+

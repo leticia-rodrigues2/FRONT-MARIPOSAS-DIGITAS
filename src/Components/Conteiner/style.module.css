@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-
-/* Estilos gerais */
-body {
+/* body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0; 
     display: flex; 
@@ -12,14 +10,14 @@ body {
     height: 100vh; 
     margin-bottom: 0;
     overflow-x: hidden;
-}
+} */
 
-.container {
+container {
     width: 100vw;
     height: 80vh; 
 }
 
-.login-container {
+login-container {
     width: 90%; 
     max-width: 425px;
     min-height: 400px; 
@@ -95,13 +93,13 @@ button {
     margin-top: auto; 
 }
 
-.button-submit {
+button[type='submit'] {
     margin-bottom: 10px;
     margin-top: auto; 
     display: flex;
     justify-content: center; 
 }
-.signup-link {
+signup-link {
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 100;

@@ -4,7 +4,7 @@ import Link from '@mui/material/Link';
 import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from "react-router-dom";
 import Conteiner from "../../Components/Conteiner/Conteiner.js";
-import "./Help.css";
+import "./style.module.css";
 
 function Help() {
   const navigate = useNavigate();

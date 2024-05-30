@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
 import Conteiner from "../../Components/Conteiner/Conteiner.js";
-import "./login.css";
+import "./style.module.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -52,6 +52,7 @@ function Login() {
         Não tem uma conta?<span className="bold">Inscrever-se aqui!</span>
       </>}
       link="/cadastro"
+      useDefaultHeader={true}
     >
 
 

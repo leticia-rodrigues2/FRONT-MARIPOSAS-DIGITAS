@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    overflow-y: scroll;
+    height: 100vh; 
+    margin-bottom: 0;
+    overflow-x: hidden;
+    
+} */
+
+.login-container {
+    width: 500px;
+    position: relative;
+}
+
+.logo-text {
+    position: absolute;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 0 10px;
+}
+
+.borda-imagem-logo {
+    width: 150px;
+    height: auto;
+    position: absolute;
+    top: -90px;
+
+}
+
+.linha-rosa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background-color: #D457D2;
+}
+
+.signup-link {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 14px;
+    display: flex;
+    justify-content: center; 
+    margin-top: 15px; 
+}
+
+.signup {
+    text-decoration: none;
+    color: gray;
+    margin-bottom: 0;
+    margin-bottom: 15px;
+}
+
+.signup strong {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.signup:hover {
+    text-decoration: underline;
+    color: #D457D2; 
+    margin-bottom: 0;
+}
+
+
+

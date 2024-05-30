@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
 import Conteiner from "../../Components/Conteiner/Conteiner.js";
-import "./Forgot.css";
+import "./style.module.css";
 
 function Forgot() {
   const navigate = useNavigate();
@@ -47,6 +47,7 @@ function Forgot() {
         textoBotao="ENVIAR"
         textoLink
         link
+        useDefaultHeader={true}
       >
        
         <div className="input-row">

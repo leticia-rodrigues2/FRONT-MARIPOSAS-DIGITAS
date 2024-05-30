@@ -1,13 +1,13 @@
-body {
+/* body {
     background-color: #f0f0f0; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     height: 100vh; 
     overflow-y: scroll;
-    overflow-x: hidden;
     margin-bottom: 0;
-}
+    overflow-x: hidden;
+} */
 .bold {
     font-weight: bold;
     color:#D457D2;
@@ -39,7 +39,7 @@ body {
     font-size: 12px;
     margin-bottom: 10px;
     margin-left: 70%;
-    text-align: right , !important; 
+    text-align: right , !important; /* Alinha o texto à direita */
 }
 
 .signup2 {

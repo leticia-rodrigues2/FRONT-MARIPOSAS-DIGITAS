@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.home {
+    width: 100%;
+    overflow: hidden;
+}
+.image-container { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 0px;
+    width: 100%;
+    background-size: cover; 
+    height: calc(100vh - 63px);
+    background-image: url('../../../public/images/img-principal.png');
+}
+
+
+.container {
+    background-color: #F0F0F0; 
+    padding: 20px;
+    color: white; 
+    text-align: center; 
+    height: full;
+
+}
+.container-description {
+    background-color: #92CAE7; 
+    padding: 30px;
+    color: white; 
+    text-align: center; 
+    margin: 60px;
+
+}
+
+.container h1 {
+    font-size: 28px; 
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+ 
+
+.content-info {
+    margin: 30px;
+
+}
+
+.signup2 {
+    font-weight: 800;
+    font-size: 18px;
+    color: #D457D2; 
+    margin-bottom: 0;
+    text-decoration: none;
+}
+
+.signup2:hover {
+    text-decoration: underline;
+    color: gray;
+    margin-bottom: 0;
+}
+
+
+.content-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+.contente-faq {
+    background-color: #92CAE7; 
+    padding: 20px;
+    height: full;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .container h1 {
+        font-size: 1.5rem; /* Tamanho de texto para tablets */
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+      
+    }
+    .container-description {
+        padding: 30px;
+        margin: 10px;
+        margin-bottom: 30px;
+    }
+    .image-container {
+         margin-top: 63px;
+        width: 100%;
+        height: calc(100vh - 63px);
+        margin-top: 50px; /* Ajusta a margem para telas menores */
+    }
+
+}
+
+@media(min-width: 640px){
+    .image-container {
+        margin-top: 63px;
+       width: 100%;
+       height: calc(100vh - 63px);
+       margin-top: 0;
+   }
+}
+
+@media (max-width: 480px) {
+    .container h1 {
+        font-size: 1.2rem; /* Tamanho de texto para dispositivos móveis */
+       
+        
+    }
+    .container  {
+        margin: 10px;
+        
+    }
+    .container-description {
+        margin: 10px;
+        padding: 8px;
+        margin-bottom: 30px;
+    }
+    .content-info{
+        margin: 0px;
+    }
+    .image-container {
+        height: calc(100vh - 63px);
+        margin-top: 0px; /* Ajusta a margem para telas muito pequenas */
+    }
+}

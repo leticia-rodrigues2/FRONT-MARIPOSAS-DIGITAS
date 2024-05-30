@@ -23,3 +23,7 @@
 .css-1wfyvro-MuiPaper-root-MuiAppBar-root {
     box-shadow:0px !important;
 }
+button {
+  max-width: 50px;
+  min-width: 40px;
+}

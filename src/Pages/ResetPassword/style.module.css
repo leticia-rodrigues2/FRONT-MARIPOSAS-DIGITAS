@@ -1,13 +1,14 @@
-body {
+/* body {
     background-color: #f0f0f0; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     height: 100vh; 
     overflow-y: scroll;
-    margin-bottom: 0;
     overflow-x: hidden;
-}
+    margin-bottom: 0;
+    margin-top: 0;
+} */
 .bold {
     font-weight: bold;
     color:#D457D2;

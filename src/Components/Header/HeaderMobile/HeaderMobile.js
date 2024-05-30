@@ -15,17 +15,19 @@ import HomeIcon from '@mui/icons-material/Home';
 import ContentPasteSearchSharpIcon from '@mui/icons-material/ContentPasteSearchSharp';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 const pages = [
-  { text: 'PÁGINA INICIAL', icon: <HomeIcon /> },
-  { text: 'CONFIGURAÇÕES', icon: <ContentPasteSearchSharpIcon /> },
-  { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon /> },
-  { text: 'SAIR', icon: <LogoutOutlinedIcon /> }
+  { text: 'PÁGINA INICIAL', icon: <HomeIcon />,  route: '/home'  },
+  { text: 'CONFIGURAÇÕES', icon: <ContentPasteSearchSharpIcon /> ,  route: '/' },
+  { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/'  },
+  { text: 'SAIR', icon: <LogoutOutlinedIcon /> ,  route: '/' }
 ];
 
 export default function HeaderMobile() {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer = (open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -34,12 +36,17 @@ export default function HeaderMobile() {
     setDrawerOpen(open);
   };
 
+  const handleMenuItemClick = (route) => {
+    navigate(route); 
+    setDrawerOpen(false); 
+  };
+
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <CssBaseline />
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none' }}>
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div className='logo' style={{ textAlign: 'center' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          <div className='logo' style={{ textAlign: 'center', margin: 'auto' }}>
             <img src="images//LogoText.png" alt="Logo" className="logo" style={{ width: '200px' }} />
           </div>
           <IconButton
@@ -47,13 +54,12 @@ export default function HeaderMobile() {
             edge="end"
             color="inherit"
             aria-label="open drawer"
-            onClick={toggleDrawer(!drawerOpen)}
+            onClick={toggleDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-
       <Drawer anchor="top" open={drawerOpen} onClose={toggleDrawer(false)} sx={{
         width: drawerWidth,
         flexShrink: 0,
@@ -61,10 +67,10 @@ export default function HeaderMobile() {
       }}>
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
-          <List>
+          <List sx={{ backgroundColor: '#80BBD9' }}>
             {pages.map((page, index) => (
-              <ListItem key={index} disablePadding>
-                <ListItemButton>
+              <ListItem key={index} disablePadding onClick={() => handleMenuItemClick(page.route)}>
+                <ListItemButton sx={{ alignItems: 'center' }}>
                   <ListItemIcon sx={{ color: 'white' }}>
                     {page.icon}
                   </ListItemIcon>

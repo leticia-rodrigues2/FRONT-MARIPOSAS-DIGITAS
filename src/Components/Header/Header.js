@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useMemo } from 'react';
+import HeaderDesktop from './HeaderDesktop/HeaderDesktop.js';
+import HeaderMobile from './HeaderMobile/HeaderMobile.js';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import "./Header.css";
+export default function Header() {
+    const isDesktop = useMediaQuery('(min-width: 640px)', {
+        initializeWithValue: false
+    });
 
-const Header = () => {
-  return (
-    <header className="header">
-      <img src="images//LogoText.png" alt="Logo" className="logo" />
-    </header>
-  );
-};
+    const HeaderComponent = useMemo(() => {
+       
+        return !isDesktop ?  <HeaderMobile /> :<HeaderDesktop /> ;
+    }, [isDesktop]);
 
-export default Header;
+    return (
+        <>
+            {HeaderComponent}
+        </>
+    );
+}

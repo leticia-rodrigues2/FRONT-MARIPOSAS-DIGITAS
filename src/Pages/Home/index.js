@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { color } from 'style-value-types';
 import Style from "./style.module.css";
+import Faq from '../../Components/Faq';
 
 const Home = () => (
     <div className={Style.home}>
@@ -96,29 +97,11 @@ const Home = () => (
 
 
         <div className={Style['contente-faq']}> 
-        <Typography sx={{ textAlign: 'left', fontWeight: '800', color: 'white' }}>
+        <Typography sx={{ textAlign: 'left', fontWeight: '800', color: 'white',marginBottom:2 }}>
             FAQ | PERGUNTAS FREQUENTES
         </Typography>
 
-        <div>
-            <Typography  sx={{ textAlign: 'center', fontWeight: '800', color: 'white' }}>
-                <a href="#" className="signup2" style={{ fontWeight: 'bold' }}>CONECTE-SE COM MENTORAS</a>
-            </Typography>
-        </div>
-
-
-
-        <div>
-            <Typography  sx={{ textAlign: 'center', fontWeight: '800', color: 'white' }}>
-                <a href="#" className="signup2" style={{ fontWeight: 'bold',color: 'white'  }}>CONECTE-SE COM MENTORAS</a>
-            </Typography>
-        </div>
-
-        <div>
-            <Typography  sx={{ textAlign: 'center', fontWeight: '800', color: 'white' }}>
-                <a href="#" className="signup2" style={{ fontWeight: 'bold' }}>CONECTE-SE COM MENTORAS</a>
-            </Typography>
-        </div>
+        <Faq></Faq>
         </div>
     </div>
 );

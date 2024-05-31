@@ -4,7 +4,7 @@ import Login from "./Pages/Login/index.js"
 import Cadastro from "./Pages/Cadastro/index.js" 
 import Reset from "./Pages/ResetPassword/index.js"
 import Forgot from "./Pages/Forgot"
-import Help from "./Pages/Help/Help.js"
+import Help from "./Pages/Help/index.js"
 import Home from "./Pages/Home/index.js";
 import DeleteAccount from "./Pages/DeleteAccount/index.js";
 import './global.css'

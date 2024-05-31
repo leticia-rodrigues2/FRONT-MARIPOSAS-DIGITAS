@@ -1,66 +1,69 @@
-/* body {
-    background-color: #f0f0f0; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin-bottom: 0;
-} */
-.bold {
-    font-weight: bold;
-    color:#D457D2;
-  }
 
-  form {
-    width: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.container {
+    height: calc(100vh - 71px);
+    background-color: #F1F1F1;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-  }
+    padding-top: 30px !important; 
+} 
 
-.input-row3 {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    width: 100%;
-    margin-left: 25px;
-}
-.input-row4 {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    width: 100%;
-    margin-left: 25px;
-    margin-bottom: 20px;
+
+h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: #D457D2;
+    margin: 0; 
 }
 
 .input-row input {
     width: 100%;
 }
 
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
 
-.forgot-password {
-    margin-top: auto;
-    margin-left: auto;
-}
-
-.signup-link-termos {
-    color: gray;
-    width: 100%;
+.input-row3 {
     font-family: "Roboto", sans-serif;
     font-style: normal;
-    font-weight: bold;
-    font-size: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    
+}
+.input-row4 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    width: 100%;
+    margin-bottom:5px ;
+    
 }
 
-.css-l62xy5-MuiInputBase-root-MuiOutlinedInput-root {
-    margin-bottom: 40px;
+.checkboxLabel {
+    margin-left: 8px;
 }
-.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-    width: 90%;
+  
+.customLabel {
+    font-family: "Roboto", sans-serif;
+}
+
+  @media (max-width: 768px) {
+    h2 {
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 20px;
+        color: #D457D2;
+        margin: 0; 
+        margin-bottom: 0 !important; 
+    }
+
+    .container {
+        margin-top: 50px;
+        height: calc(100vh);
+    } 
 }

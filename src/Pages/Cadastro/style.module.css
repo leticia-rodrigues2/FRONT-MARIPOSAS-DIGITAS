@@ -1,23 +1,82 @@
-/* body {
-    background-color: #f0f0f0; 
-    display: flex; 
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.container {
+    height: calc(100vh - 71px);
+    background-color: #F1F1F1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px !important; 
+} 
+.signup-link-fixed {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #F1F1F1;
+    text-align: center;
+    display: flex;
     justify-content: center; 
     align-items: center; 
-    height: 100vh; 
-    overflow-y: scroll;
-    overflow-x: hidden;
-    margin-bottom: 0;
-} */
-.bold {
-    font-weight: bold;
-    color:#D457D2;
+    margin-bottom: 10px;
+  }
+  .signup-link-fixed a {
+    text-decoration: none; 
+    color: gray;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
   }
 
-  form {
+  .signup-link-fixed .rosa {
+    color: #D457D2;
+    font-weight: bold;
+  }
+h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: #D457D2;
+    margin: 0; 
+}
+
+
+
+.input-row input {
     width: 100%;
+}
+
+.forgot-password {
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.signup-link2 {
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 10px;
+    margin-left: 70%;
+    text-align: right , !important; 
+}
+
+.signup2 {
+    text-decoration: none;
+    color: #D457D2; 
+    margin-bottom: 0;
+}
+
+.signup2:hover {
+    text-decoration: underline;
+    color: gray;
+    margin-bottom: 0;
+}
+
+.buttonContainer {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    align-items: center; 
   }
 
 .input-row3 {
@@ -26,15 +85,12 @@
     width: 100%;
     
 }
-
-.input-row input {
+.input-row4 {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
     width: 100%;
-}
-
-
-.forgot-password {
-    margin-top: auto;
-    margin-left: auto;
+    margin-bottom:5px ;
+    
 }
 
 .signup-link-termos {
@@ -44,12 +100,54 @@
     font-style: normal;
     font-weight: bold;
     font-size: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
+.signup-link {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 14px;
+    display: flex;
+    justify-content: center; 
+    margin-top: 15px; 
+}
 
+.signup {
+    text-decoration: none;
+    color: gray;
+    margin-bottom: 0;
+    margin-bottom: 15px;
+}
+
+.signup strong {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.signup:hover {
+    text-decoration: underline;
+    color: #D457D2; 
+    margin-bottom: 0;
+}
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    h2 {
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 20px;
+        color: #D457D2;
+        margin: 0; 
+        margin-bottom: 0 !important; 
+    }
+
+    .container {
+        padding-top: 15px !important; 
+    } 
+}
 
 

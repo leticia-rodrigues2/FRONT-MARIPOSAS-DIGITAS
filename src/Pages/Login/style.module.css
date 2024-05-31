@@ -1,13 +1,12 @@
-/* body {
-    background-color: #f0f0f0; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    overflow-y: scroll;
-    margin-bottom: 0;
-    overflow-x: hidden;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.container {
+    height: calc(100vh - 71px);
+    background-color: #F0F0F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
 .bold {
     font-weight: bold;
     color:#D457D2;
@@ -19,18 +18,49 @@
     margin-bottom: 15px;
 }
 
+h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    color: #D457D2;
+    margin: 0; 
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 15px;
+    color: #5B5B5B;
+    margin: 0; 
+    margin-bottom: 60px;
+}
 
 .input-row input {
     width: 100%;
 }
 
-
-
-.forgot-password {
-    margin-top: auto;
-    margin-left: auto;
-}
-
+.forgotPassword {
+    font-family: "Roboto", sans-serif;
+    margin-top: 10px;
+    margin-left: 350px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    
+  }
+  
+  .forgotPassword a {
+    text-decoration: none;
+    color: #D457D2;
+  }
+  
+  .forgotPassword a:hover {
+    text-decoration: underline;
+  }
+  
 .signup-link2 {
     width: 100%;
     font-family: "Roboto", sans-serif;
@@ -39,7 +69,7 @@
     font-size: 12px;
     margin-bottom: 10px;
     margin-left: 70%;
-    text-align: right , !important; /* Alinha o texto à direita */
+    text-align: right , !important; 
 }
 
 .signup2 {
@@ -52,4 +82,40 @@
     text-decoration: underline;
     color: gray;
     margin-bottom: 0;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 30px; 
+    margin-bottom: 30px;
+}
+
+.signup-link-fixed {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #F1F1F1;
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 20px;
+}
+.signup-link-fixed a {
+    text-decoration: none; 
+    color: gray;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+}
+
+.signup-link-fixed .rosa {
+    color: #D457D2;
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    .forgotPassword {
+        margin-left: 180px;
+    }
 }

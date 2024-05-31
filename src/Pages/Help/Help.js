@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from "react-router-dom";
-import Conteiner from "../../Components/Conteiner/Conteiner.js";
+import Container from '../../Components/Container'
 import "./style.module.css";
 
 function Help() {
@@ -49,13 +49,7 @@ function Help() {
   };
 
   return (
- <Conteiner
-      titulo="ACONTECEU ALGO? SOLICITE AJUDA!"
-      paragrafo
-      textoBotao="ENVIAR"
-      textoLink
-      link
-    >
+ <Container>
 
       <div className="input-row">
         <TextField id="password" label="Insira seu nome completo" variant="outlined" defaultValue="Normal" size="small" color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
@@ -82,7 +76,7 @@ function Help() {
         variant="outlined" />
 
 
-    </Conteiner>
+    </Container>
 
   );
 }

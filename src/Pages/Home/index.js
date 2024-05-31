@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { color } from 'style-value-types';
 import Style from "./style.module.css";
 import Faq from '../../Components/Faq';
+import { Footer } from '../../Components/Fotter';
 
 const Home = () => (
     <div className={Style.home}>
@@ -103,6 +104,8 @@ const Home = () => (
 
         <Faq></Faq>
         </div>
+
+        <Footer></Footer>
     </div>
 );
 

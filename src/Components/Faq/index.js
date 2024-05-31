@@ -40,7 +40,7 @@ const ExpandableCard = ({ title, content }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: '100%', marginBottom: 2, bgcolor:'#ddeff8', paddingRight:4 ,paddingLeft:4 }}>
+    <Card sx={{ maxWidth: '100%', marginBottom: 6, bgcolor:'#ddeff8', paddingRight:4 ,paddingLeft:4 }}>
       <CardHeader
       title={
         <Typography variant="h6" sx={{ color: '#737678', fontSize:'20px', fontWeight:"600" }}>

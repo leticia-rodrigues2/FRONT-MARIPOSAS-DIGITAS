@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
-import Conteiner from "../../Components/Conteiner/Conteiner.js";
-import "./style.module.css";
+import Container from '../../Components/Container';
+import s from "./style.module.css";
+import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader';
+import { Button } from "@mui/material";
 
 function Login() {
   const navigate = useNavigate();
@@ -35,39 +37,63 @@ function Login() {
         navigate('/Home'); 
       } else {
         console.log('Credenciais inválidas.');
-        // Mostrar mensagem de erro para o usuário
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
-      // Mostrar mensagem de erro para o usuário
     }
   };
 
   return (
-   <Conteiner
-      titulo="SEJA BEM VINDA, MARIPOSA!"
-      paragrafo="Nosso objetivo é apoiar e capacitar mulheres na área da tecnologia. É fantástico tê-la conosco!"
-      textoBotao="ENTRAR"
-      textoLink={<>
-        Não tem uma conta?<span className="bold">Inscrever-se aqui!</span>
-      </>}
-      link="/cadastro"
-      useDefaultHeader={true}
-    >
-
-
-      <div className="input-row">
-        <TextField id="username" label="Email" variant="outlined" defaultValue="Normal" size="small" color="secondary" fullWidth={true} value={email} onChange={handleEmailChange} />
+    <div>
+      <DefaultHeader />
+      <div className={s.container}>
+        <Container>
+          <div sx={{mb: '100px' }}>
+            <h2>SEJA BEM VINDA, MARIPOSA!</h2>
+            <p>Nosso objetivo é apoiar e capacitar mulheres na área da tecnologia. É fantástico tê-la conosco!</p>
+            <form onSubmit={handleSubmit}>
+              <TextField 
+                sx={{mb: '10px' }}
+                id="email" 
+                type="email"
+                label="Insira seu e-mail" 
+                variant="outlined" 
+                size="small" 
+                color="secondary" 
+                fullWidth 
+                value={email} 
+                onChange={handleEmailChange} 
+              />
+              <TextField 
+                sx={{mb: '10px' }}
+                id="password" 
+                label="Insira sua senha" 
+                variant="outlined" 
+                size="small"
+                color="secondary" 
+                fullWidth 
+                type="password" 
+                value={password} 
+                onChange={handlePasswordChange} 
+              /> 
+              <div className={s.forgotPassword}>
+                <Link href="forgot" underline="none" color="secondary">
+                Esqueci minha senha
+                </Link>
+              </div>
+              <div className={s.buttonContainer}>
+                <Button type="submit" variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>
+                  Entrar
+                </Button>
+              </div>
+            </form>
+          </div>
+        </Container>
+        <div className={s['signup-link-fixed']}>
+          <a href='cadastro' className="signup">Ainda não tem uma conta? <span className={s.rosa}>Clique aqui para se cadastrar!</span></a>
+        </div>
       </div>
-      <div className="input-row">
-        <TextField id="password" label="Senha" variant="outlined" defaultValue="Normal" size="small" color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
-      </div>
-
-      <div className="signup-link2">
-        <a href="#" className="signup2">Esqueci minha senha</a>
-      </div>
-
-    </Conteiner>
+    </div>
   );
 }
 

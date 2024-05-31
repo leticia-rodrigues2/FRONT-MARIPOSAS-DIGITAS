@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
-import Conteiner from "../../Components/Conteiner/Conteiner.js";
-import "./style.module.css";
+import Container from '../../Components/Container'
+import s from "./style.module.css";
+import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader'
+import { Button } from "@mui/material";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -44,24 +46,45 @@ function ResetPassword() {
   };
 
   return (
-   
-      <Conteiner
-        titulo="REDEFINA SUA SENHA"
-        paragrafo
-        textoBotao="ALTERAR SENHA"
-        textoLink
-        link="/cadastro"
-        useDefaultHeader={true} >
-      
-       
-        <div className="input-row">
-          <TextField id="password" label="Insira sua nova senha" variant="outlined" defaultValue="Normal" size="small" color="secondary"  fullWidth={true} value={email} onChange={handleEmailChange} />
-        </div>
-        <div className="input-row">
-          <TextField id="password" label="Confirme sua senha" variant="outlined" defaultValue="Normal" size="small"color="secondary" fullWidth={true} type="password" value={password} onChange={handlePasswordChange} /> {/* Definindo o tipo como 'password' */}
-        </div>
-      </Conteiner>
-
+    <div>
+      <DefaultHeader />
+      <div className={s.container}>
+        <Container>
+          <div sx={{mb: '100px' }}>
+          <h2>REDEFINA SUA SENHA</h2>
+          <form>
+            <TextField 
+              sx={{mb: '30px' }}
+              id="password" 
+              type="password"
+              label="Insira sua nova senha" 
+              variant="outlined" 
+              size="small" 
+              color="secondary" 
+              fullWidth 
+              value={email} 
+              onChange={handleEmailChange} 
+            />
+            <TextField 
+              sx={{mb: '160px' }}
+              id="confirm-password" 
+              label="Confirme sua senha" 
+              variant="outlined" 
+              size="small"
+              color="secondary" 
+              fullWidth 
+              type="password" 
+              value={password} 
+              onChange={handlePasswordChange} 
+            /> 
+          </form>
+          </div>
+          <div className={s.buttonContainer}>
+          <Button variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width:190 }}>Entrar</Button>
+          </div>
+        </Container>
+      </div>
+    </div>
   );
 }
 

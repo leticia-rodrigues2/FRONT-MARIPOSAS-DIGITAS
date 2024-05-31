@@ -1,11 +1,11 @@
 import React from "react";
 
-import "./style.module.css";
+import s from "./style.module.css";
 
 const DefaultHeader = () => {
   return (
-    <header className="header">
-      <img src="images//LogoText.png" alt="Logo" className="logo" />
+    <header className={s["header"]}>
+      <img src="images//LogoText.png" alt="Logo" className={s["logo"]} />
     </header>
   );
 };

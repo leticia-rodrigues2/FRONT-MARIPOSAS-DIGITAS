@@ -8,6 +8,7 @@ import Help from "./Pages/Help/index.js"
 import Home from "./Pages/Home/index.js";
 import DeleteAccount from "./Pages/DeleteAccount/index.js";
 import './global.css'
+import MentoredPerfil from "./Pages/MentoredPerfil/index.js";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="forgot" element={<Forgot />} />
         <Route path="help" element={<Help />} />
         <Route path="delete" element={<DeleteAccount/>} />
+        <Route path="perfil-mentored" element={<MentoredPerfil/>} />
 
       </Routes>
     </BrowserRouter>

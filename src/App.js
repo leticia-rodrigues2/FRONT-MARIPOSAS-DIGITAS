@@ -9,6 +9,8 @@ import Home from "./Pages/Home/index.js";
 import DeleteAccount from "./Pages/DeleteAccount/index.js";
 import './global.css'
 import MentoredPerfil from "./Pages/MentoredPerfil/index.js";
+import About from "./Pages/About/index.js";
+import Contact from "./Pages/Contact/index.js";
 
 export default function App() {
   return (
@@ -22,6 +24,10 @@ export default function App() {
         <Route path="help" element={<Help />} />
         <Route path="delete" element={<DeleteAccount/>} />
         <Route path="perfil-mentored" element={<MentoredPerfil/>} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+
+        
 
       </Routes>
     </BrowserRouter>

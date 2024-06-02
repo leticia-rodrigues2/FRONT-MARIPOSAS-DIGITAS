@@ -1,0 +1,56 @@
+
+.root {
+    display: flex;
+  }
+  
+  .appBar {
+    background-color: #80BBD9;
+    box-shadow: none;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .logo {
+    text-align: center;
+    margin: auto;
+  }
+  
+  .logoImage {
+    width: 200px;
+  }
+  
+  .drawerPaper {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .drawerContainer {
+    overflow: auto;
+  }
+  
+  .listItem {
+    cursor: pointer;
+  }
+  
+  .listItem:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .customIcon {
+    width: 25px;
+  }
+  
+  .listItemIcon {
+    color: white;
+  }
+  
+  .listItemText {
+    color: white;
+    font-weight: bold;
+  }
+  

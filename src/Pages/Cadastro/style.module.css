@@ -1,15 +1,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 .container {
-    height: calc(100vh - 71px);
+    height: full;
     background-color: #F1F1F1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 30px !important; 
+    padding-top: 150px !important; 
 } 
 .signup-link-fixed {
-    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: #F1F1F1;
@@ -17,19 +16,21 @@
     display: flex;
     justify-content: center; 
     align-items: center; 
-    margin-bottom: 10px;
-  }
-  .signup-link-fixed a {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.signup-link-fixed a {
     text-decoration: none; 
     color: gray;
     font-family: "Roboto", sans-serif;
     font-size: 12px;
-  }
+}
 
-  .signup-link-fixed .rosa {
+.signup-link-fixed .rosa {
     color: #D457D2;
     font-weight: bold;
-  }
+}
+
 h2 {
     text-align: center;
     font-family: 'Roboto', sans-serif;

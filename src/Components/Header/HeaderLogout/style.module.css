@@ -10,6 +10,14 @@ body, html {
     align-items: center;
     margin-top: 0;
   }
+
+  .clickable {
+    transition: transform 0.3s ease;
+  }
+  
+.clickable:hover {
+    transform: scale(1.1);
+}    
   
   .logo {
     width: 200px;

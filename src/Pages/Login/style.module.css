@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
 .container {
-    height: calc(100vh - 71px);
+    height: full;
     background-color: #F0F0F0;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 150px;
+    padding-bottom: 30px;
 } 
 
 .bold {
@@ -18,17 +22,16 @@
     margin-bottom: 15px;
 }
 
-h2 {
+.title {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 25px;
     color: #D457D2;
     margin: 0; 
-    margin-bottom: 20px;
 }
 
-p {
+.text {
     text-align: center;
     font-family: "Roboto", sans-serif;
     font-style: normal;
@@ -49,6 +52,7 @@ p {
     margin-left: 350px;
     margin-bottom: 20px;
     font-weight: bold;
+    font-size: 14px;
     
   }
   
@@ -59,6 +63,7 @@ p {
   
   .forgotPassword a:hover {
     text-decoration: underline;
+    color: #8d8989;
   }
   
 .signup-link2 {
@@ -93,7 +98,6 @@ p {
 }
 
 .signup-link-fixed {
-    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: #F1F1F1;
@@ -101,7 +105,7 @@ p {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 .signup-link-fixed a {
     text-decoration: none; 
@@ -118,4 +122,9 @@ p {
     .forgotPassword {
         margin-left: 180px;
     }
+
+    .container {
+        padding-bottom: 70px;
+        margin: 0; 
+    } 
 }

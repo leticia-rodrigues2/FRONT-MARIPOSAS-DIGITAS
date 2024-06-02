@@ -12,10 +12,11 @@ import { color } from 'style-value-types';
 import Style from "./style.module.css";
 import Faq from '../../Components/Faq';
 import { Footer } from '../../Components/Fotter';
+import HeaderLogout from '../../Components/Header/HeaderLogout';
 
 const Home = () => (
     <div className={Style.home}>
-        <Header/>
+        <HeaderLogout/>
             <div className={Style['image-container']}/>    
              
        

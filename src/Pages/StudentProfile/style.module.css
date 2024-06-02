@@ -10,7 +10,6 @@
     position: relative; 
     z-index: 15; 
     display: flex;
-    justify-content: space-between; 
 }
 .clickable {
     transition: transform 0.3s ease;
@@ -145,4 +144,35 @@
         margin-right: -17px !important;
     }
     
+
+    @media (max-width: 640px) {
+       
+        .likeIcon, .closeIcon {
+            cursor: pointer;
+            font-size: 20px !important;
+            color: #535353; 
+            margin: 0 auto; 
+            background-color: #fff; 
+            border-radius: 50%; 
+            padding: 4px; 
+            margin-right: -18px !important;
+        }
+        
+       
+    }
+    @media (max-width: 360px) {
+       
+        .likeIcon, .closeIcon {
+            cursor: pointer;
+            font-size: 25px !important;
+            color: #535353; 
+            margin: 0 auto; 
+            background-color: #fff; 
+            border-radius: 50%; 
+            padding: 4px; 
+            margin-right: -18px !important;
+        }
+        
+       
+    }
 }

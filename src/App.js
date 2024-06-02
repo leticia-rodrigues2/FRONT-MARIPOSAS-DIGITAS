@@ -11,6 +11,7 @@ import './global.css'
 import MentoredPerfil from "./Pages/MentoredPerfil/index.js";
 import About from "./Pages/About/index.js";
 import Contact from "./Pages/Contact/index.js";
+import Notification from "./Pages/Notification/index.js";
 
 export default function App() {
   return (
@@ -26,6 +27,8 @@ export default function App() {
         <Route path="perfil-mentored" element={<MentoredPerfil/>} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="Notification" element={<Notification />} />
+        
 
         
 

@@ -1,51 +1,154 @@
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import s from "./style.module.css";
 import Container from '../../Components/Container';
 import DefaultHeader from "../../Components/Header/DefaultHeader/DefaultHeader";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material"; // Consolidated imports
 import ScrollDialog from "./ScrollDialog";
+import { useNavigate } from "react-router-dom";
 
 const Cadastro = () => {
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [nome, setNome] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [nomeError, setNomeError] = useState('');
+  const [phone, setPhone] = useState("");
   const [madrinha, setMadrinha] = useState(0);
-  const [response, setResponse] = useState(null);
-  const [type, setType] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
-  const handleSubmit = (event) => {
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    if (!event.target.value.trim() || !validateEmail(event.target.value)) {
+      setEmailError('Por favor, insira um e-mail válido.');
+    } else {
+      setEmailError('');
+    }
+    setShowAlert(false);
+  };
+
+  const handleNameChange = (event) => {
+    const name = event.target.value;
+    setNome(name);
+    if (!name.trim() || name.length > 50 || !/^[a-zA-Z\s]*$/.test(name)) {
+      setNomeError("Por favor, insira um nome válido.");
+    } else {
+      setNomeError('');
+    }
+  };
+
+  const handlePhoneChange = (event) => {
+    const phone = event.target.value;
+    setPhone(phone);
+    if (phone.trim() === "" || phone.length < 12) {
+      setPhoneError("Por favor, insira seu telefone.");
+    } else {
+      setPhoneError("");
+    }
+  };
+
+  const handlePasswordChange = (event) => {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+    if (!newPassword.trim()) {
+      setPasswordError('Por favor, insira sua senha.');
+    } else if (newPassword.length < 8) {
+      setPasswordError('A senha deve ter pelo menos 8 caracteres.');
+    } else {
+      setPasswordError('');
+    }
+    setShowAlert(false);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    const confirmPasswordValue = event.target.value;
+    setConfirmPassword(confirmPasswordValue);
+    if (!confirmPasswordValue.trim()) {
+      setPasswordError('Por favor, confirme sua senha.');
+    } else if (confirmPasswordValue !== password) {
+      setPasswordError('As senhas não coincidem.');
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    fetch('http://localhost:3120/cadastro', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ nome, email, telefone, senha, madrinha })
-    })
-      .then(response => {
-        if (!response.ok) {
-          setType("error");
-          throw new Error('Erro ao cadastrar usuário');
-        }
-        setResponse("Usuário cadastrado com sucesso!");
-        setType("success")
-      })
-      .catch(error => {
-        setType("error");
-        setResponse("Erro ao cadastrar usuário", error);
+
+    if (!email.trim() || !validateEmail(email)) {
+      setEmailError('Por favor, insira um e-mail válido.');
+      setShowAlert(true);
+      return;
+    }
+
+    if (!nome.trim() || nome.length > 50 || !/^[a-zA-Z\s]*$/.test(nome)) {
+      setNomeError("Por favor, insira um nome válido.");
+      setShowAlert(true);
+      return;
+    }
+
+    if (!password.trim()) {
+      setPasswordError('Por favor, insira sua senha.');
+      setShowAlert(true);
+      return;
+    } else if (password.length < 8) {
+      setPasswordError('A senha deve ter pelo menos 8 caracteres.');
+      setShowAlert(true);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setPasswordError('As senhas não coincidem.');
+      setShowAlert(true);
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3120/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
-  }
+
+      if (response.ok) {
+        console.log('Login bem-sucedido!');
+        navigate('/Home');
+      } else {
+        setShowAlert(true);
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      setShowAlert(true);
+    }
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleClickShowPasswordConfirmation = () => {
+    setShowPasswordConfirmation(!showPasswordConfirmation);
+  };
 
   const handleCheckboxChange = (event) => {
     setMadrinha(event.target.checked ? 1 : 0);
-  }
-
-  const handlePasswordChange = (event) => {
-    setSenha(event.target.value);
-  }
+  };
 
   return (
     <div>
@@ -53,10 +156,9 @@ const Cadastro = () => {
       <div className={s.container}>
         <Container>
           <div sx={{ mb: '100px' }}>
-            <h2>CADASTRE-SE</h2>
-    
-            <form onSubmit={handleSubmit}>
+            <div className={s.title}>CADASTRE-SE</div>
 
+            <form onSubmit={handleSubmit}>
               <div className={s['input-row3']}>
                 <Checkbox id="madrinha" defaultChecked={madrinha === 1} color="secondary" onChange={handleCheckboxChange} />
                 <label htmlFor="madrinha" className="checkbox-label">Desejo ser mentora</label>
@@ -66,78 +168,109 @@ const Cadastro = () => {
                 <label htmlFor="aluna" className="checkbox-label">Desejo ser mentorada - receber apadrinhamento</label>
               </div>
 
-              <TextField 
+              <TextField
                 sx={{ mb: '10px' }}
-                id="nome" 
+                id="nome"
                 type="text"
-                label="Insira seu nome completo" 
-                size="small" 
-                color="secondary" 
-                fullWidth 
+                label="Insira seu nome completo"
+                size="small"
+                color="secondary"
+                fullWidth
                 value={nome}
-                onChange={(e) => setNome(e.target.value)} 
+                onChange={handleNameChange}
+                error={!!nomeError}
+                helperText={nomeError}
               />
-              <TextField 
-                sx={{ mb: '10px' }}
-                id="email" 
+              <TextField
+                sx={{ mb: '20px' }}
+                id="email"
                 type="email"
-                label="Insira seu e-mail" 
-                variant="outlined" 
-                size="small" 
-                color="secondary" 
-                fullWidth 
+                label="Insira seu e-mail"
+                variant="outlined"
+                size="small"
+                color="secondary"
+                fullWidth
                 value={email}
-                onChange={(e) => setEmail(e.target.value)} 
+                onChange={handleEmailChange}
+                error={!!emailError}
+                helperText={emailError}
               />
-              <TextField 
+              <TextField
                 sx={{ mb: '10px' }}
-                id="phone" 
-                type="text"
-                label="Insira seu telefone" 
-                variant="outlined" 
-                size="small" 
-                color="secondary" 
-                fullWidth 
-                value={telefone}
-                onChange={(e) => setTelefone(e.target.value)} 
-              />
-              <TextField 
-                sx={{ mb: '10px' }}
-                id="password" 
-                label="Insira sua senha" 
-                variant="outlined" 
+                id="phone"
+                type="tel"
+                label="Insira seu telefone"
+                variant="outlined"
                 size="small"
-                color="secondary" 
-                fullWidth 
-                type="password" 
-                value={senha}
-                onChange={handlePasswordChange} 
-              /> 
-              <TextField 
+                color="secondary"
+                fullWidth
+                value={phone}
+                error={!!phoneError}
+                helperText={phoneError}
+                onChange={handlePhoneChange}
+              />
+              <TextField
+                sx={{ mb: '10px' }}
+                id="password"
+                label="Insira sua senha"
+                variant="outlined"
+                size="small"
+                color="secondary"
+                fullWidth
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={handlePasswordChange}
+                error={!!passwordError}
+                helperText={passwordError}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </IconButton>
+                  ),
+                }}
+              />
+              <TextField
                 sx={{ mb: '30px' }}
-                id="confirm-password" 
-                label="Confirme sua senha" 
-                variant="outlined" 
+                id="confirm-password"
+                label="Confirme sua senha"
+                variant="outlined"
                 size="small"
-                color="secondary" 
-                fullWidth 
-                type="password" 
-                value={senha}
-                onChange={handlePasswordChange} 
-              /> 
+                color="secondary"
+                fullWidth
+                type={showPasswordConfirmation ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                error={!!passwordError}
+                helperText={passwordError}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPasswordConfirmation}
+                      edge="end"
+                    >
+                      {showPasswordConfirmation ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </IconButton>
+                  ),
+                }}
+              />
               <div className={s.buttonContainer}>
                 <Button type="submit" variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>CADASTRAR</Button>
               </div>
               <div className={s['signup-link-termos']}>
-                Ao clicar em cadastrar, concordo que li e aceito os <span className="bold"><ScrollDialog  /></span>
+                Ao clicar em cadastrar, concordo que li e aceito os <span className="bold"><ScrollDialog /></span>
               </div>
             </form>
-          </div>     
-         
+          </div>
         </Container>
-        <div className={s['signup-link-fixed']}>
-        <a href='login' className="signup">Já possui uma conta? <span className={s.rosa}>Clique aqui para realizar o login!</span></a>
       </div>
+      <div className={s['signup-link-fixed']}>
+        <a href='login' className="signup">Já possui uma conta? <span className={s.rosa}>Clique aqui para realizar o login!</span></a>
       </div>
     </div>
   );

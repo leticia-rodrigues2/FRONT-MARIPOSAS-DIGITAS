@@ -31,10 +31,10 @@ function ResetPassword() {
         },
         body: JSON.stringify({ email, senha: password }),
       });
-     
-      if (response.ok) {
+
+      if (response === 200) {
         console.log('Login bem-sucedido!');
-        navigate('/Home'); 
+        navigate('/Home');
       } else {
         console.log('Credenciais inválidas.');
         // Mostrar mensagem de erro para o usuário
@@ -50,37 +50,37 @@ function ResetPassword() {
       <DefaultHeader />
       <div className={s.container}>
         <Container>
-          <div sx={{mb: '100px' }}>
-          <h2>REDEFINA SUA SENHA</h2>
-          <form>
-            <TextField 
-              sx={{mb: '30px' }}
-              id="password" 
-              type="password"
-              label="Insira sua nova senha" 
-              variant="outlined" 
-              size="small" 
-              color="secondary" 
-              fullWidth 
-              value={email} 
-              onChange={handleEmailChange} 
-            />
-            <TextField 
-              sx={{mb: '160px' }}
-              id="confirm-password" 
-              label="Confirme sua senha" 
-              variant="outlined" 
-              size="small"
-              color="secondary" 
-              fullWidth 
-              type="password" 
-              value={password} 
-              onChange={handlePasswordChange} 
-            /> 
-          </form>
+          <div sx={{ mb: '100px' }}>
+            <h2>REDEFINA SUA SENHA</h2>
+            <form>
+              <TextField
+                sx={{ mb: '30px' }}
+                id="password"
+                type="password"
+                label="Insira sua nova senha"
+                variant="outlined"
+                size="small"
+                color="secondary"
+                fullWidth
+                value={email}
+                onChange={handleEmailChange}
+              />
+              <TextField
+                sx={{ mb: '160px' }}
+                id="confirm-password"
+                label="Confirme sua senha"
+                variant="outlined"
+                size="small"
+                color="secondary"
+                fullWidth
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+            </form>
           </div>
           <div className={s.buttonContainer}>
-          <Button variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width:190 }}>Entrar</Button>
+            <Button variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>Entrar</Button>
           </div>
         </Container>
       </div>

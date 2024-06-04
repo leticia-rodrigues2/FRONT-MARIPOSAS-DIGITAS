@@ -54,7 +54,7 @@ const Cadastro = () => {
   const handlePhoneChange = (event) => {
     const phone = event.target.value;
     setPhone(phone);
-    if (phone.trim() === "" || phone.length < 12) {
+    if (phone.trim() === "" || phone.length <= 11) {
       setPhoneError("Por favor, insira seu telefone.");
     } else {
       setPhoneError("");

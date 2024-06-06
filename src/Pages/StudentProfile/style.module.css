@@ -165,11 +165,8 @@
         }
 
         .logo-container {
-            top: 64px;
+            top: 34px;
         }
-
-
-
     }
 
     @media (max-width: 360px) {

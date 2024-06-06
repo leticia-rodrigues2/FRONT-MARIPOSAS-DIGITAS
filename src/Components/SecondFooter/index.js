@@ -23,7 +23,7 @@ export function SecondFooter() {
 
     return (
         <Box component="footer" sx={{ width: '100%', bgcolor: '#80BBD9' }}>
-            <Container 
+            <Container
                 maxWidth="lg"
                 sx={{
                     display: 'flex',
@@ -35,7 +35,7 @@ export function SecondFooter() {
                     height: '100%',
                 }}
             >
-                <Box 
+                <Box
                     className={s.icons}
                     sx={{
                         display: 'flex',
@@ -44,15 +44,15 @@ export function SecondFooter() {
                     }}
                 >
                     <Box className={s.icon}>
-                        <HomeSharpIcon 
-                            className={`${s.likeIcon} ${s.clickable}`} 
+                        <HomeSharpIcon
+                            className={s.iconFooter}
                             onClick={handleInitial}
                         />
                     </Box>
                     <Box className={s.icon}>
-                        <Badge 
-                            color="secondary" 
-                            variant="dot" 
+                        <Badge
+                            color="secondary"
+                            variant="dot"
                             invisible={invisible}
                             overlap="circular"
                             anchorOrigin={{
@@ -68,15 +68,15 @@ export function SecondFooter() {
                                 }
                             }}
                         >
-                            <NotificationsIcon 
-                                className={`${s.likeIcon} ${s.clickable}`} 
+                            <NotificationsIcon
+                                className={s.iconFooter}
                                 onClick={handleNotification}
                             />
                         </Badge>
                     </Box>
                     <Box className={s.icon}>
-                        <HandshakeIcon 
-                            className={`${s.closeIcon} ${s.clickable}`} 
+                        <HandshakeIcon
+                            className={s.iconFooter}
                             onMouseEnter={handleHandshake}
                         />
                     </Box>

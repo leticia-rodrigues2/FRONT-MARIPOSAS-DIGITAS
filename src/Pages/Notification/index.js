@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
-import Container from '../../Components/Container'
-import s from "./style.module.css";
-import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader'
-import { Button } from "@mui/material";
 import Header from "../../Components/Header/Header";
-import { SecondFooter } from "../../Components/SecondFooter";
 import StudentProfile from "../StudentProfile";
+import { SecondFooter } from "../../Components/SecondFooter";
+import s from "./style.module.css";
 
 function Notification() {
   const navigate = useNavigate();
@@ -34,27 +29,27 @@ function Notification() {
         },
         body: JSON.stringify({ email, senha: password }),
       });
-     
+
       if (response.ok) {
         console.log('Login bem-sucedido!');
-        navigate('/Home'); 
+        navigate('/Home');
       } else {
         console.log('Credenciais inválidas.');
-        
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
-    
     }
   };
 
   return (
-    <div>
+    <div className={s.container}>
       <Header />
-      <div className={s.container}>
-        <StudentProfile></StudentProfile>
+      <div className={s.content}>
+        <StudentProfile />
       </div>
-      <SecondFooter></SecondFooter>
+      <div className={s.footer}>
+        <SecondFooter />
+      </div>
     </div>
   );
 }

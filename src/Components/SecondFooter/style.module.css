@@ -8,22 +8,42 @@
 
 .icons {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
 }
 
 .icon {
-    margin: 2px 0; 
+    padding-inline: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 30px;
+    margin: 2px 0;
     position: relative;
 }
 
-.likeIcon, .closeIcon {
+.iconFooter {
+    color: white;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    padding: 4px;
+    font-size: 36px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.iconFooter:hover {
+    transform: scale(1.1);
+}
+
+.likeIcon,
+.closeIcon {
     cursor: pointer;
     font-size: 20px !important;
-    color: #fff; 
-    margin: 0 auto; 
-    border: 2px solid #fff; 
-    border-radius: 50%; 
-    padding: 4px; 
+    color: #fff;
+    margin: 0 auto;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    padding: 4px;
     margin: 8px !important;
     position: relative;
 }
@@ -36,11 +56,13 @@
         width: 300px;
         padding-bottom: 0;
     }
-    .likeIcon, .closeIcon {
+
+    .likeIcon,
+    .closeIcon {
         font-size: 20px !important;
         margin-inline: 8px !important;
     }
-   
+
 }
 
 @media (max-width: 630px) {
@@ -49,11 +71,13 @@
         margin-right: 15px;
         margin-left: 15px;
         width: 300px;
-        padding-bottom:5px;
+        padding-bottom: 5px;
     }
-    .likeIcon, .closeIcon {
+
+    .likeIcon,
+    .closeIcon {
         font-size: 35px !important;
         margin-inline: 8px !important;
     }
-   
+
 }

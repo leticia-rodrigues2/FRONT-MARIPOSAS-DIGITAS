@@ -3,23 +3,34 @@
 }
 
 .container {
-    height: 509px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background-color: #F0F0F0;
+    overflow-x: hidden;
+}
+
+.content {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: hidden;
+    padding-top: 110px;
+    padding-bottom: 37px;
 }
 
+.footer {
+    flex-shrink: 0;
+    width: 100%;
+}
 
 @media (max-width: 850px) {
-    .container {
-        padding-bottom: 30px;
-        height: 100vh;
+    .content {
         flex-direction: column;
-        overflow-y: hidden;
-        padding-top: 25px;
-        margin-top: 30px;
+        /* Ensure content stacks in a column on mobile */
+        padding-top: 80px;
+        padding-bottom: 30px;
+        height: auto;
     }
 
 

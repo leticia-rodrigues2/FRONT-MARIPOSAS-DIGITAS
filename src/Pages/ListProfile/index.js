@@ -94,10 +94,10 @@ function ListProfile() {
                             <img src={profile.imageUrl} alt="photo" className={s.photo} />
                             <div className={s.containerDescription}>
                                 <div className={s.title}>{profile.name}</div>
-                                <div className={s.text}>Deseja ser falar com sua apadrinhada ?</div>
+                                <div className={s.text}>Para obter mais informações, consulte o perfil desta mariposa. </div>
                             </div>
                         </div>
-                        <Button size="small" onClick={handleSubmit} className={s.button3} variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 150 }}>VER PERFIL</Button>
+                        <Button size="small" onClick={handleSubmit} className={s.button3} variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 150, marginBottom: "5px" }}>VER PERFIL</Button>
                     </div>
                 ))}
             </div>

@@ -14,6 +14,7 @@ import Contact from "./Pages/Contact/index.js";
 import Notification from "./Pages/Notification/index.js";
 import Profile from "./Pages/Profile/index.js";
 import Dashboard from "./Pages/Dashboard/index.js";
+import ListProfile from "./Pages/ListProfile/index.js";
 
 export default function App() {
   return (
@@ -31,7 +32,8 @@ export default function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="Notification" element={<Notification />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="dash" element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="list-profile" element={<ListProfile />} />
       </Routes>
     </BrowserRouter>
   );

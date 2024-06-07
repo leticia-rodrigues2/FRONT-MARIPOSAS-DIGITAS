@@ -30,16 +30,15 @@
     color: white;
     text-align: center;
     align-items: center;
-    height: 370px;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 990px;
+    width: 890px;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
-    margin-bottom: 100px;
     margin-left: 40px;
-    margin-right: 40px;
+    margin-right: 10px;
     padding-left: 30px;
     animation: fadeIn 1s ease-out;
 }
@@ -75,7 +74,7 @@
 }
 
 .container-description h1 {
-    padding-right: 100px;
+    padding-right: 10px;
     padding-left: 10px;
     font-size: 20px;
     font-family: 'Roboto', sans-serif;
@@ -95,14 +94,14 @@
 .logo-container {
     height: 70px;
     position: relative;
-    top: -230px;
-    left: 50px !important;
+    top: -130px;
+    left: 10px !important;
 }
 
 .logo {
     margin: auto;
     display: block;
-    width: 450px;
+    width: 300px;
     animation: slideIn 1s ease-out 0.5s forwards;
 }
 

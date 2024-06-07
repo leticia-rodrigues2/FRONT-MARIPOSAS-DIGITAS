@@ -3,22 +3,25 @@ import { Badge, Box, Container } from '@mui/material';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import { useNavigate } from "react-router-dom";
 import s from "./style.module.css";
 
 export function SecondFooter() {
     const [invisible, setInvisible] = React.useState(false);
 
+    const navigate = useNavigate();
+
     const handleInitial = () => {
-        console.log("Ícone de favorito clicado");
+        navigate("/dashboard");
     };
 
     const handleNotification = () => {
-        console.log("Notification");
         setInvisible(true);
+        navigate("/notification");
     };
 
     const handleHandshake = () => {
-        console.log("Mouse entrou no ícone");
+        navigate("/list-profile");
     };
 
     return (
@@ -64,7 +67,7 @@ export function SecondFooter() {
                                     width: '12px',
                                     height: '12px',
                                     borderRadius: '50%',
-                                    border: '2px solid #80BBD9', // Cor de fundo do Box
+                                    border: '2px solid #80BBD9',
                                 }
                             }}
                         >
@@ -77,7 +80,7 @@ export function SecondFooter() {
                     <Box className={s.icon}>
                         <HandshakeIcon
                             className={s.iconFooter}
-                            onMouseEnter={handleHandshake}
+                            onClick={handleHandshake}
                         />
                     </Box>
                 </Box>

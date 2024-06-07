@@ -2,7 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import Style from './style.module.css';
 
-const ImagemDescription = () => {
+const ImagemDescriptionDash = () => {
     const isDesktop = useMediaQuery({ query: '(min-width: 870px)' });
 
     return (
@@ -38,4 +38,4 @@ const ImagemDescription = () => {
     );
 };
 
-export default ImagemDescription;
+export default ImagemDescriptionDash;

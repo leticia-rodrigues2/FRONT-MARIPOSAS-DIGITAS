@@ -23,7 +23,7 @@
     color: white;
     text-align: center;
     height: full;
-    margin-top: 100px;
+    margin-top: 150px;
 }
 
 .description {
@@ -86,7 +86,7 @@ p {
 .content-info {
     margin: 30px;
     background-color: #92CAE7;
-    
+
 }
 
 .content-info h2 {
@@ -135,7 +135,7 @@ p {
         padding: 0;
     }
 
-    .content-info{
+    .content-info {
         padding: 0px;
     }
 }
@@ -145,7 +145,7 @@ p {
         padding: 0 80px;
     }
 
-    .content-info{
+    .content-info {
         padding: 0px;
     }
 
@@ -157,7 +157,7 @@ p {
 
 @media (min-width: 900px) {
 
-    .content-info{
+    .content-info {
         padding: 0px;
     }
 }

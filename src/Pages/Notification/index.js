@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
-import StudentProfile from "../StudentProfile";
+import ProfileNotification from "../ProfileNotification";
 import { SecondFooter } from "../../Components/SecondFooter";
 import s from "./style.module.css";
 
@@ -45,7 +45,7 @@ function Notification() {
     <div className={s.container}>
       <Header />
       <div className={s.content}>
-        <StudentProfile />
+        <ProfileNotification />
       </div>
       <div className={s.footer}>
         <SecondFooter />

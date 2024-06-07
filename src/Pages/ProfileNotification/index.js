@@ -26,7 +26,7 @@ const studentData = [
   }
 ];
 
-export default function StudentProfile() {
+export default function ProfileNotification() {
   const [students, setStudents] = useState(studentData);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
@@ -35,11 +35,11 @@ export default function StudentProfile() {
     const updatedStudents = [...students];
     setSnackbarMessage(`Agora contamos com você para cuidar da mariposa, ${updatedStudents[index].name}!`);
     setOpenSnackbar(true);
-    
+
     setTimeout(() => {
       updatedStudents.splice(index, 1);
       setStudents(updatedStudents);
-    }, 100); 
+    }, 100);
   };
 
   const handleCloseSnackbar = () => {
@@ -94,7 +94,7 @@ export default function StudentProfile() {
         </div>
       ))}
 
-    <Snackbar open={openSnackbar} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+      <Snackbar open={openSnackbar} autoHideDuration={3500} onClose={handleCloseSnackbar}>
         <MuiAlert icon={false} elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="info">
           {snackbarMessage} <img src="images/borbo.png" alt="nivel" className={styles.nivelButterfly} />
         </MuiAlert>

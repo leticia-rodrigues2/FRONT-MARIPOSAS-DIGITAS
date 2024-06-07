@@ -1,0 +1,77 @@
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+
+
+
+.content {
+    margin-top: 20px;
+}
+
+.centeredContent {
+    text-align: center;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.nivel,
+.nivelButterfly {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.text {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.description {
+    margin-top: 20px;
+}
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .details {
+        flex-direction: column;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .title {
+        font-size: 18px;
+    }
+
+    .nivel,
+    .nivelButterfly {
+        width: 40px;
+        height: 40px;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+}

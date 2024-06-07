@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Pages/Login/index.js" 
-import Cadastro from "./Pages/Cadastro/index.js" 
+import Login from "./Pages/Login/index.js"
+import Cadastro from "./Pages/Cadastro/index.js"
 import Reset from "./Pages/ResetPassword/index.js"
 import Forgot from "./Pages/Forgot"
 import Help from "./Pages/Help/index.js"
@@ -12,6 +12,7 @@ import MentoredPerfil from "./Pages/MentoredPerfil/index.js";
 import About from "./Pages/About/index.js";
 import Contact from "./Pages/Contact/index.js";
 import Notification from "./Pages/Notification/index.js";
+import Profile from "./Pages/Profile/index.js";
 
 export default function App() {
   return (
@@ -23,14 +24,15 @@ export default function App() {
         <Route path="reset" element={<Reset />} />
         <Route path="forgot" element={<Forgot />} />
         <Route path="help" element={<Help />} />
-        <Route path="delete" element={<DeleteAccount/>} />
-        <Route path="perfil-mentored" element={<MentoredPerfil/>} />
+        <Route path="delete" element={<DeleteAccount />} />
+        <Route path="perfil-mentored" element={<MentoredPerfil />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="Notification" element={<Notification />} />
-        
+        <Route path="profile" element={<Profile />} />
 
-        
+
+
 
       </Routes>
     </BrowserRouter>

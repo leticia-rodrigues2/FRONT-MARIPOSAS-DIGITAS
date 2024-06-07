@@ -16,94 +16,94 @@ import HeaderLogout from '../../Components/Header/HeaderLogout';
 
 const Home = () => (
     <div className={Style.home}>
-        <HeaderLogout/>
-            <div className={Style['image-container']}/>    
-             
-       
+        <HeaderLogout />
+        <div className={Style['image-container']} />
 
-         <div className={Style.container}>
+
+
+        <div className={Style.container}>
             <div className={Style['container-description']}>
                 <h1>Embarque na jornada de metamorfose e voe alto com o apoio das nossas mentoras!</h1>
             </div>
-            
+
             <div className={Style['content-info']}>
                 <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} md={4}>
-                    <div sx={{ maxWidth: 345 }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 180 }}>
-                        <CardMedia
-                        sx={{ height: 180, width: 150, display: 'flex' }}
-                        image="images/cadastro.png"
-                        title="green iguana"
-                        />
-                    </div>
-                    <CardContent>
-                        <Typography gutterBottom variant="body2" component="div">
-                        <a href="#" className={Style.signup2} style={{ fontWeight: 'bold' }}>REALIZE SEU CADASTRO</a>
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary" fontSize="16px">
-                        Preencha seus dados e realize seu cadastro em nossa plataforma.
-                        </Typography>
-                    </CardContent>
-                    </div>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <div sx={{ maxWidth: 345 }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 180 }}>
+                                <CardMedia
+                                    sx={{ height: 180, width: 150, display: 'flex' }}
+                                    image="images/cadastro.png"
+                                    title="green iguana"
+                                />
+                            </div>
+                            <CardContent>
+                                <Typography gutterBottom variant="body2" component="div">
+                                    <div className={Style.signup2} style={{ fontWeight: 'bold' }}>REALIZE SEU CADASTRO</div>
+                                </Typography>
+                                <Typography variant="caption" color="text.secondary" fontSize="16px">
+                                    Preencha seus dados e realize seu cadastro em nossa plataforma.
+                                </Typography>
+                            </CardContent>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <div sx={{ maxWidth: 345 }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 180 }}>
+                                <CardMedia
+                                    sx={{ height: 180, width: 150, display: 'flex' }}
+                                    image="images/icone-apadrinhamento.png"
+                                    title="apadrinhamento"
+                                />
+                            </div>
+                            <CardContent>
+                                <Typography gutterBottom variant="body2" component="div">
+                                    <div className={Style.signup2} style={{ fontWeight: 'bold' }}>CONECTE-SE COM MENTORAS</div>
+                                </Typography>
+                                <Typography variant="caption" color="text.secondary" fontSize="16px">
+                                    Visualize mentoras disponíveis e manifeste abertura para apadrinhamento.
+                                </Typography>
+                            </CardContent>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={4}>
+                        <div sx={{ maxWidth: 345 }}>
+                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 180 }}>
+                                <CardMedia
+                                    sx={{ height: 180, width: 150, display: 'flex' }}
+                                    image="images/icone-mentoria.png"
+                                    title="mentoria"
+                                />
+                            </div>
+                            <CardContent>
+                                <Typography gutterBottom variant="body2" component="div">
+                                    <div className={Style.signup2} style={{ fontWeight: 'bold' }}>OBTENHA APADRINHAMENTO</div>
+                                </Typography>
+                                <Typography variant="caption" color="text.secondary" fontSize="16px">
+                                    Seja apadrinhada e inicie sua jornada e tecnologia com apoio de sua mentora.
+                                </Typography>
+                            </CardContent>
+                        </div>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                    <div sx={{ maxWidth: 345 }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 180 }}>
-                        <CardMedia
-                        sx={{ height: 180, width: 150, display: 'flex' }}
-                        image="images/icone-apadrinhamento.png"
-                        title="apadrinhamento"
-                        />
-                    </div>
-                    <CardContent>
-                        <Typography gutterBottom variant="body2" component="div">
-                        <a href="#" className={Style.signup2} style={{ fontWeight: 'bold' }}>CONECTE-SE COM MENTORAS</a>
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary" fontSize="16px">
-                        Visualize mentoras disponíveis e manifeste abertura para apadrinhamento.
-                        </Typography>
-                    </CardContent>
-                    </div>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                    <div sx={{ maxWidth: 345 }}>
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 180 }}>
-                        <CardMedia
-                        sx={{ height: 180, width: 150, display: 'flex' }}
-                        image="images/icone-mentoria.png"
-                        title="mentoria"
-                        />
-                    </div>
-                    <CardContent>
-                        <Typography gutterBottom variant="body2" component="div">
-                        <a href="#" className={Style.signup2} style={{ fontWeight: 'bold' }}>OBTENHA APADRINHAMENTO</a>
-                        </Typography>
-                        <Typography variant="caption" color="text.secondary" fontSize="16px">
-                        Seja apadrinhada e inicie sua jornada e tecnologia com apoio de sua mentora.
-                        </Typography>
-                    </CardContent>
-                    </div>
-                </Grid>
-                </Grid>
-             </div>
-           
+            </div>
+
         </div>
-        <div  className={Style['content-video']}> 
-         <video controls autoPlay muted>
-          <source src="https://docs.material-tailwind.com/demo.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-         </video>
-        </div> 
+        <div className={Style['content-video']}>
+            <video controls autoPlay muted>
+                <source src="https://docs.material-tailwind.com/demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        </div>
 
 
 
-        <div className={Style['contente-faq']}> 
-        <Typography sx={{ textAlign: 'left', fontWeight: '800', color: 'white',marginBottom:2 }}>
-            FAQ | PERGUNTAS FREQUENTES
-        </Typography>
+        <div className={Style['contente-faq']}>
+            <Typography sx={{ textAlign: 'left', fontWeight: '800', color: 'white', marginBottom: 2 }}>
+                FAQ | PERGUNTAS FREQUENTES
+            </Typography>
 
-        <Faq></Faq>
+            <Faq></Faq>
         </div>
 
         <Footer></Footer>

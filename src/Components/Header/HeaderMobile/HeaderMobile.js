@@ -15,14 +15,15 @@ import HomeIcon from '@mui/icons-material/Home';
 import ContentPasteSearchSharpIcon from '@mui/icons-material/ContentPasteSearchSharp';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import CoPresentRoundedIcon from '@mui/icons-material/CoPresentRounded';
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 const pages = [
-  { text: 'PÁGINA INICIAL', icon: <HomeIcon />,  route: '/'  },
-  { text: 'CONFIGURAÇÕES', icon: <ContentPasteSearchSharpIcon /> ,  route: '/' },
-  { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/'  },
-  { text: 'SAIR', icon: <LogoutOutlinedIcon /> ,  route: '/' }
+  { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/' },
+  { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/perfil' },
+  { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
+  { text: 'SAIR', icon: <LogoutOutlinedIcon />, route: '/' }
 ];
 
 export default function HeaderMobile() {
@@ -37,14 +38,14 @@ export default function HeaderMobile() {
   };
 
   const handleMenuItemClick = (route) => {
-    navigate(route); 
-    setDrawerOpen(false); 
+    navigate(route);
+    setDrawerOpen(false);
   };
 
   return (
-    <Box sx={{ display: 'flex'}}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none' , minHeight:"12px !imaprtant" }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none', minHeight: "12px !imaprtant" }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <div className='logo' style={{ textAlign: 'center', margin: 'auto' }}>
             <img src="images//LogoText.png" alt="Logo" className="logo" style={{ width: '150px' }} />

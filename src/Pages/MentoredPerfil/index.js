@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import ImageUpload from "./Componets/ImageUpload";
+import { SecondFooter } from "../../Components/SecondFooter";
 
 const MentoredPerfil = () => {
   const [name, setName] = useState('');
@@ -64,31 +65,31 @@ const MentoredPerfil = () => {
             <form onSubmit={handleSubmit}>
               <div className={s.checkboxContainer}>
                 <div className={s.inputRow}>
-                  <Checkbox 
-                    id="mentor" 
-                    checked={isMentor} 
-                    color="secondary" 
-                    onChange={handleMentorCheckboxChange} 
-                    value="mentor" 
+                  <Checkbox
+                    id="mentor"
+                    checked={isMentor}
+                    color="secondary"
+                    onChange={handleMentorCheckboxChange}
+                    value="mentor"
                   />
 
-                 <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}> 
+                  <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>
                     Desejo ser mentora
-                 </label>
-                 
+                  </label>
+
                 </div>
                 <div className={s.inputRow}>
-                  <Checkbox 
-                    id="mentee" 
-                    checked={isMentee} 
-                    color="secondary" 
-                    onChange={handleMenteeCheckboxChange} 
-                    value="mentee" 
+                  <Checkbox
+                    id="mentee"
+                    checked={isMentee}
+                    color="secondary"
+                    onChange={handleMenteeCheckboxChange}
+                    value="mentee"
                   />
-                  
-                  <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}> 
+
+                  <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>
                     Desejo ser mentorada - receber apadrinhamento
-                 </label>
+                  </label>
                 </div>
               </div>
               <Box sx={{ width: '100%', marginTop: 2 }}>
@@ -103,8 +104,8 @@ const MentoredPerfil = () => {
                 />
               </Box>
 
-              <ImageUpload/>
-              
+              <ImageUpload />
+
               {isMentor && (
                 <>
                   <TextField
@@ -129,8 +130,8 @@ const MentoredPerfil = () => {
                         onChange={handleMenteeAmountChange}
                         value='1'
                       />
-                      <label htmlFor="oneMentee" className={`${s.checkboxLabel} ${s.customLabel}`}> 
-                      1 - UMA ÚNICA MENTORADA
+                      <label htmlFor="oneMentee" className={`${s.checkboxLabel} ${s.customLabel}`}>
+                        1 - UMA ÚNICA MENTORADA
                       </label>
                     </div>
                     <div className={s.inputRow}>
@@ -156,7 +157,7 @@ const MentoredPerfil = () => {
                     <div className={s.inputRow}>
                       <Checkbox
                         id="initial"
-                        checked={training === 'initial'} 
+                        checked={training === 'initial'}
                         color="secondary"
                         onChange={handleTrainingChange}
                         value='initial'
@@ -168,7 +169,7 @@ const MentoredPerfil = () => {
                     <div className={s.inputRow}>
                       <Checkbox
                         id="intermediary"
-                        checked={training === 'intermediary'} 
+                        checked={training === 'intermediary'}
                         color="secondary"
                         onChange={handleTrainingChange}
                         value='intermediary'
@@ -182,9 +183,9 @@ const MentoredPerfil = () => {
               )}
 
               <div className={s.buttonContainer}>
-                <Button 
-                  type="submit" 
-                  variant="contained" 
+                <Button
+                  type="submit"
+                  variant="contained"
                   style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}
                 >
                   ENVIAR
@@ -194,6 +195,7 @@ const MentoredPerfil = () => {
           </div>
         </Container>
       </div>
+      <SecondFooter />
     </div>
   );
 };

@@ -5,6 +5,9 @@ import ProfileNotification from "../ProfileNotification";
 import { SecondFooter } from "../../Components/SecondFooter";
 import s from "./style.module.css";
 import ContainerPerfil from "../../Components/ContainerPerfil";
+import { Button } from "@mui/material";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import HeaderMobile from "../../Components/Header/HeaderMobile/HeaderMobile";
 
 const profileData = [
     {
@@ -20,12 +23,15 @@ const profileData = [
 
 function Profile() {
     const navigate = useNavigate();
+    const handleEdit = async (event) => {
+        navigate('/perfil-create');
+    };
 
     const { name, age, level, degree, description, type, imageUrl } = profileData[0]; // Destructuring para obter os dados do perfil
 
     return (
         <div className={s.container}>
-            <Header />
+            <HeaderMobile />
             <div className={s.content}>
                 <ContainerPerfil imageUrl={imageUrl}>
                     <div className={s.centeredContent}>
@@ -39,10 +45,23 @@ function Profile() {
                             <div className={s.text}>{level}  {degree}</div>
 
                         </div>
-                        <div className={s.description}>  <div className={s.text}> {description}</div></div>
+                        <div className={s.description}>
+                            <div className={s.text}> {description}</div>
+                            <div className={s.edit}>
+
+                                <EditOutlinedIcon className={s.iconEdit} />
+                                <Button type="submit" variant="contained" onClick={handleEdit} style={{ color: '#D457D2', backgroundColor: '#fff', width: 390 }}>EDITAR PERFIL</Button>
+                                <div >
+
+                                </div>
+
+                            </div>
+                        </div>
 
                     </div>
+
                 </ContainerPerfil>
+
             </div>
             <div className={s.footer}>
                 <SecondFooter />

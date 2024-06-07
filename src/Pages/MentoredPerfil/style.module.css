@@ -1,20 +1,19 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 body {
-    background: #F1F1F1;
+    background: #F1F1F1 !important;
 }
 
 .container {
-    height: calc(100vh - 71px);
+    height: calc(100vh - 151px);
     background-color: #F1F1F1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 30px !important; 
-    margin-top: 60px;
-    margin-bottom: 30px;
-} 
+    padding-top: 160px !important;
+    margin-top: 130px;
+    margin-bottom: 180px;
+}
 
 
 h2 {
@@ -23,7 +22,7 @@ h2 {
     font-weight: 300;
     font-size: 25px;
     color: #D457D2;
-    margin: 0; 
+    margin: 0;
 }
 
 p {
@@ -33,7 +32,7 @@ p {
     font-weight: 100;
     font-size: 15px;
     color: #5B5B5B;
-    margin: 0; 
+    margin: 0;
     margin-bottom: 26px;
     margin-top: 15px;
 }
@@ -46,46 +45,55 @@ p {
 .buttonContainer {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     margin-top: 20px;
     margin-bottom: 10px;
-  }
+}
 
 .input-row3 {
     font-family: "Roboto", sans-serif;
     font-style: normal;
     width: 100%;
-    
+
 }
+
 .input-row4 {
     font-family: "Roboto", sans-serif;
     font-style: normal;
     width: 100%;
-    margin-bottom:5px ;
-    
+    margin-bottom: 5px;
+
 }
 
 .checkboxLabel {
     margin-left: 8px;
 }
-  
+
 .customLabel {
     font-family: "Roboto", sans-serif;
 }
 
-  @media (max-width: 768px) {
+.MuiButton-contained {
+    background-color: #D457D2 !important;
+    color: #FFFFFF !important;
+    width: 190px;
+}
+
+@media (max-width: 768px) {
     h2 {
         text-align: center;
         font-family: 'Roboto', sans-serif;
         font-weight: 300;
         font-size: 20px;
         color: #D457D2;
-        margin: 0; 
-        margin-bottom: 0 !important; 
+        margin: 0;
+        margin-bottom: 0 !important;
     }
 
     .container {
-        margin-top: 115px;
         height: calc(100vh);
-    } 
+        padding-top: 0px !important;
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
 }

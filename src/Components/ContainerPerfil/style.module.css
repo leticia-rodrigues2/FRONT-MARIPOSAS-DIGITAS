@@ -1,6 +1,6 @@
 .container {
-    max-width: 459px;
-    width: 100vw;
+    max-width: 759px;
+    width: calc(100vw - 40px);
     background-color: #D457D2;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -10,10 +10,10 @@
     position: relative;
     z-index: 15;
     display: flex;
-    margin-inline: 20px;
+    justify-content: center;
+    margin: 0 auto;
+    padding-inline: 30px;
 }
-
-
 
 .logo-container {
     position: relative;
@@ -27,20 +27,14 @@
     width: 350px;
 }
 
-
-
 .icon {
     margin: 2px 0;
 }
 
-
-
-
 @media (max-width: 768px) {
     .container {
         padding: 10px;
-        width: 300px;
-        margin: 0;
+        width: calc(100vw - 40px);
     }
 
     .logo {
@@ -50,9 +44,7 @@
     .logo-container {
         top: 34px;
     }
-
 }
-
 
 @media (max-width: 640px) {
     .logo-container {

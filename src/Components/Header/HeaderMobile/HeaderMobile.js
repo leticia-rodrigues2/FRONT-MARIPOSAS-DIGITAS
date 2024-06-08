@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 const pages = [
   { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/' },
-  { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/perfil' },
+  { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/profile' },
   { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
   { text: 'SAIR', icon: <LogoutOutlinedIcon />, route: '/' }
 ];

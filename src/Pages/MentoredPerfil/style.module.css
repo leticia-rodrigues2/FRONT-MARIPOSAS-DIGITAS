@@ -2,44 +2,47 @@
 
 body {
     background: #F1F1F1 !important;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .container {
-    height: calc(100vh - 151px);
+    min-height: calc(100vh - 151px);
     background-color: #F1F1F1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 160px !important;
+    padding-top: 20px !important;
     margin-top: 130px;
-    margin-bottom: 180px;
+    margin-bottom: 10px;
 }
 
-
-h2 {
+.title {
+    text-transform: uppercase;
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 25px;
     color: #D457D2;
     margin: 0;
+    margin-bottom: 20px;
 }
 
-p {
-    text-align: left;
+.text {
+    text-transform: uppercase;
+    text-align: center;
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 100;
     font-size: 15px;
     color: #5B5B5B;
     margin: 0;
-    margin-bottom: 26px;
-    margin-top: 15px;
 }
 
 .input-row input {
     width: 100%;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .buttonContainer {
@@ -50,19 +53,12 @@ p {
     margin-bottom: 10px;
 }
 
-.input-row3 {
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    width: 100%;
-
-}
-
+.input-row3,
 .input-row4 {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     width: 100%;
     margin-bottom: 5px;
-
 }
 
 .checkboxLabel {
@@ -70,7 +66,7 @@ p {
 }
 
 .customLabel {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .MuiButton-contained {

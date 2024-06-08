@@ -1,16 +1,12 @@
-import { useState } from "react"; // Remova import React, { useState }
-import React from 'react'; // Adicione o import React
-
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import { useNavigate } from "react-router-dom";
 import Container from '../../Components/Container';
 import s from "./style.module.css";
-import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader';
-import { Alert, AlertTitle, Button, IconButton, InputAdornment } from "@mui/material";
+import { Alert, Button, IconButton, InputAdornment } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import HeaderLogout from "../../Components/Header/HeaderLogout";
 import HeaderLogoutMobile from "../../Components/Header/HeaderLogout/HeaderLogoutMobile";
 
 function Login() {
@@ -28,23 +24,25 @@ function Login() {
   };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-    if (!validateEmail(event.target.value)) {
+    const emailValue = event.target.value;
+    setEmail(emailValue);
+    if (!validateEmail(emailValue)) {
       setEmailError('Por favor, insira um e-mail válido.');
     } else {
       setEmailError('');
     }
-    setShowAlert(false); 
+    setShowAlert(false);
   };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-    if (event.target.value.length < 8) {
+    const passwordValue = event.target.value;
+    setPassword(passwordValue);
+    if (passwordValue.length < 8) {
       setPasswordError('A senha deve ter pelo menos 8 caracteres.');
     } else {
       setPasswordError('');
     }
-    setShowAlert(false); 
+    setShowAlert(false);
   };
 
   const handleSubmit = async (event) => {
@@ -63,17 +61,18 @@ function Login() {
     }
 
     try {
-      const response = await fetch('http://localhost:3120/login', {
+      const response = await fetch('http://localhost:3020/api/md-user-service/v1/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, senha: password }),
+        body: JSON.stringify({ email, password }),
       });
-
       if (response.ok) {
-        console.log('Login bem-sucedido!');
-        navigate('/Home'); 
+        const { token } = await response.json();
+        localStorage.setItem('token', token);
+        console.log('Login bem-sucedido!, token:', token);
+        navigate("/dashboard");
       } else {
         setShowAlert(true);
       }
@@ -92,18 +91,17 @@ function Login() {
       <HeaderLogoutMobile />
       <div className={s.container}>
         <Container>
-          <div sx={{ mb: '100px' }}>
+          <div style={{ marginBottom: '100px' }}> {/* Changed sx to style */}
             <div className={s.title}>SEJA BEM VINDA, MARIPOSA!</div>
             <div className={s.text}>Nosso objetivo é apoiar e capacitar mulheres na área da tecnologia. É fantástico tê-la conosco!</div>
             {showAlert && (
-              <Alert severity="error" sx={{ mb: '20px' }}>
-                <AlertTitle>Error</AlertTitle>
+              <Alert severity="error" style={{ marginBottom: '20px' }}> {/* Changed sx to style */}
                 Credenciais inválidas. Tente novamente.
               </Alert>
             )}
             <form onSubmit={handleSubmit}>
-              <TextField 
-                sx={{ mb: '20px' }}
+              <TextField
+                style={{ marginBottom: '20px' }} // Changed sx to style
                 id="email"
                 type="email"
                 label="Insira seu e-mail"
@@ -116,8 +114,8 @@ function Login() {
                 error={!!emailError}
                 helperText={emailError}
               />
-              <TextField 
-                sx={{ mb: '10px' }}
+              <TextField
+                style={{ marginBottom: '10px' }} // Changed sx to style
                 id="password"
                 label="Insira sua senha"
                 variant="outlined"
@@ -158,7 +156,7 @@ function Login() {
         </Container>
       </div>
       <div className={s['signup-link-fixed']}>
-        <a href='cadastro' className="signup">Ainda não tem uma conta? <span className={s.rosa}>Clique aqui para se cadastrar!</span></a>
+        <a href='cadastro' className={s.signup}>Ainda não tem uma conta? <span className={s.rosa}>Clique aqui para se cadastrar!</span></a>
       </div>
     </div>
   );

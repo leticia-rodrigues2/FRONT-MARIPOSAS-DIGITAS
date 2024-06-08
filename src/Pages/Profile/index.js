@@ -49,7 +49,7 @@ function Profile() {
                             <div className={s.text}> {description}</div>
                             <div className={s.edit}>
 
-                                <EditOutlinedIcon className={s.iconEdit} />
+
                                 <Button type="submit" variant="contained" onClick={handleEdit} style={{ color: '#D457D2', backgroundColor: '#fff', width: 390 }}>EDITAR PERFIL</Button>
                                 <div >
 

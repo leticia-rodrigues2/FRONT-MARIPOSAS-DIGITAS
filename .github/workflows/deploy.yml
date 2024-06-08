@@ -36,3 +36,8 @@ jobs:
 
       - name: Configure docker for GCP
         run: gcloud auth configure-docker us-east1-docker.pkg.dev
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t "us-east1-docker.pkg.dev/mariposas-digitais/mariposas-digitais-front/mariposas-digitais-front:${{ env.GH_REF }}" .
+          docker push "us-east1-docker.pkg.dev/mariposas-digitais/mariposas-digitais-front/mariposas-digitais-front:${{ env.GH_REF }}"

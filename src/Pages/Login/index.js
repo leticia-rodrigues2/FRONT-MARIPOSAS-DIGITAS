@@ -1,9 +1,7 @@
-import { useState } from "react"; // Remova import React, { useState }
-import React from 'react'; // Adicione o import React
-
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import { useNavigate } from "react-router-dom";
 import Container from '../../Components/Container';
 import s from "./style.module.css";
 import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader';
@@ -34,7 +32,7 @@ function Login() {
     } else {
       setEmailError('');
     }
-    setShowAlert(false); 
+    setShowAlert(false);
   };
 
   const handlePasswordChange = (event) => {
@@ -44,7 +42,7 @@ function Login() {
     } else {
       setPasswordError('');
     }
-    setShowAlert(false); 
+    setShowAlert(false);
   };
 
   const handleSubmit = async (event) => {
@@ -72,8 +70,10 @@ function Login() {
       });
 
       if (response.ok) {
+        const { token } = await response.json();
+        localStorage.setItem('token', token);
         console.log('Login bem-sucedido!');
-        navigate('/Home'); 
+        navigate('/Home');
       } else {
         setShowAlert(true);
       }
@@ -102,7 +102,7 @@ function Login() {
               </Alert>
             )}
             <form onSubmit={handleSubmit}>
-              <TextField 
+              <TextField
                 sx={{ mb: '20px' }}
                 id="email"
                 type="email"
@@ -116,7 +116,7 @@ function Login() {
                 error={!!emailError}
                 helperText={emailError}
               />
-              <TextField 
+              <TextField
                 sx={{ mb: '10px' }}
                 id="password"
                 label="Insira sua senha"

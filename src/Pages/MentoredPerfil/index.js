@@ -61,7 +61,7 @@ const MentoredPerfil = () => {
       <div className={s.container}>
         <Container>
           <div className={s.content}>
-            <h2>CONFIGURE SEU PERFIL!</h2>
+            <div className={s.title}>CONFIGURE SEU PERFIL!</div>
             <form onSubmit={handleSubmit}>
               <div className={s.checkboxContainer}>
                 <div className={s.inputRow}>
@@ -72,11 +72,9 @@ const MentoredPerfil = () => {
                     onChange={handleMentorCheckboxChange}
                     value="mentor"
                   />
-
                   <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>
                     Desejo ser mentora
                   </label>
-
                 </div>
                 <div className={s.inputRow}>
                   <Checkbox
@@ -86,7 +84,6 @@ const MentoredPerfil = () => {
                     onChange={handleMenteeCheckboxChange}
                     value="mentee"
                   />
-
                   <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>
                     Desejo ser mentorada - receber apadrinhamento
                   </label>
@@ -103,85 +100,85 @@ const MentoredPerfil = () => {
                   sx={{ marginBottom: '15px' }}
                 />
               </Box>
-
               <ImageUpload />
-
-              {isMentor && (
-                <>
-                  <TextField
-                    sx={{ marginBottom: '15px' }}
-                    id="training"
-                    type="text"
-                    label="Formação superior"
-                    variant="outlined"
-                    size="small"
-                    color="secondary"
-                    fullWidth
-                    value={training} // Fixed value
-                    onChange={(event) => setTraining(event.target.value)} // Changed to setTraining
-                  />
-                  <p>Disponibilidade de apadrinhamento</p>
-                  <div className={s.checkboxContainer}>
-                    <div className={s.inputRow}>
-                      <Checkbox
-                        id="oneMentee"
-                        checked={menteeAmount === '1'}
-                        color="secondary"
-                        onChange={handleMenteeAmountChange}
-                        value='1'
-                      />
-                      <label htmlFor="oneMentee" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                        1 - UMA ÚNICA MENTORADA
-                      </label>
+              <div>
+                {isMentor && (
+                  <>
+                    <TextField
+                      sx={{ marginBottom: '15px', marginTop: "15px" }}
+                      id="training"
+                      type="text"
+                      label="Formação superior"
+                      variant="outlined"
+                      size="small"
+                      color="secondary"
+                      fullWidth
+                      value={training}
+                      onChange={(event) => setTraining(event.target.value)}
+                    />
+                    <div className={s.text}>Disponibilidade de apadrinhamento</div>
+                    <div className={s.checkboxContainer}>
+                      <div className={s.inputRow}>
+                        <Checkbox
+                          id="oneMentee"
+                          checked={menteeAmount === '1'}
+                          color="secondary"
+                          onChange={handleMenteeAmountChange}
+                          value='1'
+                        />
+                        <label htmlFor="oneMentee" className={`${s.checkboxLabel} ${s.text}`}>
+                          1 - UMA ÚNICA MENTORADA
+                        </label>
+                      </div>
+                      <div className={s.inputRow}>
+                        <Checkbox
+                          id="twoMentees"
+                          checked={menteeAmount === '2'}
+                          color="secondary"
+                          onChange={handleMenteeAmountChange}
+                          value='2'
+                        />
+                        <label htmlFor="twoMentees" className={`${s.checkboxLabel} ${s.text}`}>
+                          2 - DUAS MENTORADAS
+                        </label>
+                      </div>
                     </div>
-                    <div className={s.inputRow}>
-                      <Checkbox
-                        id="twoMentees"
-                        checked={menteeAmount === '2'}
-                        color="secondary"
-                        onChange={handleMenteeAmountChange}
-                        value='2'
-                      />
-                      <label htmlFor="twoMentees" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                        2 - DUAS MENTORADAS
-                      </label>
+                  </>
+                )}
+              </div>
+              <div>
+                {isMentee && (
+                  <>
+                    <div className={s.text}>Classificação de conhecimento</div>
+                    <div className={s.checkboxContainer}>
+                      <div className={s.inputRow}>
+                        <Checkbox
+                          id="initial"
+                          checked={training === 'initial'}
+                          color="secondary"
+                          onChange={handleTrainingChange}
+                          value='initial'
+                        />
+                        <label htmlFor="initial" className={`${s.checkboxLabel} ${s.text}`}>
+                          1 - CASULO - PRIMEIRO CONTATO COM TECNOLOGIA
+                        </label>
+                      </div>
+                      <div className={s.inputRow}>
+                        <Checkbox
+                          id="intermediary"
+                          checked={training === 'intermediary'}
+                          color="secondary"
+                          onChange={handleTrainingChange}
+                          value='intermediary'
+                        />
+                        <label htmlFor="intermediary" className={`${s.checkboxLabel} ${s.text}`}>
+                          2 - LAGARTA - ALGUM CONHECIMENTO SOBRE TECNOLOGIA
+                        </label>
+                      </div>
                     </div>
-                  </div>
-                </>
-              )}
-
-              {isMentee && (
-                <>
-                  <p>Classificação de conhecimento</p>
-                  <div className={s.checkboxContainer}>
-                    <div className={s.inputRow}>
-                      <Checkbox
-                        id="initial"
-                        checked={training === 'initial'}
-                        color="secondary"
-                        onChange={handleTrainingChange}
-                        value='initial'
-                      />
-                      <label htmlFor="initial" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                        1 - CASULO - PRIMEIRO CONTATO COM TECNOLOGIA
-                      </label>
-                    </div>
-                    <div className={s.inputRow}>
-                      <Checkbox
-                        id="intermediary"
-                        checked={training === 'intermediary'}
-                        color="secondary"
-                        onChange={handleTrainingChange}
-                        value='intermediary'
-                      />
-                      <label htmlFor="intermediary" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                        2 - LAGARTA - ALGUM CONHECIMENTO SOBRE TECNOLOGIA
-                      </label>
-                    </div>
-                  </div>
-                </>
-              )}
-
+                  </>
+                )}
+              </div>
               <div className={s.buttonContainer}>
                 <Button
                   type="submit"

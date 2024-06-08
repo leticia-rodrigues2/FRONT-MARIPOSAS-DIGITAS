@@ -41,3 +41,12 @@ jobs:
         run: |
           docker build -t "us-east1-docker.pkg.dev/mariposas-digitais/mariposas-digitais-front/mariposas-digitais-front:${{ env.GH_REF }}" .
           docker push "us-east1-docker.pkg.dev/mariposas-digitais/mariposas-digitais-front/mariposas-digitais-front:${{ env.GH_REF }}"
+      
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@main
+        with:
+          image: us-east1-docker.pkg.dev/mariposas-digitais/mariposas-digitais-front/mariposas-digitais-front:${{ env.GH_REF }}
+          service: mariposas-digitais-front
+          region: us-east1
+          platform: managed
+          allow-unauthenticated: true

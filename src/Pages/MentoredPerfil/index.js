@@ -7,27 +7,29 @@ import Header from "../../Components/Header/Header";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
-import ImageUpload from "./Componets/ImageUpload";
 import { SecondFooter } from "../../Components/SecondFooter";
+import ImageUpload from "./Componets/ImageUpload";
+import baseUrl from "../../config";
 
 const MentoredPerfil = () => {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const [age, setAge] = useState('0');
+  const [menteeLevel, setMenteeLevel] = useState('1');
   const [isMentor, setIsMentor] = useState(false);
   const [isMentee, setIsMentee] = useState(false);
-  const [menteeAmount, setMenteeAmount] = useState('1');
-  const [training, setTraining] = useState('');
+  const [mentoringCapacity, setMentoringCapacity] = useState('1');
+  const [education, setEducation] = useState('');
+  const [profile, setProfile] = useState('');
+  const [image, setImage] = useState(null);
+  const [isSponsored, setIsSponsored] = useState(false);
+  const token = localStorage.getItem('token');
+  const email = localStorage.getItem('email');
   const navigate = useNavigate();
-
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
 
   const handleMentorCheckboxChange = (event) => {
     setIsMentor(event.target.checked);
     if (event.target.checked) {
       setIsMentee(false);
-      setMenteeAmount('1');
+      setMentoringCapacity('1');
     }
   };
 
@@ -38,21 +40,97 @@ const MentoredPerfil = () => {
     }
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handleMessageChange = (event) => {
+    setProfile(event.target.value);
   };
 
-  const handleTrainingChange = (event) => {
-    setTraining(event.target.value);
+  const handleImageChange = (file) => {
+    setImage(file);
   };
 
-  const handleMenteeAmountChange = (event) => {
-    setMenteeAmount(event.target.value);
+  const convertImageToBytes = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(file);
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+    });
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    navigate('/Home');
+
+    try {
+      if (isMentor) {
+        const mentorData = {
+          email,
+          education,
+          age,
+          mentoringCapacity,
+          profile
+        };
+
+        const mentorResponse = await fetch(`${baseUrl}/user/profile/mentor`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(mentorData)
+        });
+
+        if (!mentorResponse.ok) {
+          throw new Error('Failed to update mentor profile');
+        }
+      } else if (isMentee) {
+        const menteeData = {
+          email,
+          isSponsored,
+          age,
+          menteeLevel,
+          profile
+        };
+
+        const menteeResponse = await fetch(`${baseUrl}/user/profile/mentee`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(menteeData)
+        });
+        console.log(menteeData)
+        if (!menteeResponse.ok) {
+          throw new Error('Failed to update mentee profile');
+        }
+      }
+
+
+
+      if (image) {
+        const imageBytes = await convertImageToBytes(image);
+        const formData = new FormData();
+        formData.append('arquivo', new Blob([imageBytes]));
+
+        const imageResponse = await fetch(`${baseUrl}/user/profile/image`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData
+        });
+
+        if (!imageResponse.ok) {
+          throw new Error('Failed to upload image');
+        }
+      }
+
+      navigate("/dashboard");
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
   };
 
   return (
@@ -98,32 +176,34 @@ const MentoredPerfil = () => {
                   multiline
                   rows={2}
                   sx={{ marginBottom: '15px' }}
+                  value={profile}
+                  onChange={handleMessageChange}
                 />
               </Box>
-              <ImageUpload />
+              <ImageUpload onImageChange={handleImageChange} />
               <div>
                 {isMentor && (
                   <>
                     <TextField
                       sx={{ marginBottom: '15px', marginTop: "15px" }}
-                      id="training"
+                      id="education"
                       type="text"
                       label="Formação superior"
                       variant="outlined"
                       size="small"
                       color="secondary"
                       fullWidth
-                      value={training}
-                      onChange={(event) => setTraining(event.target.value)}
+                      value={education}
+                      onChange={(event) => setEducation(event.target.value)}
                     />
                     <div className={s.text}>Disponibilidade de apadrinhamento</div>
                     <div className={s.checkboxContainer}>
                       <div className={s.inputRow}>
                         <Checkbox
                           id="oneMentee"
-                          checked={menteeAmount === '1'}
+                          checked={mentoringCapacity === '1'}
                           color="secondary"
-                          onChange={handleMenteeAmountChange}
+                          onChange={() => setMentoringCapacity('1')}
                           value='1'
                         />
                         <label htmlFor="oneMentee" className={`${s.checkboxLabel} ${s.text}`}>
@@ -133,9 +213,9 @@ const MentoredPerfil = () => {
                       <div className={s.inputRow}>
                         <Checkbox
                           id="twoMentees"
-                          checked={menteeAmount === '2'}
+                          checked={mentoringCapacity === '2'}
                           color="secondary"
-                          onChange={handleMenteeAmountChange}
+                          onChange={() => setMentoringCapacity('2')}
                           value='2'
                         />
                         <label htmlFor="twoMentees" className={`${s.checkboxLabel} ${s.text}`}>
@@ -154,9 +234,9 @@ const MentoredPerfil = () => {
                       <div className={s.inputRow}>
                         <Checkbox
                           id="initial"
-                          checked={training === 'initial'}
+                          checked={menteeLevel === '1'}
                           color="secondary"
-                          onChange={handleTrainingChange}
+                          onChange={() => setMenteeLevel("1")}
                           value='initial'
                         />
                         <label htmlFor="initial" className={`${s.checkboxLabel} ${s.text}`}>
@@ -166,9 +246,9 @@ const MentoredPerfil = () => {
                       <div className={s.inputRow}>
                         <Checkbox
                           id="intermediary"
-                          checked={training === 'intermediary'}
+                          checked={menteeLevel === '2'}
                           color="secondary"
-                          onChange={handleTrainingChange}
+                          onChange={() => setMenteeLevel("2")}
                           value='intermediary'
                         />
                         <label htmlFor="intermediary" className={`${s.checkboxLabel} ${s.text}`}>

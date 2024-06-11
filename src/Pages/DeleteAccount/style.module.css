@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 .container {
     height: calc(100vh - 71px);
+    margin-top: 60px;
     background-color: #F0F0F0;
     display: flex;
     justify-content: center;

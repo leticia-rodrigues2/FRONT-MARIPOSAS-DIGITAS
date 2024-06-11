@@ -86,9 +86,6 @@ const ImageUpload = () => {
             </CloseButton>
           </ImagePreviewContainer>
         )}
-        {/* <Button type="submit" variant="contained" style={{ marginTop: "10px", backgroundColor: '#808080', color: '#fff' }}>
-          Submit
-        </Button> */}
       </form>
     </div>
   );

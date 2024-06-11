@@ -9,24 +9,40 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
-import ContentPasteSearchSharpIcon from '@mui/icons-material/ContentPasteSearchSharp';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import CoPresentRoundedIcon from '@mui/icons-material/CoPresentRounded';
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
-const pages = [
-  { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/' },
-  { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/profile' },
-  { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
-  { text: 'SAIR', icon: <LogoutOutlinedIcon />, route: '/' }
-];
 
 export default function HeaderMobile() {
+  const token = localStorage.getItem('token');
+  const isLoggedIn = Boolean(token);
+
+  let pages = [];
+
+  if (isLoggedIn) {
+    pages = [
+      { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/dashboard' },
+      { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/profile' },
+      { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
+      { text: 'DELETAR CONTA', icon: <DeleteOutlinedIcon />, route: '/delete' },
+      { text: 'SAIR', icon: <LogoutOutlinedIcon />, route: '/' }
+    ];
+  } else {
+    pages = [
+      { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/' },
+      { text: 'SOBRE', icon: <CoPresentRoundedIcon />, route: '/profile' },
+      { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
+      { text: 'ENTRAR', icon: <LogoutOutlinedIcon />, route: '/' }
+    ];
+  }
+
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const navigate = useNavigate();
 
@@ -45,10 +61,10 @@ export default function HeaderMobile() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none', minHeight: "12px !imaprtant" }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none', minHeight: '64px !important' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <div className='logo' style={{ textAlign: 'center', margin: 'auto' }}>
-            <img src="images//LogoText.png" alt="Logo" className="logo" style={{ width: '150px' }} />
+            <img src="images/LogoText.png" alt="Logo" className="logo" style={{ width: '150px' }} />
           </div>
           <IconButton
             size="large"

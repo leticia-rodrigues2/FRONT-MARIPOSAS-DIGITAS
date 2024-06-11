@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Container from '../../Components/Container';
 import s from "./style.module.css";
+import baseUrl from "../../config.js"
 import { Alert, Button, IconButton, InputAdornment } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -61,7 +62,7 @@ function Login() {
     }
 
     try {
-      const response = await fetch('http://localhost:3020/api/md-user-service/v1/user/login', {
+      const response = await fetch(`${baseUrl}/user/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ function Login() {
       if (response.ok) {
         const { token } = await response.json();
         localStorage.setItem('token', token);
-        console.log('Login bem-sucedido!, token:', token);
+        localStorage.setItem('email', email); 
         navigate("/dashboard");
       } else {
         setShowAlert(true);

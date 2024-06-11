@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
+import { TextField, Checkbox, Button, IconButton } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import s from "./style.module.css";
 import Container from '../../Components/Container';
 import DefaultHeader from "../../Components/Header/DefaultHeader/DefaultHeader";
-import { Button, IconButton } from "@mui/material"; // Consolidated imports
 import ScrollDialog from "./ScrollDialog";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../../config";
 
 const Cadastro = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
-  const [nome, setNome] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showAlert, setShowAlert] = useState(false);
@@ -23,7 +22,7 @@ const Cadastro = () => {
   const [passwordError, setPasswordError] = useState('');
   const [nomeError, setNomeError] = useState('');
   const [phone, setPhone] = useState("");
-  const [madrinha, setMadrinha] = useState(0);
+  const [isMentor, setIsMentor] = useState(1);
   const [phoneError, setPhoneError] = useState("");
 
   const validateEmail = (email) => {
@@ -43,7 +42,7 @@ const Cadastro = () => {
 
   const handleNameChange = (event) => {
     const name = event.target.value;
-    setNome(name);
+    setName(name);
     if (!name.trim() || name.length > 50 || !/^[a-zA-Z\s]*$/.test(name)) {
       setNomeError("Por favor, insira um nome válido.");
     } else {
@@ -54,7 +53,7 @@ const Cadastro = () => {
   const handlePhoneChange = (event) => {
     const phone = event.target.value;
     setPhone(phone);
-    if (phone.trim() === "" || phone.length <= 11) {
+    if (phone.trim() === "" || phone.length !== 11) {
       setPhoneError("Por favor, insira seu telefone.");
     } else {
       setPhoneError("");
@@ -95,7 +94,7 @@ const Cadastro = () => {
       return;
     }
 
-    if (!nome.trim() || nome.length > 50 || !/^[a-zA-Z\s]*$/.test(nome)) {
+    if (!name.trim() || name.length > 50 || !/^[a-zA-Z\s]*$/.test(name)) {
       setNomeError("Por favor, insira um nome válido.");
       setShowAlert(true);
       return;
@@ -117,16 +116,23 @@ const Cadastro = () => {
       return;
     }
 
+    if (phone.trim() === "" || phone.length !== 11) {
+      setPhoneError("Por favor, insira seu telefone.");
+      setShowAlert(true);
+      return;
+    }
+    
     try {
-      const response = await fetch('http://localhost:3120/login', {
+      const response = await fetch(`${baseUrl}/user`, {
         method: 'POST',
-  
-        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, password, phone, isMentor }),
       });
 
       if (response.ok) {
-        console.log('Login bem-sucedido!');
-        navigate('/Home');
+        navigate('/login');
       } else {
         setShowAlert(true);
       }
@@ -145,7 +151,7 @@ const Cadastro = () => {
   };
 
   const handleCheckboxChange = (event) => {
-    setMadrinha(event.target.checked ? 1 : 0);
+    setIsMentor(event.target.checked ? 1 : 0);
   };
 
   return (
@@ -153,16 +159,25 @@ const Cadastro = () => {
       <DefaultHeader />
       <div className={s.container}>
         <Container>
-          <div sx={{ mb: '100px' }}>
+          <div>
             <div className={s.title}>CADASTRE-SE</div>
-
             <form onSubmit={handleSubmit}>
               <div className={s['input-row3']}>
-                <Checkbox id="madrinha" defaultChecked={madrinha === 1} color="secondary" onChange={handleCheckboxChange} />
+                <Checkbox
+                  id="madrinha"
+                  checked={isMentor === 1}
+                  color="secondary"
+                  onChange={handleCheckboxChange}
+                />
                 <label htmlFor="madrinha" className="checkbox-label">Desejo ser mentora</label>
               </div>
               <div className={s['input-row4']}>
-                <Checkbox id="aluna" defaultChecked={madrinha === 0} color="secondary" onChange={handleCheckboxChange} />
+                <Checkbox
+                  id="aluna"
+                  checked={isMentor === 0}
+                  color="secondary"
+                  onChange={handleCheckboxChange}
+                />
                 <label htmlFor="aluna" className="checkbox-label">Desejo ser mentorada - receber apadrinhamento</label>
               </div>
 
@@ -174,7 +189,7 @@ const Cadastro = () => {
                 size="small"
                 color="secondary"
                 fullWidth
-                value={nome}
+                value={name}
                 onChange={handleNameChange}
                 error={!!nomeError}
                 helperText={nomeError}

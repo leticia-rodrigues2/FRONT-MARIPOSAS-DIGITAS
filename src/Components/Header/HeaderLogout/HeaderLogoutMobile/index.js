@@ -1,33 +1,44 @@
-import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
+import * as React from 'react';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import { useNavigate } from "react-router-dom";
-import { AccountCircle } from '@mui/icons-material';
 import Drawer from '@mui/material/Drawer';
+import AppBar from '@mui/material/AppBar';
 import CssBaseline from '@mui/material/CssBaseline';
+import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
-import s from "./style.module.css";
+import IconButton from '@mui/material/IconButton';
+import HomeIcon from '@mui/icons-material/Home';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import LoginIcon from '@mui/icons-material/Login';
+import CoPresentRoundedIcon from '@mui/icons-material/CoPresentRounded';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
-const pages = [
-  { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/' },
-  { text: 'ENTRAR', icon: <AccountCircle />, route: '/login' },
-  { text: 'SOBRE', icon: <img src="images/borbo.png" alt="sobre" style={{ width: '25px' }} />, route: '/' },
-  { text: 'CONTATO', icon: <ContactMailIcon />, route: '/' }
-];
 
-function HeaderLogoutMobile({ logoPrimary = false }) {
+export default function HeaderMobile() {
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const navigate = useNavigate();
-  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  // Verifica se o token existe no localStorage
+  const token = localStorage.getItem('token');
+  const isLoggedIn = Boolean(token);
+
+  // Define as páginas com base no estado de autenticação
+  const pages = [
+    { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/dashboard' },
+    { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/profile' },
+    { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
+    { 
+      text: isLoggedIn ? 'SAIR' : 'ENTRAR', 
+      icon: isLoggedIn ? <LogoutOutlinedIcon /> : <LoginIcon />, 
+      route: isLoggedIn ? '/login' : '/login' // Muda a rota se necessário
+    }
+  ];
 
   const toggleDrawer = (open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -36,7 +47,10 @@ function HeaderLogoutMobile({ logoPrimary = false }) {
     setDrawerOpen(open);
   };
 
-  const handleMenuItemClick = (route) => {
+  const handleMenuItemClick = (route, text) => {
+    if (text === 'SAIR') {
+      localStorage.removeItem('token'); // Remove o token do localStorage
+    }
     navigate(route);
     setDrawerOpen(false);
   };
@@ -44,14 +58,10 @@ function HeaderLogoutMobile({ logoPrimary = false }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none' }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none', minHeight: "12px !imaprtant" }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <div className='logo' style={{ textAlign: 'center', margin: 'auto' }}>
-            {logoPrimary ? (
-              <img src="images/logo-txt-img.png" style={{ width: '150px' }} />
-            ) : (
-              <img src="images/LogoText.png" style={{ width: '200px' }} />
-            )}
+            <img src="images//LogoText.png" alt="Logo" className="logo" style={{ width: '150px' }} />
           </div>
           <IconButton
             size="large"
@@ -73,12 +83,12 @@ function HeaderLogoutMobile({ logoPrimary = false }) {
         <Box sx={{ overflow: 'auto' }}>
           <List sx={{ backgroundColor: '#80BBD9' }}>
             {pages.map((page, index) => (
-              <ListItem key={index} disablePadding onClick={() => handleMenuItemClick(page.route)}>
+              <ListItem key={index} disablePadding onClick={() => handleMenuItemClick(page.route, page.text)}>
                 <ListItemButton sx={{ alignItems: 'center' }}>
                   <ListItemIcon sx={{ color: 'white' }}>
                     {page.icon}
                   </ListItemIcon>
-                  <ListItemText sx={{ color: 'white', fontWeight: "bold" }} primary={page.text} />
+                  <ListItemText sx={{ color: 'white' }} primary={page.text} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -88,5 +98,3 @@ function HeaderLogoutMobile({ logoPrimary = false }) {
     </Box>
   );
 }
-
-export default HeaderLogoutMobile;

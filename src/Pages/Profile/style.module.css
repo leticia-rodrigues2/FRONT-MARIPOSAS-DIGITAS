@@ -1,126 +1,124 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    overflow-x: hidden;
-    padding-top: 30px;
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.footer {
-    margin-top: auto;
-    width: 100%;
-    padding-top: 10px;
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 30px;
+  margin-bottom: 60px;
 }
 
 .content {
-    margin-top: 20px;
-    flex-grow: 1;
+  margin-top: 20px;
+  flex-grow: 1;
 }
 
 .centeredContent {
-    text-align: center;
+  text-align: center;
+  padding: 0 20px; 
 }
 
 .title {
-    text-transform: uppercase;
-    padding-left: 10px;
-    font-size: 20px;
-    font-family: 'Roboto', sans-serif;
-    color: #fff;
-    text-align: center;
-    font-weight: 100;
-    margin-bottom: 10px;
+  text-transform: uppercase;
+  padding-left: 10px;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 10px;
 }
 
 .details {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-}
-
-.iconEdit {
-    color: white;
-    border: 4px solid #fff;
-    border-radius: 50%;
-    padding: 4px;
-    font-size: 46px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    margin-right: 20px;
-}
-
-.edit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
 .nivel,
 .nivelButterfly {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .text {
-    text-transform: uppercase;
-    text-align: center;
-    font-family: "Roboto", sans-serif;
-    font-style: normal;
-    font-weight: 100;
-    font-size: 15px;
-    color: #FFFFFF;
-    margin: 0;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 15px;
+  color: #FFFFFF;
+  margin: 0;
 }
-
-
 
 .description {
-    margin-top: 5px;
-    padding-bottom: 30px;
+  margin-top: 5px;
+  padding-bottom: 30px;
 }
 
+.edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
 
+.editButton {
+  color: #D457D2;
+  background-color: #fff;
+  width: 100%;
+  max-width: 390px;
+}
+
+.footer {
+  width: 100%;
+  padding-top: 10px;
+  background-color: #80BBD9; /* Ensure the footer has a background color for visibility */
+  margin-top: auto; /* Push the footer to the bottom */
+}
 
 @media (max-width: 768px) {
-    .title {
-        font-size: 20px;
-    }
+  .title {
+    font-size: 20px;
+  }
 
-    .details {
-        flex-direction: column;
-    }
+  .details {
+    flex-direction: column;
+  }
 
-    .nivel,
-    .nivelButterfly {
-        width: 20px;
-        height: 20px;
-    }
+  .nivel,
+  .nivelButterfly {
+    width: 20px;
+    height: 20px;
+  }
 
-    .text {
-        font-size: 16px;
-    }
+  .text {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 576px) {
-    .title {
-        font-size: 18px;
-    }
+  .title {
+    font-size: 18px;
+  }
 
-    .nivel,
-    .nivelButterfly {
-        width: 15px;
-        height: 15px;
-    }
+  .nivel,
+  .nivelButterfly {
+    width: 15px;
+    height: 15px;
+  }
 
-    .text {
-        font-size: 14px;
-    }
+  .text {
+    font-size: 14px;
+  }
 }

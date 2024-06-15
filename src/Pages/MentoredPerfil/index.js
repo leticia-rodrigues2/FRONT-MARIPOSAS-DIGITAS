@@ -61,7 +61,7 @@ const MentoredPerfil = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       if (isMentor) {
         const mentorData = {
@@ -71,49 +71,51 @@ const MentoredPerfil = () => {
           mentoringCapacity,
           profile
         };
-
+  
         const mentorResponse = await fetch(`${baseUrl}/user/profile/mentor`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            // 'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'email': email,
+            'token': token,
           },
           body: JSON.stringify(mentorData)
         });
-
+  
         if (!mentorResponse.ok) {
           throw new Error('Failed to update mentor profile');
         }
       } else if (isMentee) {
         const menteeData = {
-          email,
-          isSponsored,
-          age,
-          menteeLevel,
-          profile
+          email: "leticiaarodrigues2@gmail.com",
+          age: "24",
+          menteeLevel: 1,
+          isSponsored: true,
+          profile: "Olá, sou Leticia Rodrigues, iniciante na área de tecnologia e gostaria de encontrar uma mentora para me guiar nesta trilha."
         };
-
+  
         const menteeResponse = await fetch(`${baseUrl}/user/profile/mentee`, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            // 'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'email': email,
+            'token': token,
           },
           body: JSON.stringify(menteeData)
         });
-        console.log(menteeData)
+  
         if (!menteeResponse.ok) {
           throw new Error('Failed to update mentee profile');
         }
       }
-
-
-
+  
       if (image) {
         const imageBytes = await convertImageToBytes(image);
         const formData = new FormData();
         formData.append('arquivo', new Blob([imageBytes]));
-
+  
         const imageResponse = await fetch(`${baseUrl}/user/profile/image`, {
           method: 'POST',
           headers: {
@@ -121,17 +123,18 @@ const MentoredPerfil = () => {
           },
           body: formData
         });
-
+  
         if (!imageResponse.ok) {
           throw new Error('Failed to upload image');
         }
       }
-
+  
       navigate("/dashboard");
     } catch (error) {
       console.error('Error updating profile:', error);
     }
   };
+  
 
   return (
     <div>

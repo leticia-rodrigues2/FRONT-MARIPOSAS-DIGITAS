@@ -22,12 +22,13 @@ function DeleteAccount() {
       const response = await fetch(`${baseUrl}/user`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
           'email': email,
+          'token': token,
         },
       });
-
+    
       if (response.ok) {
         console.log('Account successfully deleted!');
         localStorage.removeItem('token');

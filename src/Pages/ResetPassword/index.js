@@ -4,16 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Container from '../../Components/Container';
 import s from "./style.module.css";
 import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader';
-import { Button, CircularProgress, Box, Modal, Backdrop, Fade, Typography } from "@mui/material";
+import { Button, CircularProgress, Box, Alert , AlertTitle} from "@mui/material";
+
 import baseUrl from "../../config";
 
 function ResetPassword({ email }) {
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [successOpen, setSuccessOpen] = useState(false);
-  const [errorOpen, setErrorOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -23,7 +22,7 @@ function ResetPassword({ email }) {
     event.preventDefault();
 
     try {
-      setLoading(true);
+      setLoading(true); 
 
       const response = await fetch(`${baseUrl}/user/profile/reset-password`, {
         method: 'POST',
@@ -33,29 +32,35 @@ function ResetPassword({ email }) {
         body: JSON.stringify({ email, password }),
       });
 
-      if (response.ok) {
-        setSuccessOpen(true);
-        setTimeout(() => {
-          setSuccessOpen(false);
-          navigate('/login');
-        }, 500); 
+      if (response.ok) { 
+        setShowAlert(false)
+        navigate('/login');
       } else {
-        setErrorMessage(response.statusText);
-        setErrorOpen(true);
+        console.log('Erro ao redefinir senha:', response.statusText);
+        setShowAlert(true)
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setErrorOpen(true);
+      setShowAlert(true)
+      console.error('Erro ao redefinir senha:', error);
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
 
-  const handleClose = () => {
-    setSuccessOpen(false);
-    setErrorOpen(false);
-    navigate('/login');
-  };
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress  color="secondary" />
+      </Box>
+    );
+  }
 
   return (
     <div>
@@ -64,6 +69,12 @@ function ResetPassword({ email }) {
         <Container>
           <div sx={{ mb: '100px' }}>
             <div className={s.title}>REDEFINA SUA SENHA</div>
+            {showAlert && (
+              <Alert severity="error" style={{ marginBottom: '20px' }}> 
+                <AlertTitle>Erro ao redefinir senha.</AlertTitle>
+                Tente novamente.
+              </Alert>
+            )}
             <form onSubmit={handleSubmit}>
               <TextField
                 sx={{ mb: '30px' }}
@@ -96,41 +107,6 @@ function ResetPassword({ email }) {
           </div>
         </Container>
       </div>
-
-      <Modal
-        open={successOpen || errorOpen}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-        closeOnClickOutside={true} // Fechar ao clicar fora do modal
-      >
-        <Fade in={successOpen || errorOpen}>
-          <div style={{ 
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh',
-          }}>
-            <Box sx={{ bgcolor: 'background.paper', p: 4, maxWidth: 400, textAlign: 'center' }}>
-              {successOpen && (
-                <>
-                  <Typography variant="h5" gutterBottom>Sucesso!</Typography>
-                  <Typography variant="body1">Senha redefinida com sucesso!</Typography>
-                </>
-              )}
-              {errorOpen && (
-                <>
-                  <Typography variant="h5" gutterBottom>Erro!</Typography>
-                  <Typography variant="body1">Erro ao redefinir senha: {errorMessage}</Typography>
-                </>
-              )}
-            </Box>
-          </div>
-        </Fade>
-      </Modal>
     </div>
   );
 }

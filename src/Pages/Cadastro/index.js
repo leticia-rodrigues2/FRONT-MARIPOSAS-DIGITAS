@@ -151,7 +151,7 @@ const Cadastro = () => {
   };
 
   const handleCheckboxChange = (event) => {
-    setIsMentor(event.target.checked ? 1 : 0);
+    setIsMentor(event.target.checked ? 1 : 2);
   };
 
   return (
@@ -174,7 +174,7 @@ const Cadastro = () => {
               <div className={s['input-row4']}>
                 <Checkbox
                   id="aluna"
-                  checked={isMentor === 0}
+                  checked={isMentor === 2}
                   color="secondary"
                   onChange={handleCheckboxChange}
                 />

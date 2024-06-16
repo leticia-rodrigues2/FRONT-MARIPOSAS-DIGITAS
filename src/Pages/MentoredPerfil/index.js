@@ -4,15 +4,14 @@ import Checkbox from '@mui/material/Checkbox';
 import s from "./style.module.css";
 import Container from '../../Components/Container';
 import Header from "../../Components/Header/Header";
-import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Box from '@mui/material/Box';
+import { Box , Alert, Button, IconButton, CircularProgress , AlertTitle} from "@mui/material"; // Renomeando Box para MuiBox
 import { SecondFooter } from "../../Components/SecondFooter";
 import { styled } from '@mui/material/styles';
 import LocalSeeIcon from '@mui/icons-material/LocalSee';
-import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import baseUrl from "../../config";
+
 
 const Input = styled('input')({
   display: 'none',
@@ -41,6 +40,7 @@ const CloseButton = styled(IconButton)({
 const MentoredPerfil = () => {
   const [age, setAge] = useState('0');
   const [menteeLevel, setMenteeLevel] = useState('1');
+  const [loading, setLoading] = useState(false); 
   const [isMentor, setIsMentor] = useState(false);
   const [isMentee, setIsMentee] = useState(false);
   const [mentoringCapacity, setMentoringCapacity] = useState('1');
@@ -48,6 +48,7 @@ const MentoredPerfil = () => {
   const [profile, setProfile] = useState('');
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
   const [isSponsored, setIsSponsored] = useState(false);
   const token = localStorage.getItem('token');
   const email = localStorage.getItem('email');
@@ -67,6 +68,21 @@ const MentoredPerfil = () => {
       setIsMentor(false);
     }
   };
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress  color="secondary" />
+      </Box>
+    );
+  }
 
   const handleMessageChange = (event) => {
     setProfile(event.target.value);
@@ -101,6 +117,7 @@ const MentoredPerfil = () => {
   };
 
   const handleSubmit = async (event) => {
+    setLoading(true)
     event.preventDefault();
 
     try {
@@ -180,6 +197,12 @@ const MentoredPerfil = () => {
         <Container>
           <div className={s.content}>
             <div className={s.title}>CONFIGURE SEU PERFIL!</div>
+            {showAlert && (
+              <Alert severity="error" style={{ marginBottom: '20px' }}> 
+                <AlertTitle>Erro ao criar seu perfil.</AlertTitle>
+                Tente novamente.
+              </Alert>
+            )}
             <form onSubmit={handleSubmit}>
               <div className={s.checkboxContainer}>
                 <div className={s.inputRow}>

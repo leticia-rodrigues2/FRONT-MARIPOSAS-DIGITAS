@@ -78,6 +78,12 @@
     z-index: 2;
     top: 44px;
 }
+.round-image {
+  min-height: 350px;
+  border-radius: 50%; /* Ensures the image is displayed as a circle */
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
 
 .logo {
     margin: auto;
@@ -117,7 +123,8 @@
     }
 
     .logo {
-        width: 250px;
+        width: 350px;
+        min-height: 350px;
     }
 
     .logo-container {

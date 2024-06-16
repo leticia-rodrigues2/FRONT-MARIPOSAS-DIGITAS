@@ -5,7 +5,7 @@ import Link from '@mui/material/Link';
 import Container from '../../Components/Container';
 import s from "./style.module.css";
 import baseUrl from "../../config.js"
-import { Alert, Button, IconButton, InputAdornment } from "@mui/material";
+import { Alert, Button, IconButton, InputAdornment,Box,CircularProgress } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import HeaderLogoutMobile from "../../Components/Header/HeaderLogout/HeaderLogoutMobile";
@@ -18,6 +18,22 @@ function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [loading, setLoading] = useState(false); 
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress  color="secondary" />
+      </Box>
+    );
+  }
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -62,6 +78,7 @@ function Login() {
     }
 
     try {
+      setLoading(true);
       const response = await fetch(`${baseUrl}/user/login`, {
         method: 'POST',
         headers: {
@@ -73,7 +90,9 @@ function Login() {
         const { token } = await response.json();
         localStorage.setItem('token', token);
         localStorage.setItem('email', email); 
+        setLoading(false)
         navigate("/dashboard");
+       
       } else {
         setShowAlert(true);
       }

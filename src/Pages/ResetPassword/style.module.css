@@ -5,6 +5,16 @@
     justify-content: center;
     align-items: center;
 } 
+.title {
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: 25px;
+  color: #D457D2;
+  margin: 0;
+  margin-bottom: 20px;
+}
 
 .bold {
     font-weight: bold;

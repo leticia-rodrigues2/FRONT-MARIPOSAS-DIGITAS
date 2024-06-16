@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import { useNavigate } from "react-router-dom";
-import Container from '../../Components/Container'
+import Container from '../../Components/Container';
 import s from "./style.module.css";
-import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader'
-import { Button } from "@mui/material";
+import DefaultHeader from '../../Components/Header/DefaultHeader/DefaultHeader';
+import { Button, CircularProgress, Box, Modal, Backdrop, Fade, Typography } from "@mui/material";
+import baseUrl from "../../config";
 
-function ResetPassword() {
+function ResetPassword({ email }) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const [loading, setLoading] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -24,25 +23,38 @@ function ResetPassword() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3120/login', {
+      setLoading(true);
+
+      const response = await fetch(`${baseUrl}/user/profile/reset-password`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, senha: password }),
+        body: JSON.stringify({ email, password }),
       });
 
-      if (response === 200) {
-        console.log('Login bem-sucedido!');
-        navigate('/Home');
+      if (response.ok) {
+        setSuccessOpen(true);
+        setTimeout(() => {
+          setSuccessOpen(false);
+          navigate('/login');
+        }, 500); 
       } else {
-        console.log('Credenciais inválidas.');
-        // Mostrar mensagem de erro para o usuário
+        setErrorMessage(response.statusText);
+        setErrorOpen(true);
       }
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
-      // Mostrar mensagem de erro para o usuário
+      setErrorMessage(error.message);
+      setErrorOpen(true);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleClose = () => {
+    setSuccessOpen(false);
+    setErrorOpen(false);
+    navigate('/login');
   };
 
   return (
@@ -51,8 +63,8 @@ function ResetPassword() {
       <div className={s.container}>
         <Container>
           <div sx={{ mb: '100px' }}>
-            <h2>REDEFINA SUA SENHA</h2>
-            <form>
+            <div className={s.title}>REDEFINA SUA SENHA</div>
+            <form onSubmit={handleSubmit}>
               <TextField
                 sx={{ mb: '30px' }}
                 id="password"
@@ -62,8 +74,8 @@ function ResetPassword() {
                 size="small"
                 color="secondary"
                 fullWidth
-                value={email}
-                onChange={handleEmailChange}
+                value={password}
+                onChange={handlePasswordChange}
               />
               <TextField
                 sx={{ mb: '160px' }}
@@ -77,13 +89,48 @@ function ResetPassword() {
                 value={password}
                 onChange={handlePasswordChange}
               />
+              <div className={s.buttonContainer}>
+                <Button variant="contained" type="submit" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>Entrar</Button>
+              </div>
             </form>
-          </div>
-          <div className={s.buttonContainer}>
-            <Button variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>Entrar</Button>
           </div>
         </Container>
       </div>
+
+      <Modal
+        open={successOpen || errorOpen}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+        closeOnClickOutside={true} // Fechar ao clicar fora do modal
+      >
+        <Fade in={successOpen || errorOpen}>
+          <div style={{ 
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}>
+            <Box sx={{ bgcolor: 'background.paper', p: 4, maxWidth: 400, textAlign: 'center' }}>
+              {successOpen && (
+                <>
+                  <Typography variant="h5" gutterBottom>Sucesso!</Typography>
+                  <Typography variant="body1">Senha redefinida com sucesso!</Typography>
+                </>
+              )}
+              {errorOpen && (
+                <>
+                  <Typography variant="h5" gutterBottom>Erro!</Typography>
+                  <Typography variant="body1">Erro ao redefinir senha: {errorMessage}</Typography>
+                </>
+              )}
+            </Box>
+          </div>
+        </Fade>
+      </Modal>
     </div>
   );
 }

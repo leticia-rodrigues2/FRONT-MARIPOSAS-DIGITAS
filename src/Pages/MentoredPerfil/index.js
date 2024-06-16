@@ -148,8 +148,6 @@ const MentoredPerfil = () => {
         }
       }
 
-      console.log("-------->",image);
-
       if (image) {
         const imageBytes = await convertImageToBytes(image);
         const formData = new FormData();

@@ -8,8 +8,35 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import { SecondFooter } from "../../Components/SecondFooter";
-import ImageUpload from "./Componets/ImageUpload";
+import { styled } from '@mui/material/styles';
+import LocalSeeIcon from '@mui/icons-material/LocalSee';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import baseUrl from "../../config";
+
+const Input = styled('input')({
+  display: 'none',
+});
+
+const ImagePreviewContainer = styled('div')({
+  position: 'relative',
+  display: 'inline-block',
+  width: '150px',
+  height: '100px',
+  marginBottom: '12px',
+});
+
+const CloseButton = styled(IconButton)({
+  position: 'absolute',
+  top: '2px',
+  right: '2px',
+  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+  padding: '3px',
+  zIndex: 1,
+  '& svg': {
+    fontSize: '16px',
+  },
+});
 
 const MentoredPerfil = () => {
   const [age, setAge] = useState('0');
@@ -20,6 +47,7 @@ const MentoredPerfil = () => {
   const [education, setEducation] = useState('');
   const [profile, setProfile] = useState('');
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [isSponsored, setIsSponsored] = useState(false);
   const token = localStorage.getItem('token');
   const email = localStorage.getItem('email');
@@ -44,8 +72,21 @@ const MentoredPerfil = () => {
     setProfile(event.target.value);
   };
 
-  const handleImageChange = (file) => {
-    setImage(file);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImage(null);
+    setPreview(null);
   };
 
   const convertImageToBytes = (file) => {
@@ -61,7 +102,7 @@ const MentoredPerfil = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
       if (isMentor) {
         const mentorData = {
@@ -71,70 +112,68 @@ const MentoredPerfil = () => {
           mentoringCapacity,
           profile
         };
-  
+
         const mentorResponse = await fetch(`${baseUrl}/user/profile/mentor`, {
           method: 'POST',
           headers: {
-            // 'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-            'email': email,
-            'token': token,
+            "token": token,
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify(mentorData)
         });
-  
+
         if (!mentorResponse.ok) {
           throw new Error('Failed to update mentor profile');
         }
       } else if (isMentee) {
         const menteeData = {
-          email: "leticiaarodrigues2@gmail.com",
-          age: "24",
-          menteeLevel: 1,
-          isSponsored: true,
-          profile: "Olá, sou Leticia Rodrigues, iniciante na área de tecnologia e gostaria de encontrar uma mentora para me guiar nesta trilha."
+          email: email,
+          age,
+          menteeLevel,
+          isSponsored,
+          profile
         };
-  
+
         const menteeResponse = await fetch(`${baseUrl}/user/profile/mentee`, {
           method: 'POST',
           headers: {
-            // 'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-            'email': email,
-            'token': token,
+            "token": token,
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify(menteeData)
         });
-  
+
         if (!menteeResponse.ok) {
           throw new Error('Failed to update mentee profile');
         }
       }
-  
+
+      console.log("-------->",image);
+
       if (image) {
         const imageBytes = await convertImageToBytes(image);
         const formData = new FormData();
         formData.append('arquivo', new Blob([imageBytes]));
-  
+
         const imageResponse = await fetch(`${baseUrl}/user/profile/image`, {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${token}`
+            "token":token,
+            email
           },
           body: formData
         });
-  
+
         if (!imageResponse.ok) {
           throw new Error('Failed to upload image');
         }
       }
-  
+
       navigate("/dashboard");
     } catch (error) {
       console.error('Error updating profile:', error);
     }
   };
-  
 
   return (
     <div>
@@ -183,7 +222,33 @@ const MentoredPerfil = () => {
                   onChange={handleMessageChange}
                 />
               </Box>
-              <ImageUpload onImageChange={handleImageChange} />
+              <div>
+                <label htmlFor="upload-button">
+                  <Input
+                    accept="image/*"
+                    id="upload-button"
+                    type="file"
+                    onChange={handleImageChange}
+                  />
+                  <Button 
+                    variant="contained" 
+                    component="span" 
+                    size="large" 
+                    endIcon={<LocalSeeIcon />} 
+                    style={{ backgroundColor: '#808080', color: '#fff', width: '100%', marginBottom: 12, justifyContent: 'space-between' }}
+                  >
+                    CARREGAR IMAGEM
+                  </Button>
+                </label>
+                {preview && (
+                  <ImagePreviewContainer>
+                    <img src={preview} alt="Selected" style={{ width: "100%", height: "100%" }} />
+                    <CloseButton onClick={handleRemoveImage}>
+                      <CloseIcon />
+                    </CloseButton>
+                  </ImagePreviewContainer>
+                )}
+              </div>
               <div>
                 {isMentor && (
                   <>

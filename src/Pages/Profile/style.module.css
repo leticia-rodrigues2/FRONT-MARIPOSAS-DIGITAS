@@ -74,8 +74,8 @@
 }
 
 .editButton {
-  color: #D457D2;
-  background-color: #fff;
+  color: #D457D2 !important;
+  background-color: #fff !important;
   width: 100%;
   max-width: 390px;
 }

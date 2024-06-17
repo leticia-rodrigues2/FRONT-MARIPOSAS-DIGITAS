@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import HeaderMobile from "../../Components/Header/HeaderMobile/HeaderMobile";
 import { SecondFooter } from "../../Components/SecondFooter";
 import s from "./style.module.css";
 import ContainerPerfil from "../../Components/ContainerPerfil";
 import { Button } from "@mui/material";
+import baseUrl from "../../config";
 
-const profileData = [
-  {
-    name: "Ana Carolina",
-    age: 25,
-    level: "Mariposa Mestra",
-    degree: "Bacharel em Sistemas de Informação",
-    imageUrl: "images/Ellipse.png",
-    description:
-      "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-    type: "cocoon",
-  },
-];
+const convertBlobToImageDataUrl = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = (error) => {
+      reject(error); // Handle error from blob conversion
+    };
+  });
+};
 
 function Profile() {
   const navigate = useNavigate();
@@ -25,30 +26,84 @@ function Profile() {
     navigate("/perfil-create");
   };
 
-  const { name, age, level, degree, description, type, imageUrl } = profileData[0]; // Destructuring para obter os dados do perfil
+  const [profile, setProfile] = useState({});
+  const [image, setImage]= useState("")
 
+  async function fetchData() {
+    const token = localStorage.getItem('token');
+    const email = localStorage.getItem('email');
+    try {
+      const response = await fetch(`${baseUrl}/user/profile`, {
+        method: 'GET',
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "token": token,
+          "email": email
+        },
+      });
+
+      if (response.ok) {
+
+
+        const data = await response.json();
+
+
+        console.log("imageeeeeem",data.image)
+        if (data.image) {
+          const image2 = await convertBlobToImageDataUrl(
+            new Blob([new Uint8Array(data.image)])
+          );
+          data.image = image2;
+          setImage(image2)
+          setProfile(data);
+          console.log("PROFILE", data);
+        } else {
+          console.log('Dados retornados pela API não são válidos:', data);
+          setImage(null)
+        }
+      } else {
+        console.log('Erro ao buscar dados dos alunos:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados dos alunos:', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+console.log(profile);
+  const { name, age, menteeLevel, degree, profile: description, type } = profile;
+  const displayName = name 
+  const displayAge = age 
+  const displayLevel = menteeLevel 
+  const displayDegree = degree 
+  const displayDescription = description 
+  const displayType = type 
+  const displayImage = image 
   return (
     <div className={s.pageContainer}>
       <HeaderMobile />
       <div className={s.container}>
         <div className={s.content}>
-          <ContainerPerfil imageUrl={imageUrl}>
+          <ContainerPerfil imageUrl={displayImage}>
             <div className={s.centeredContent}>
               <div className={s.title}>
-                {name}, {age}
+                {displayName}, {displayAge}
               </div>
               <div className={s.details}>
-                {type === "cocoon" ? (
-                  <img src="images/casulo.png" alt="nivel" className={s.nivel} />
+                {displayType === 'CASULO' ? (
+                  <><img src="images/casulo.png" alt="nivel" className={s.nivel} /><div className={s.text}>  CASULO - PRIMEIRO CONTATO COM TECNOLOGIA</div></>
                 ) : (
-                  <img src="images/borbo.png" alt="nivel" className={s.nivelButterfly} />
+                  <><img src="images/borbo.png" alt="nivel" className={s.nivelButterfly} /><div className={s.text}> LAGARTA - ALGUM CONHECIMENTO SOBRE TECNOLOGIA</div></>
                 )}
+               
                 <div className={s.text}>
-                  {level} {degree}
+                   {displayDegree}
                 </div>
               </div>
               <div className={s.description}>
-                <div className={s.text}>{description}</div>
+                <div className={s.text}>{displayDescription}</div>
                 <div className={s.edit}>
                   <Button
                     type="submit"

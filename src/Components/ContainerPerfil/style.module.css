@@ -46,6 +46,12 @@
     }
 }
 
+.round-image {
+  min-height: 350px;
+  border-radius: 50%; /* Ensures the image is displayed as a circle */
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
 @media (max-width: 640px) {
     .logo-container {
         top: 34px;

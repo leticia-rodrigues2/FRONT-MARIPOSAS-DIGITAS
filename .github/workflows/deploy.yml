@@ -50,3 +50,5 @@ jobs:
           region: us-east1
           platform: managed
           allow-unauthenticated: true
+          env-vars: |-
+            REACT_APP_API_URL=${{ vars.REACT_APP_API_URL }}

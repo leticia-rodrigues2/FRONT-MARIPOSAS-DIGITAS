@@ -63,8 +63,14 @@ function DeleteAccount() {
           <div className={s.buttonContainer}>
             <Button
               variant="contained"
-              onClick={handleDelete}
-              sx={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}
+              onClick={handleDelete}sx={{ 
+                backgroundColor: '#D457D2', 
+                color: '#fff', 
+                width: 190,
+                "&:hover": {
+                  backgroundColor: '#D457D2'
+                }
+              }}
             >
               EXCLUIR CONTA
             </Button>

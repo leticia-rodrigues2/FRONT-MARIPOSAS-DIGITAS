@@ -1,111 +1,186 @@
-import React, { useState } from "react";
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import s from "./style.module.css";
-import Container from '../../Components/Container';
-import Header from "../../Components/Header/Header";
-import { Button } from "@mui/material";
+import React, { useState } from 'react';
+import Header from '../../Components/Header/Header';
+import  Footer  from '../../Components/Fotter';
 import { useNavigate } from "react-router-dom";
-import Box from '@mui/material/Box';
-
+import { TextField, Button, Box, CircularProgress, Alert, Snackbar, Checkbox } from '@mui/material';
+import MuiAlert from '@mui/material/Alert';
+import s from './style.module.css';
+import baseUrl from "../../config.js";
+import Container from '../../Components/Container';
+import { SecondFooter } from "../../Components/SecondFooter";
 
 const Help = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [isMentor, setIsMentor] = useState(false);
-  const [isMentee, setIsMentee] = useState(false);
-  const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        userType: '',
+        message: ''
+    });
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+    const [loading, setLoading] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const navigate = useNavigate();
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
 
-  const handleMentorCheckboxChange = (event) => {
-    setIsMentor(event.target.checked);
-    if (event.target.checked) {
-      setIsMentee(false);
-    }
-  };
+    const handleUserTypeChange = (userType) => {
+        setFormData({
+            ...formData,
+            userType
+        });
+    };
 
-  const handleMenteeCheckboxChange = (event) => {
-    setIsMentee(event.target.checked);
-    if (event.target.checked) {
-      setIsMentor(false);
-    }
-  };
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
+    };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { name, email, userType, message } = formData;
+        const emailContent = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+        console.log('Email enviado:', emailContent);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    navigate('/Home');
-  };
-  return (
-    <div>
-    <Header />
-    <div className={s.container}>
-      <Container>
-        <div sx={{ mb: '100px' }}>
-          <h2>ACONTECEU ALGO? SOLICITE AJUDA!</h2>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              sx={{ mb: '15px' , mt:'15px'}}
-              id="name"
-              type="text"
-              label="Insira seu nome completo"
-              variant="outlined"
-              size="small"
-              color="secondary"
-              fullWidth
-              value={name}
-              onChange={handleNameChange}
-            />
-            <TextField
-              sx={{ mb: '10px' }}
-              id="email"
-              type="email"
-              label="Insira seu e-mail"
-              variant="outlined"
-              size="small"
-              color="secondary"
-              fullWidth
-              value={email}
-              onChange={handleEmailChange}
-            />
-           <div className={s.inputRow3}>
-                <Checkbox id="mentor" checked={isMentor} color="secondary" onChange={handleMentorCheckboxChange} />
-                <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser mentora</label>
-              </div>
-              <div className={s.inputRow4}>
-                <Checkbox id="mentee" checked={isMentee} color="secondary" onChange={handleMenteeCheckboxChange} />
-                <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser mentorada - receber apadrinhamento</label>
-              </div>
-            <Box sx={{ width: '100%', height: 200, marginTop: 2 }}>
-              <TextField
-                color="secondary"
-                fullWidth
-                label="Digite sua mensagem"
-                id="message"
-                multiline
-                rows={6}
-                sx={{ height: '200px' }}
-              />
+        try {
+            setLoading(true);
+            const response = await fetch(`${baseUrl}/contact/internal`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, userType, message }),
+            });
+
+            if (response.ok) {
+                console.log('Email enviado com sucesso!');
+                setFormData({
+                    name: '',
+                    email: '',
+                    userType: '',
+                    message: ''
+                });
+                setOpenSnackbar(true);
+            } else {
+                setShowAlert(true);
+            }
+        } catch (error) {
+            console.error('Erro ao enviar mensagem:', error);
+            setShowAlert(true);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',
+                }}
+            >
+                <CircularProgress color="secondary" />
             </Box>
-            <div className={s.buttonContainer}>
-              <Button type="submit" variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>ENVIAR</Button>
+        );
+    }
+
+    return (
+        <div>
+            <Header />
+            <div className={s.container}>
+                <Container>
+                    <div sx={{ mb: '100px' }}>
+                        <h2>ACONTECEU ALGO? SOLICITE AJUDA!</h2>
+                        {showAlert && (
+                            <Alert severity="error" style={{ marginBottom: '20px' }}>
+                                Erro ao enviar mensagem. Tente novamente
+                            </Alert>
+                        )}
+                        <form onSubmit={handleSubmit}>
+                            <TextField
+                                sx={{ mb: '15px', mt: '15px' }}
+                                id="name"
+                                name="name"
+                                type="text"
+                                label="Insira seu nome completo"
+                                variant="outlined"
+                                size="small"
+                                color="secondary"
+                                fullWidth
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
+                            <TextField
+                                sx={{ mb: '10px' }}
+                                id="email"
+                                name="email"
+                                type="email"
+                                label="Insira seu e-mail"
+                                variant="outlined"
+                                size="small"
+                                color="secondary"
+                                fullWidth
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
+                            <div className={s.inputRow3}>
+                                <Checkbox
+                                    id="mentor"
+                                    checked={formData.userType === "MENTORA"}
+                                    color="secondary"
+                                    onChange={() => handleUserTypeChange("MENTORA")}
+                                />
+                                <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser mentora</label>
+                            </div>
+                            <div className={s.inputRow4}>
+                                <Checkbox
+                                    id="mentee"
+                                    checked={formData.userType === "AFILHADA"}
+                                    color="secondary"
+                                    onChange={() => handleUserTypeChange("AFILHADA")}
+                                />
+                                <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser mentorada - receber apadrinhamento</label>
+                            </div>
+                            <Box sx={{ width: '100%', height: 200, marginTop: 2 }}>
+                                <TextField
+                                    color="secondary"
+                                    fullWidth
+                                    label="Digite sua mensagem"
+                                    id="message"
+                                    name="message"
+                                    multiline
+                                    rows={6}
+                                    sx={{ height: '200px' }}
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                />
+                            </Box>
+                            <div className={s.buttonContainer}>
+                                <Button type="submit" variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>ENVIAR</Button>
+                            </div>
+                        </form>
+                    </div>
+                </Container>
+
+                <Snackbar open={openSnackbar} autoHideDuration={3500} onClose={handleCloseSnackbar}>
+                <MuiAlert icon={false} elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="info">
+                    Email enviado com sucesso! <img src="images/borbo.png" alt="nivel" className={s.nivelButterfly} />
+                </MuiAlert>
+            </Snackbar>
             </div>
-          </form>
+            
+
+            <SecondFooter />
         </div>
-      </Container>
-    </div>
-  </div>
-)};
+    );
+};
 
 export default Help;

@@ -5,7 +5,7 @@ import s from "./style.module.css";
 import Container from '../../Components/Container';
 import Header from "../../Components/Header/Header";
 import { useNavigate } from "react-router-dom";
-import { Box , Alert, Button, IconButton, CircularProgress , AlertTitle} from "@mui/material"; // Renomeando Box para MuiBox
+import { Box , Alert, Button, IconButton, CircularProgress , AlertTitle} from "@mui/material"; 
 import { SecondFooter } from "../../Components/SecondFooter";
 import { styled } from '@mui/material/styles';
 import LocalSeeIcon from '@mui/icons-material/LocalSee';
@@ -123,7 +123,6 @@ const MentoredPerfil = () => {
     try {
       if (isMentor) {
         const mentorData = {
-          email,
           education,
           age,
           mentoringCapacity,
@@ -134,7 +133,8 @@ const MentoredPerfil = () => {
           method: 'POST',
           headers: {
             "token": token,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "email": email,
           },
           body: JSON.stringify(mentorData)
         });
@@ -144,7 +144,6 @@ const MentoredPerfil = () => {
         }
       } else if (isMentee) {
         const menteeData = {
-          email: email,
           age,
           menteeLevel,
           isSponsored,
@@ -155,7 +154,9 @@ const MentoredPerfil = () => {
           method: 'POST',
           headers: {
             "token": token,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            "email": email
+
           },
           body: JSON.stringify(menteeData)
         });

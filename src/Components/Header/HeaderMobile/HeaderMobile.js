@@ -30,7 +30,7 @@ export default function HeaderMobile() {
     pages = [
       { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/dashboard' },
       { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/profile' },
-      { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
+      { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/help' },
       { text: 'DELETAR CONTA', icon: <DeleteOutlinedIcon />, route: '/delete' },
       { text: 'SAIR', icon: <LogoutOutlinedIcon />, route: '/' }
     ];
@@ -38,8 +38,8 @@ export default function HeaderMobile() {
     pages = [
       { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/' },
       { text: 'SOBRE', icon: <CoPresentRoundedIcon />, route: '/profile' },
-      { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
-      { text: 'ENTRAR', icon: <LogoutOutlinedIcon />, route: '/' }
+      { text: 'FALE COM AS FUNDADORAS', icon: <HelpOutlineOutlinedIcon />, route: '/contact' },
+      { text: 'ENTRAR', icon: <LogoutOutlinedIcon />, route: '/login' }
     ];
   }
 

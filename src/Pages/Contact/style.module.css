@@ -22,12 +22,13 @@
 }
 
 h2 {
-    text-align: start;
+    text-align: center;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 20px;
     color: #D457D2;
     margin: 0;
+    margin-bottom: 30px;
 }
 
 .input-row input {

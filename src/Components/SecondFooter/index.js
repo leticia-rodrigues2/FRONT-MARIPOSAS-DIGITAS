@@ -1,15 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Badge, Box, Container } from '@mui/material';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HandshakeIcon from '@mui/icons-material/Handshake';
-import { useNavigate } from "react-router-dom";
+import baseUrl from "../../config";
 import s from "./style.module.css";
 
 export function SecondFooter() {
     const [invisible, setInvisible] = React.useState(false);
-
     const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+    const email = localStorage.getItem('email');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`${baseUrl}/sponsorship/notification`, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "email": email, 
+                        token: token,
+                    },
+                });
+
+                if (response.ok) {
+                    console.log('FOOOOOI APADRINHADA');
+                } else {
+                    console.log('Credenciais inválidas.');
+                    // Mostrar mensagem de erro para o usuário
+                }
+            } catch (error) {
+                console.error('Erro ao fazer login:', error);
+                // Mostrar mensagem de erro para o usuário
+            }
+        };
+
+        fetchData();
+    }, [email]); 
 
     const handleInitial = () => {
         navigate("/dashboard");
@@ -63,7 +92,7 @@ export function SecondFooter() {
                                 horizontal: 'right',
                             }}
                             sx={{
-                                '.MuiBadge-dot': {
+                                '& .MuiBadge-dot': {
                                     width: '12px',
                                     height: '12px',
                                     borderRadius: '50%',

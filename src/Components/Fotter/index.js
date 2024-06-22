@@ -48,7 +48,7 @@ export function Footer() {
               </Box>
               <Box component="li">
                   <Typography gutterBottom variant="body2" component="div">
-                      <a href="#"  style={{ fontWeight: 'bold', color:'#FFFFFF' ,  textDecoration: 'none' }}>CONTATO</a>
+                      <a href="/contact"  style={{ fontWeight: 'bold', color:'#FFFFFF' ,  textDecoration: 'none' }}>CONTATO</a>
                   </Typography> 
               </Box>
               <Box sx={{ display: 'flex', gap: 2 }}>

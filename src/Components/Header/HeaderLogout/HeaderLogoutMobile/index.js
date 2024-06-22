@@ -32,7 +32,7 @@ export default function HeaderMobile() {
   const pages = [
     { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/dashboard' },
     { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/profile' },
-    { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/' },
+    { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/help' },
     { 
       text: isLoggedIn ? 'SAIR' : 'ENTRAR', 
       icon: isLoggedIn ? <LogoutOutlinedIcon /> : <LoginIcon />, 

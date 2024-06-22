@@ -1,0 +1,153 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 30px;
+  margin-bottom: 60px;
+}
+
+.content {
+  margin-top: 20px;
+  flex-grow: 1;
+}
+
+.centeredContent {
+  text-align: center;
+  padding: 0 20px; 
+}
+
+.title {
+  text-transform: uppercase;
+  padding-left: 10px;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  text-align: center;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.nivel,
+.nivelButterfly {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.text {
+  text-transform: uppercase;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  font-size: 15px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.description {
+  margin-top: 5px;
+  padding-bottom: 30px;
+}
+
+.edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.editButton {
+  color: #D457D2 !important;
+  background-color: #fff !important;
+  width: 100%;
+  max-width: 390px;
+}
+
+.footer {
+  width: 100%;
+  padding-top: 10px;
+  background-color: #80BBD9; /* Ensure the footer has a background color for visibility */
+  margin-top: auto; /* Push the footer to the bottom */
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #ffffff; /* White border */
+  background-color: transparent; /* Transparent background */
+  margin-top: 0px; /* Adjust as needed */
+  margin-right: 20px;
+}
+
+.icon {
+  color: #ffffff; /* White color for the icon */
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pinkButton {
+  background-color: pink;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .details {
+    flex-direction: column;
+  }
+
+  .nivel,
+  .nivelButterfly {
+    width: 20px;
+    height: 20px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .nivel,
+  .nivelButterfly {
+    width: 15px;
+    height: 15px;
+  }
+
+  .text {
+    font-size: 14px;
+  }
+}

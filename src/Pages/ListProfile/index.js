@@ -1,111 +1,112 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
-import ProfileNotification from "../ProfileNotification";
 import { SecondFooter } from "../../Components/SecondFooter";
 import { Button } from "@mui/material";
 import s from "./style.module.css";
+import baseUrl from "../../config";
 
-const profileData = [
-    {
-        name: "Ana Carolina",
-        age: 25,
-        level: "Mariposa Mestra",
-        degree: "Bacharel em Sistemas de Informação",
-        imageUrl: "images/Ellipse.png",
-        description:
-            "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-        type: "cocoon",
-    },
-    {
-        name: "Ana Carolina",
-        age: 25,
-        level: "Mariposa Mestra",
-        degree: "Bacharel em Sistemas de Informação",
-        imageUrl: "images/Ellipse.png",
-        description:
-            "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-        type: "cocoon",
-    },
-    {
-        name: "Carol",
-        age: 25,
-        level: "Mariposa Mestra",
-        degree: "Bacharel em Sistemas de Informação",
-        imageUrl: "images/Ellipse.png",
-        description:
-            "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-        type: "cocoon",
-    },
-    {
-        name: "Carolina",
-        age: 25,
-        level: "Mariposa Mestra",
-        degree: "Bacharel em Sistemas de Informação",
-        imageUrl: "images/Ellipse.png",
-        description:
-            "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-        type: "cocoon",
-    }, {
-        name: "Ana Carolina",
-        age: 25,
-        level: "Mariposa Mestra",
-        degree: "Bacharel em Sistemas de Informação",
-        imageUrl: "images/Ellipse.png",
-        description:
-            "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-        type: "cocoon",
-    },
-    {
-        name: "Carol",
-        age: 25,
-        level: "Mariposa Mestra",
-        degree: "Bacharel em Sistemas de Informação",
-        imageUrl: "images/Ellipse.png",
-        description:
-            "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-        type: "cocoon",
-    },
-    {
-        name: "Carolina",
-        age: 25,
-        level: "Mariposa Mestra",
-        degree: "Bacharel em Sistemas de Informação",
-        imageUrl: "images/Ellipse.png",
-        description:
-            "Me chamo Ana Carolina, sou bacharel em Sistemas de Informação e tenho 25 anos. Estou muito empolgada por ter a oportunidade de ser mentora de meninas interessadas em aprender sobre programação e tecnologia. Desde que entrei nessa área, percebi o quão gratificante é compartilhar conhecimento e ajudar outras pessoas a descobrirem o vasto mundo da tecnologia. Mal posso esperar para orientar e inspirar essas meninas, mostrando-lhes todas as possibilidades emocionantes que a programação oferece.",
-        type: "cocoon",
-    },
-];
+// Função para converter Blob em Data URL
+const convertBlobToImageDataUrl = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = (error) => {
+      reject(error);
+    };
+  });
+};
 
 function ListProfile() {
-    const navigate = useNavigate();
-    const handleSubmit = async (event) => {
-        navigate("/notification");
-    };
+  const navigate = useNavigate();
 
-    return (
-        <div className={s.container}>
-            <Header />
-            <div className={s.content}>
-                {profileData.map((profile, index) => (
-                    <div key={index} className={s.conteinerInfo}>
-                        <div className={s.details}>
-                            <img src={profile.imageUrl} alt="photo" className={s.photo} />
-                            <div className={s.containerDescription}>
-                                <div className={s.title}>{profile.name}</div>
-                                <div className={s.text}>Para obter mais informações, consulte o perfil desta mariposa. </div>
-                            </div>
-                        </div>
-                        <Button size="small" onClick={handleSubmit} className={s.button3} variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 150, marginBottom: "5px" }}>VER PERFIL</Button>
-                    </div>
-                ))}
+  const [profileData, setProfileData] = useState([]);
+
+  const handleSubmit = (email) => {
+    navigate("/profile-client/"+email, { emailUser: email });
+  };
+
+  const fetchData = async () => {
+    const token = localStorage.getItem('token');
+    const email = localStorage.getItem('email');
+    
+    try {
+      const response = await fetch(`${baseUrl}/sponsorship/mentor`, {
+        method: 'GET',
+        headers: {
+          "token": token,
+          "email": email,
+        },
+      });
+
+      if (response.ok) {
+        let data = await response.json();
+        if (Array.isArray(data)) {
+          data = await Promise.all(data.map(async (s) => {
+            try {
+              const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(s.image)]));
+              s.image = image;
+            } catch (error) {
+              s.image = null; 
+            }
+            return s;
+          }));
+          setProfileData(data);
+        } else {
+        }
+      } else {
+        console.log('Erro ao buscar dados dos alunos:',);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados dos alunos:');
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <div className={s.container}>
+      <Header />
+      <div className={s.content}>
+        {profileData.map((profile, index) => (
+          <div key={index} className={s.conteinerInfo}>
+
+            <div className={s.details}>
+            <img 
+                src={profile.image ? profile.image : 'images/EllipseNull.png'} 
+                alt="photo" 
+                className={s.photo} 
+                onError={(e) => {
+                  e.target.src = 'images/EllipseNull.png'; 
+                }}
+              />
+              <div className={s.containerDescription}>
+                <div className={s.title}>{profile.name}</div>
+                <div className={s.text}>Para obter mais informações, consulte o perfil desta mariposa.</div>
+              </div>
             </div>
-            <div className={s.footer}>
-                <SecondFooter />
-            </div>
-        </div>
-    );
+            <Button 
+              size="small" 
+              onClick={() => handleSubmit(profile.email)}
+              className={s.button3} 
+              variant="contained" 
+              style={{ backgroundColor: '#D457D2', color: '#fff', width: 200, marginBottom: "5px" }}
+            >
+              VER PERFIL
+            </Button>
+          </div>
+        ))}
+      </div>
+      <div className={s.footer}>
+        <SecondFooter />
+      </div>
+    </div>
+  );
 }
 
 export default ListProfile;

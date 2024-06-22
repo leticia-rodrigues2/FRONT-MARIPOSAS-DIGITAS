@@ -15,6 +15,7 @@ import Notification from "./Pages/Notification/index.js";
 import Profile from "./Pages/Profile/index.js";
 import Dashboard from "./Pages/Dashboard/index.js";
 import ListProfile from "./Pages/ListProfile/index.js";
+import ProfileClient from "./Pages/ProfileClient/index.js";
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="profile" element={<Profile />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="list-profile" element={<ListProfile />} />
+        <Route path="profile-client/:emailUser" element={<ProfileClient />} />
       </Routes>
     </BrowserRouter>
   );

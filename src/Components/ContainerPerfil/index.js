@@ -3,7 +3,6 @@ import styles from './style.module.css';
 
 export default function ContainerPerfil({ children, imageUrl }) {
     const isInvalidImage = !imageUrl;
-    console.log("cehgooooo",imageUrl);
 
     return (
         <div className={styles.wrapper}>

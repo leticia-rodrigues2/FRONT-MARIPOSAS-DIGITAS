@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Container from '../../Components/Container'
 import s from "./style.module.css";
 import { Button } from "@mui/material";
+import baseUrl from "../../config";
 import HeaderLogoutMobile from "../../Components/Header/HeaderLogout/HeaderLogoutMobile";
 
 function Forgot() {
@@ -19,17 +20,17 @@ function Forgot() {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3120/login', {
-        method: 'POST',
+      const response = await fetch(`${baseUrl}/user/password`, {
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
+          "email": email, 
         },
-        body: JSON.stringify({ email, senha: '' }),
       });
 
       if (response.ok) {
-        console.log('Login bem-sucedido!');
-        navigate('/Home');
+        console.log('Login bem-sucedido! // POPUP SUCESS');
+        
       } else {
         console.log('Credenciais inválidas.');
         // Mostrar mensagem de erro para o usuário
@@ -65,7 +66,7 @@ function Forgot() {
             </form>
           </div>
           <div className={s.buttonContainer}>
-            <Button variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>ENVIAR</Button>
+            <Button onClick={handleSubmit} variant="contained" style={{ backgroundColor: '#D457D2', color: '#fff', width: 190 }}>ENVIAR</Button>
           </div>
 
         </Container>

@@ -12,7 +12,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 30px;
-  margin-bottom: 60px;
+  padding-bottom: 60px;
 }
 
 .content {
@@ -63,7 +63,6 @@
 
 .description {
   margin-top: 5px;
-  padding-bottom: 30px;
 }
 
 .edit {
@@ -115,6 +114,27 @@
   background-color: pink;
   color: white;
 }
+
+.deleteContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.deleteIcon {
+  cursor: pointer;
+  color: #f6f9fa;
+  transition: color 0.3s ease, transform 0.2s ease; /* Transições suaves de cor e transformação */
+}
+
+.deleteIcon:hover {
+  color: #c4d8ef; /* Mudança de cor ao passar o mouse */
+  transform: scale(1.1); /* Escala ligeiramente aumentada ao passar o mouse */
+}
+
+
+
 
 @media (max-width: 768px) {
   .title {

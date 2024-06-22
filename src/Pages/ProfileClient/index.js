@@ -7,6 +7,7 @@ import ContainerPerfil from "../../Components/ContainerPerfil";
 import { Button, Modal, Box } from "@mui/material";
 import baseUrl from "../../config";
 import PermPhoneMsgIcon from '@mui/icons-material/PermPhoneMsg';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const convertBlobToImageDataUrl = (file) => {
   return new Promise((resolve, reject) => {
@@ -36,7 +37,10 @@ function ProfileClient() {
   const { emailUser } = useParams();
   const [profile, setProfile] = useState({});
   const [image, setImage] = useState("");
-  const [open, setOpen] = useState(false); // Estado para controlar a abertura do modal
+  const [open, setOpen] = useState(false); 
+
+  const token = localStorage.getItem('token');
+  const email = localStorage.getItem('email');
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -44,14 +48,12 @@ function ProfileClient() {
   const handleContact = (option) => {
     console.log(profile);
     if (option === 'whatsapp' && profile.phone) {
-      // Redirecionar para o WhatsApp
       window.open(`https://api.whatsapp.com/send?phone=${profile.phone}`);
     }
     if (option === 'email' && profile.email) {
-      // Redirecionar para o email
       window.location.href = `mailto:${profile.email}`;
     }
-    handleClose(); // Fechar o modal após selecionar a opção de contato
+    handleClose(); 
   };
 
   const fetchData = async () => {
@@ -73,8 +75,6 @@ function ProfileClient() {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Fetched profile data:", data);
-
         if (data.image) {
           const imageDataUrl = await convertBlobToImageDataUrl(
             new Blob([new Uint8Array(data.image)])
@@ -100,6 +100,29 @@ function ProfileClient() {
       fetchData();
     }
   }, [emailUser]);
+
+  const deleteUser = async() => {
+    try {
+      const response = await fetch(`${baseUrl}/sponsorship`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json",
+          "token": token,
+          "emailMentee": emailUser,
+          "emailMentor": email,
+        },
+      });
+
+      if (response.ok) {
+        console.log("Usuário deletado com sucesso");
+        navigate('/dashboard');
+      } else {
+        console.log('Erro ao deletar usuário:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao deletar usuário:', error);
+    }
+  };
 
   const { name, age, menteeLevel, degree, profile: description } = profile;
   const displayImage = image;
@@ -143,6 +166,9 @@ function ProfileClient() {
                     FALE COM A AFILHADA
                   </Button>
                 </div>
+                <Button onClick={deleteUser} className={s.deleteIcon} sx={{ color: '#fff' , marginTop:"40px" }} startIcon={<DeleteIcon sx={{ color: '#fff' }} />}>
+                  DELETAR AFILHADA
+                </Button>
               </div>
             </div>
           </ContainerPerfil>

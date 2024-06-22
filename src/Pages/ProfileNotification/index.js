@@ -8,7 +8,6 @@ import MuiAlert from '@mui/material/Alert';
 import baseUrl from "../../config";
 import ContainerPerfil from "../../Components/ContainerPerfil";
 
-// Function to convert Blob to Data URL
 const convertBlobToImageDataUrl = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -29,7 +28,10 @@ export default function ProfileNotification() {
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [visibleStudents, setVisibleStudents] = useState([]);
   const [showEmptyProfile, setShowEmptyProfile] = useState(false);
-  const [limit, setLimit] = useState(false);
+  const [message, setMessage] = useState('');
+  const [messageSubTitle, setMessageSubTitle] = useState('');
+
+
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
@@ -51,10 +53,26 @@ export default function ProfileNotification() {
         const mentoringAvailable = data.mentoringAvailable;
 
         if (students.length === 0 || mentoringAvailable === 0) {
-          setLimit(true);
-          setShowEmptyProfile(true);
-        }
+          
+          if(mentoringAvailable === 0){
+            setMessage('VOCÊ ATIGIU O LIMITE DE MARIPOSAS PARA APADRINHA');
+            setMessageSubTitle('');
+          }
 
+          if(students.length === 0){
+            setMessage(' AINDA NÃO POSSUI UMA AFILHADA DISPONIVEL!');
+            setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
+          }
+          setShowEmptyProfile(true);
+
+        }
+        if(data.menteeLevel === 'CASULO' || data.menteeLevel === 'LARGATA'){
+          if(!data.isSponsored){
+            setMessage('VOCÊ AINDA NÃO POSSUI UMA MADRINHA!');
+            setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
+          }
+        }
+       
         if (mentoringAvailable > 0) {
           try {
             const response = await fetch(`${baseUrl}/sponsorship/mentee`, {
@@ -151,10 +169,10 @@ export default function ProfileNotification() {
       <ContainerPerfil imageUrl={null}>
         <div>
         <div className={styles.title}>
-        {limit ? 'VOCÊ ATIGIU O LIMITE DE MARIPOSAS PARA APADRINHA' : 'VOCÊ AINDA NÃO POSSUI UMA MADRINHA!'}
+          {message}
         </div>
         <div className={styles.text}>
-        {limit ? '' : 'MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!'}
+        {messageSubTitle}
         </div>
         </div>
       </ContainerPerfil>

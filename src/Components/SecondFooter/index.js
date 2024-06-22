@@ -20,25 +20,22 @@ export function SecondFooter() {
                     method: 'GET',
                     headers: {
                         "Content-Type": "application/json",
-                        "email": email, 
+                        "email": email,
                         token: token,
                     },
                 });
-
+                console("FOOTEER", response)
                 if (response.ok) {
                     console.log('FOOOOOI APADRINHADA');
                 } else {
                     console.log('Credenciais inválidas.');
-                    // Mostrar mensagem de erro para o usuário
                 }
             } catch (error) {
-                console.error('Erro ao fazer login:', error);
-                // Mostrar mensagem de erro para o usuário
             }
         };
 
         fetchData();
-    }, [email]); 
+    }, [email]);
 
     const handleInitial = () => {
         navigate("/dashboard");

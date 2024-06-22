@@ -31,13 +31,12 @@ export default function ProfileNotification() {
   const [message, setMessage] = useState('');
   const [messageSubTitle, setMessageSubTitle] = useState('');
 
-
-
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     const email = localStorage.getItem('email');
 
     try {
+
       const response = await fetch(`${baseUrl}/user/profile`, {
         method: 'GET',
         headers: {
@@ -46,73 +45,69 @@ export default function ProfileNotification() {
         },
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("Fetched profile data:", data);
+      if (!response.ok) {
+        throw new Error('Failed to fetch user profile');
+      }
+
+      const data = await response.json();
+
+      console.log("tetste1", data)
+
+      if (data.menteeLevel === 'CASULO' || data.menteeLevel === 'LARGATA') {
+        if (!data.isSponsored) {
+          setShowEmptyProfile(true)
+          setMessage('VOCÊ AINDA NÃO POSSUI UMA MADRINHA!');
+          setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
+        }
 
         const mentoringAvailable = data.mentoringAvailable;
 
-        if (students.length === 0 || mentoringAvailable === 0) {
-          
-          if(mentoringAvailable === 0){
-            setMessage('VOCÊ ATIGIU O LIMITE DE MARIPOSAS PARA APADRINHA');
-            setMessageSubTitle('');
-          }
-
-          if(students.length === 0){
-            setMessage(' AINDA NÃO POSSUI UMA AFILHADA DISPONIVEL!');
-            setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
-          }
+        if (mentoringAvailable === 0) {
+          setMessage('VOCÊ ATIGIU O LIMITE DE MARIPOSAS PARA APADRINHA');
           setShowEmptyProfile(true);
 
         }
-        if(data.menteeLevel === 'CASULO' || data.menteeLevel === 'LARGATA'){
-          if(!data.isSponsored){
-            setMessage('VOCÊ AINDA NÃO POSSUI UMA MADRINHA!');
-            setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
-          }
-        }
-       
-        if (mentoringAvailable > 0) {
-          try {
-            const response = await fetch(`${baseUrl}/sponsorship/mentee`, {
-              method: 'GET',
-              headers: {
-                "Content-Type": "application/json",
-                "token": token,
-                "email": email,
-              },
-            });
 
-            if (response.ok) {
-              let data = await response.json();
-              if (Array.isArray(data)) {
-                data = await Promise.all(data.map(async (s) => {
-                  const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(s.image)]));
-                  s.image = image;
-                  return s;
-                }));
-                setStudents(data);
-                setFirstTwoStudents(data.slice(0, 2));
-                setVisibleStudents(new Array(data.length).fill(true));
-              } else {
-                console.log('Dados retornados pela API não são um array:', data);
-              }
-            } else {
-              console.log('Erro ao buscar dados dos alunos:', response.statusText);
-            }
-          } catch (error) {
-            console.error('Erro ao buscar dados dos alunos:', error);
-          }
-        } else {
-          console.log("Mentoria indisponível");
-        }
-
-      } else {
-        console.log('Failed to fetch user profile:', response.statusText);
       }
     } catch (error) {
       console.error('Error fetching user profile:', error);
+    }
+
+    if (!showEmptyProfile) {
+      console.log("caaaai")
+
+      try {
+        const response = await fetch(`${baseUrl}/sponsorship/mentee`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json",
+            "token": token,
+            "email": email,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Erro ao buscar dados dos alunos');
+        }
+
+        let data = await response.json();
+
+        if (Array.isArray(data)) {
+          data = await Promise.all(data.map(async (s) => {
+            const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(s.image)]));
+            s.image = image;
+            return s;
+          }));
+
+          setStudents(data);
+          setFirstTwoStudents(data.slice(0, 2));
+          setVisibleStudents(new Array(data.length).fill(true));
+        } else {
+          console.log('Dados retornados pela API não são um array:', data);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar dados dos alunos:', error);
+      }
     }
   };
 
@@ -168,12 +163,12 @@ export default function ProfileNotification() {
     return (
       <ContainerPerfil imageUrl={null}>
         <div>
-        <div className={styles.title}>
-          {message}
-        </div>
-        <div className={styles.text}>
-        {messageSubTitle}
-        </div>
+          <div className={styles.title}>
+            {message}
+          </div>
+          <div className={styles.text}>
+            {messageSubTitle}
+          </div>
         </div>
       </ContainerPerfil>
     );

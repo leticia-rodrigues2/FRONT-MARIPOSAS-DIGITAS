@@ -5,7 +5,7 @@ import Link from '@mui/material/Link';
 import Container from '../../Components/Container';
 import s from "./style.module.css";
 import baseUrl from "../../config.js"
-import { Alert, Button, IconButton, InputAdornment,Box,CircularProgress } from "@mui/material";
+import { Alert, Button, IconButton, InputAdornment, Box, CircularProgress } from "@mui/material";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import HeaderLogoutMobile from "../../Components/Header/HeaderLogout/HeaderLogoutMobile";
@@ -16,7 +16,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -30,7 +30,7 @@ function Login() {
           height: '100vh',
         }}
       >
-        <CircularProgress  color="secondary" />
+        <CircularProgress color="secondary" />
       </Box>
     );
   }
@@ -89,16 +89,18 @@ function Login() {
       if (response.ok) {
         const { token } = await response.json();
         localStorage.setItem('token', token);
-        localStorage.setItem('email', email); 
+        localStorage.setItem('email', email);
         setLoading(false)
         navigate("/dashboard");
-       
+
       } else {
         setShowAlert(true);
+        setLoading(false)
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       setShowAlert(true);
+      setLoading(false)
     }
   };
 

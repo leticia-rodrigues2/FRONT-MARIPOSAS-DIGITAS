@@ -37,7 +37,7 @@ function ProfileClient() {
   const { emailUser } = useParams();
   const [profile, setProfile] = useState({});
   const [image, setImage] = useState("");
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
 
   const token = localStorage.getItem('token');
   const email = localStorage.getItem('email');
@@ -53,7 +53,7 @@ function ProfileClient() {
     if (option === 'email' && profile.email) {
       window.location.href = `mailto:${profile.email}`;
     }
-    handleClose(); 
+    handleClose();
   };
 
   const fetchData = async () => {
@@ -69,7 +69,7 @@ function ProfileClient() {
         method: 'GET',
         headers: {
           "Content-Type": "application/json",
-          "email": emailUser 
+          "email": emailUser
         },
       });
 
@@ -101,7 +101,10 @@ function ProfileClient() {
     }
   }, [emailUser]);
 
-  const deleteUser = async() => {
+  const deleteUser = async () => {
+
+    console.log("emailMentee", emailUser,
+      "emailMentor", email,)
     try {
       const response = await fetch(`${baseUrl}/sponsorship`, {
         method: 'DELETE',
@@ -158,16 +161,16 @@ function ProfileClient() {
                     <PermPhoneMsgIcon className={s.icon} />
                   </div>
                   <Button
-                    type="button" 
+                    type="button"
                     variant="contained"
                     onClick={handleOpen} // Abre o modal ao clicar no botão
                     className={s.editButton}
                   >
-                    FALE COM A AFILHADA
+                    FALE COM A MARIPOSA
                   </Button>
                 </div>
-                <Button onClick={deleteUser} className={s.deleteIcon} sx={{ color: '#fff' , marginTop:"40px" }} startIcon={<DeleteIcon sx={{ color: '#fff' }} />}>
-                  DELETAR AFILHADA
+                <Button onClick={deleteUser} className={s.deleteIcon} sx={{ color: '#fff', marginTop: "40px" }} startIcon={<DeleteIcon sx={{ color: '#fff' }} />}>
+                  DELETAR ESSA MARIPOSA
                 </Button>
               </div>
             </div>
@@ -188,17 +191,17 @@ function ProfileClient() {
           <h2 id="contact-modal-title">Opções de Contato</h2>
 
           <div className={s.buttonContainer}>
-          <Button variant="contained" onClick={() => handleContact('whatsapp')}  className={s.pinkButton}>
-            WhatsApp
-          </Button>
-          <Button variant="contained" onClick={() => handleContact('email')}  className={s.pinkButton}>
-            Email
-          </Button>
+            <Button variant="contained" onClick={() => handleContact('whatsapp')} className={s.pinkButton}>
+              WhatsApp
+            </Button>
+            <Button variant="contained" onClick={() => handleContact('email')} className={s.pinkButton}>
+              Email
+            </Button>
           </div>
-          
-          <div style={{width: '100%', marginTop: '20px', alignItems:"center"}}>
-      <Button onClick={handleClose}>Fechar</Button>
-    </div>
+
+          <div style={{ width: '100%', marginTop: '20px', alignItems: "center" }}>
+            <Button onClick={handleClose}>Fechar</Button>
+          </div>
         </Box>
       </Modal>
     </div>

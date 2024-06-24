@@ -30,13 +30,77 @@ export default function ProfileNotification() {
   const [showEmptyProfile, setShowEmptyProfile] = useState(false);
   const [message, setMessage] = useState('');
   const [messageSubTitle, setMessageSubTitle] = useState('');
+  const [mentee, setMentee] = useState(false);
+  const [isSponsored, setIsSponsored] = useState(false);
+  const [mentoringAvailable, setMentoringAvailable] = useState("");
+  const token = localStorage.getItem('token');
+  const email = localStorage.getItem('email');
+  const [imageUrl, setImageUrl] = useState(null)
+
+  const fetchDataIsSponsored = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/sponsorship/notification`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "email": email,
+          "token": token,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const imageBlob = new Blob([new Uint8Array(data.image)]);
+        const imageUrl = await convertBlobToImageDataUrl(imageBlob);
+        setImageUrl(imageUrl); // Assuming you have a state variable to hold the image URL
+
+        console.log('FOOOOOI APADRINHADA');
+      } else {
+        console.log('Credenciais inválidas.');
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados de apadrinhamento:', error);
+    }
+  };
+
+  const fetchSponsorshipMentee = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/sponsorship/mentee`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+          "token": token,
+          "email": email,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao buscar dados dos alunos');
+      }
+
+      let data = await response.json();
+      console.log(data)
+
+      if (Array.isArray(data)) {
+        data = await Promise.all(data.map(async (s) => {
+          const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(s.image)]));
+          s.image = image;
+          return s;
+        }));
+
+        setStudents(data.slice(0, 2));
+        setFirstTwoStudents(data.slice(0, 2));
+        setVisibleStudents(new Array(data.length).fill(true));
+      } else {
+        console.log('Dados retornados pela API não são um array:', data);
+      }
+    } catch (error) {
+      console.error('Erro ao buscar dados dos alunos:', error);
+    }
+  }
 
   const fetchData = async () => {
-    const token = localStorage.getItem('token');
-    const email = localStorage.getItem('email');
-
     try {
-
       const response = await fetch(`${baseUrl}/user/profile`, {
         method: 'GET',
         headers: {
@@ -50,78 +114,53 @@ export default function ProfileNotification() {
       }
 
       const data = await response.json();
+      setMentoringAvailable(data.mentoringAvailable);
 
-      console.log("tetste1", data)
-
-      if (data.menteeLevel === 'CASULO' || data.menteeLevel === 'LARGATA') {
-        if (!data.isSponsored) {
-          setShowEmptyProfile(true)
-          setMessage('VOCÊ AINDA NÃO POSSUI UMA MADRINHA!');
-          setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
-        }
-
-        const mentoringAvailable = data.mentoringAvailable;
-
-        if (mentoringAvailable === 0) {
-          setMessage('VOCÊ ATIGIU O LIMITE DE MARIPOSAS PARA APADRINHA');
-          setShowEmptyProfile(true);
-
-        }
-
+      if (data.mentoringAvailable === "0") {
+        setShowEmptyProfile(true);
+        setMessage('VOCÊ ATINGIU O LIMITE DE MARIPOSAS PARA APADRINHAR.');
       }
+
+      setIsSponsored(data.isSponsored);
+      setMentee(data.menteeLevel === 'CASULO' || data.menteeLevel === 'LARGATA');
+
+      if (data.isSponsored === false) {
+        setShowEmptyProfile(true);
+        setMessage('VOCÊ AINDA NÃO POSSUI UMA MADRINHA!');
+        setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
+      } else if (data.isSponsored === true) {
+        fetchDataIsSponsored();
+        setShowEmptyProfile(true);
+        setMessage('VOCÊ POSSUI UMA MADRINHA!');
+        setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
+      }
+
     } catch (error) {
       console.error('Error fetching user profile:', error);
-    }
-
-    if (!showEmptyProfile) {
-      console.log("caaaai")
-
-      try {
-        const response = await fetch(`${baseUrl}/sponsorship/mentee`, {
-          method: 'GET',
-          headers: {
-            "Content-Type": "application/json",
-            "token": token,
-            "email": email,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error('Erro ao buscar dados dos alunos');
-        }
-
-        let data = await response.json();
-
-        if (Array.isArray(data)) {
-          data = await Promise.all(data.map(async (s) => {
-            const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(s.image)]));
-            s.image = image;
-            return s;
-          }));
-
-          setStudents(data);
-          setFirstTwoStudents(data.slice(0, 2));
-          setVisibleStudents(new Array(data.length).fill(true));
-        } else {
-          console.log('Dados retornados pela API não são um array:', data);
-        }
-      } catch (error) {
-        console.error('Erro ao buscar dados dos alunos:', error);
-      }
     }
   };
 
   useEffect(() => {
+    if (!showEmptyProfile && mentoringAvailable > 0) {
+      fetchSponsorshipMentee();
+    }
+  }, [showEmptyProfile, mentoringAvailable])
+
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [email, token]);
+
+  useEffect(() => {
+    if (isSponsored) {
+      fetchDataIsSponsored();
+    }
+  }, [isSponsored]);
 
   const protectFirstTwoPositions = (arr) => {
     return [...firstTwoStudents, ...arr.slice(2)];
   };
 
   const handleFavorite = async (index) => {
-    const token = localStorage.getItem('token');
-    const email = localStorage.getItem('email');
     try {
       const response = await fetch(`${baseUrl}/sponsorship`, {
         method: 'POST',
@@ -159,9 +198,9 @@ export default function ProfileNotification() {
     setOpenSnackbar(false);
   };
 
-  if (showEmptyProfile) {
+  if (showEmptyProfile || isSponsored) {
     return (
-      <ContainerPerfil imageUrl={null}>
+      <ContainerPerfil imageUrl={imageUrl}>
         <div>
           <div className={styles.title}>
             {message}

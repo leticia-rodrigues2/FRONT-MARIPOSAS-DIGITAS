@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 .container {
-    height: calc(100vh - 71px);
-    margin-top: 60px;
+    margin-top: 160px;
     background-color: #F0F0F0;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
-} 
+    margin-bottom: 50px;
+}
 
 .bold {
     font-weight: bold;
-    color:#D457D2;
-  }
+    color: #D457D2;
+}
 
 .input-row {
     width: 90%;
@@ -26,7 +26,7 @@ h2 {
     font-weight: 300;
     font-size: 25px;
     color: #D457D2;
-    margin: 0; 
+    margin: 0;
     margin-bottom: 20px;
 }
 
@@ -37,7 +37,7 @@ p {
     font-weight: 100;
     font-size: 15px;
     color: #5B5B5B;
-    margin: 0; 
+    margin: 0;
     margin-bottom: 60px;
 }
 
@@ -53,16 +53,16 @@ p {
 .buttonContainer {
     display: flex;
     justify-content: center;
-    align-items: center; 
-    margin-top: 30px; 
+    align-items: center;
+    margin-top: 30px;
     margin-bottom: 30px;
-  }
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
 
     .container {
-        padding-top: 65px !important; 
+        padding-top: 65px !important;
         height: calc(100vh - 1px);
         margin-top: 30px;
-    } 
+    }
 }

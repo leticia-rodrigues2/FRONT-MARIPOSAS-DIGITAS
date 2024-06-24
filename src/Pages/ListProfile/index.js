@@ -20,42 +20,54 @@ const convertBlobToImageDataUrl = (file) => {
   });
 };
 
+async function tratarDadoUsuario(data) {
+  try {
+    const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(data.image)]));
+    data.image = image;
+  } catch (error) {
+    data.image = null;
+  }
+  return data;
+}
+
 function ListProfile() {
   const navigate = useNavigate();
 
   const [profileData, setProfileData] = useState([]);
 
   const handleSubmit = (email) => {
-    navigate("/profile-client/"+email, { emailUser: email });
+    navigate("/profile-client/" + email, { emailUser: email });
   };
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
     const email = localStorage.getItem('email');
-    
+
     try {
-      const response = await fetch(`${baseUrl}/sponsorship/mentor`, {
+      const response = await fetch(`${baseUrl}/sponsorship/profile`, {
         method: 'GET',
         headers: {
           "token": token,
           "email": email,
         },
       });
-
+      console.log(email)
       if (response.ok) {
         let data = await response.json();
         if (Array.isArray(data)) {
           data = await Promise.all(data.map(async (s) => {
-            try {
-              const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(s.image)]));
-              s.image = image;
-            } catch (error) {
-              s.image = null; 
-            }
-            return s;
+            // try {
+            //   const image = await convertBlobToImageDataUrl(new Blob([new Uint8Array(s.image)]));
+            //   s.image = image;
+            // } catch (error) {
+            //   s.image = null;
+            // }
+            // return s;
+            return await tratarDadoUsuario(s);
           }));
           setProfileData(data);
         } else {
+          setProfileData([await tratarDadoUsuario(data)]);
         }
       } else {
         console.log('Erro ao buscar dados dos alunos:',);
@@ -63,6 +75,7 @@ function ListProfile() {
     } catch (error) {
       console.error('Erro ao buscar dados dos alunos:');
     }
+
   };
 
   useEffect(() => {
@@ -77,12 +90,12 @@ function ListProfile() {
           <div key={index} className={s.conteinerInfo}>
 
             <div className={s.details}>
-            <img 
-                src={profile.image ? profile.image : 'images/EllipseNull.png'} 
-                alt="photo" 
-                className={s.photo} 
+              <img
+                src={profile.image ? profile.image : 'images/EllipseNull.png'}
+                alt="photo"
+                className={s.photo}
                 onError={(e) => {
-                  e.target.src = 'images/EllipseNull.png'; 
+                  e.target.src = 'images/EllipseNull.png';
                 }}
               />
               <div className={s.containerDescription}>
@@ -90,11 +103,11 @@ function ListProfile() {
                 <div className={s.text}>Para obter mais informações, consulte o perfil desta mariposa.</div>
               </div>
             </div>
-            <Button 
-              size="small" 
+            <Button
+              size="small"
               onClick={() => handleSubmit(profile.email)}
-              className={s.button3} 
-              variant="contained" 
+              className={s.button3}
+              variant="contained"
               style={{ backgroundColor: '#D457D2', color: '#fff', width: 200, marginBottom: "5px" }}
             >
               VER PERFIL

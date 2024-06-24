@@ -25,7 +25,7 @@ const modalStyle = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  borderRadius: "10px",
   boxShadow: 24,
   pt: 2,
   px: 4,
@@ -188,19 +188,25 @@ function ProfileClient() {
         aria-describedby="contact-modal-description"
       >
         <Box sx={modalStyle}>
-          <h2 id="contact-modal-title">Opções de Contato</h2>
+          <h2 id="contact-modal-title">OPÇÕES DE CONTATO</h2>
 
           <div className={s.buttonContainer}>
-            <Button variant="contained" onClick={() => handleContact('whatsapp')} className={s.pinkButton}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => handleContact('whatsapp')}
+              sx={{ width: '200px' }}
+            >
               WhatsApp
             </Button>
-            <Button variant="contained" onClick={() => handleContact('email')} className={s.pinkButton}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={() => handleContact('email')}
+              sx={{ width: '200px' }}
+            >
               Email
             </Button>
-          </div>
-
-          <div style={{ width: '100%', marginTop: '20px', alignItems: "center" }}>
-            <Button onClick={handleClose}>Fechar</Button>
           </div>
         </Box>
       </Modal>

@@ -4,6 +4,16 @@
   min-height: 100vh;
 }
 
+.title {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 25px;
+  color: #D457D2;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -22,7 +32,7 @@
 
 .centeredContent {
   text-align: center;
-  padding: 0 20px; 
+  padding: 0 20px;
 }
 
 .title {
@@ -82,8 +92,10 @@
 .footer {
   width: 100%;
   padding-top: 10px;
-  background-color: #80BBD9; /* Ensure the footer has a background color for visibility */
-  margin-top: auto; /* Push the footer to the bottom */
+  background-color: #80BBD9;
+  /* Ensure the footer has a background color for visibility */
+  margin-top: auto;
+  /* Push the footer to the bottom */
 }
 
 .iconWrapper {
@@ -93,14 +105,18 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 3px solid #ffffff; /* White border */
-  background-color: transparent; /* Transparent background */
-  margin-top: 0px; /* Adjust as needed */
+  border: 3px solid #ffffff;
+  /* White border */
+  background-color: transparent;
+  /* Transparent background */
+  margin-top: 0px;
+  /* Adjust as needed */
   margin-right: 20px;
 }
 
 .icon {
-  color: #ffffff; /* White color for the icon */
+  color: #ffffff;
+  /* White color for the icon */
 }
 
 .buttonContainer {
@@ -125,12 +141,15 @@
 .deleteIcon {
   cursor: pointer;
   color: #f6f9fa;
-  transition: color 0.3s ease, transform 0.2s ease; /* Transições suaves de cor e transformação */
+  transition: color 0.3s ease, transform 0.2s ease;
+  /* Transições suaves de cor e transformação */
 }
 
 .deleteIcon:hover {
-  color: #c4d8ef; /* Mudança de cor ao passar o mouse */
-  transform: scale(1.1); /* Escala ligeiramente aumentada ao passar o mouse */
+  color: #c4d8ef;
+  /* Mudança de cor ao passar o mouse */
+  transform: scale(1.1);
+  /* Escala ligeiramente aumentada ao passar o mouse */
 }
 
 

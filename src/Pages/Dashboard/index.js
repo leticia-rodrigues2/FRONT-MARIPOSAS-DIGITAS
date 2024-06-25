@@ -7,6 +7,7 @@ import s from "./style.module.css";
 import Alerts from "./Components/Alerts";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import baseUrl from "../../config";
 
 function Dashboard() {
 
@@ -17,8 +18,43 @@ function Dashboard() {
   };
 
 
+  const token = localStorage.getItem('token');
+  const email = localStorage.getItem('email');
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(`${baseUrl}/user/profile/full`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            "email": email,
+            "token": token
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch user profile');
+        }
+
+        const data = await response.json();
+
+        console.log(data); 
+
+        if(data.mensagem){
+          navigate('/perfil-create');
+        }
+
+      } catch (error) {
+        console.error('Error fetching user profile:', error);
+      }
+    };
+
+    fetchUserProfile();
+  }, []); 
+
+
+  useEffect(() => {
     if (!token) {
       navigate('/login');
     } else {
@@ -40,6 +76,8 @@ function Dashboard() {
       </Box>
     );
   }
+
+  
 
   return (
     <div className={s.container}>

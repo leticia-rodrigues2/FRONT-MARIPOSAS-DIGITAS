@@ -13,7 +13,7 @@ const ImagemDescriptionDash = () => {
                     <div className={Style['container-description']}>
                         <h1>
                             As <b>mariposas digitais</b> é uma iniciativa de impacto social que tem como missão
-                            fomentar o interesse e acesso à tecnologia para adolescentes do sexo feminino por meio da educação.
+                            fomentar o interesse e acesso à tecnologia para adolescentes do sexo feminino por meio da conexão.
                         </h1>
                         <div className={Style['logo-container']}>
                             <img src="images/logo-corte-3.png" alt="Logo of Mariposas Digitais" className={Style.logo} />
@@ -28,7 +28,7 @@ const ImagemDescriptionDash = () => {
                         <img src="images/logo-corte-3.png" alt="Logo of Mariposas Digitais" className={Style.logo2} />
                         <h1>
                             As <b>mariposas digitais</b> é uma iniciativa de impacto social que tem como missão
-                            fomentar o interesse e acesso à tecnologia para adolescentes do sexo feminino por meio da educação.
+                            fomentar o interesse e acesso à tecnologia para adolescentes do sexo feminino por meio da conexão.
                         </h1>
                     </div>
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Header from '../../Components/Header/Header';
 import { Footer } from '../../Components/Fotter';
 import { useNavigate } from "react-router-dom";
-import { TextField, Button, Box, CircularProgress, Alert, Snackbar } from '@mui/material'; 
+import { TextField, Button, Box, CircularProgress, Alert, Snackbar } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
 import s from './style.module.css';
 import baseUrl from "../../config.js"
+import HeaderLogoutDesktop from '../../Components/Header/HeaderLogout/HeaderLogoutDesktop/index.js';
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -15,7 +15,7 @@ const Contact = () => {
         message: ''
     });
 
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const navigate = useNavigate();
@@ -85,7 +85,7 @@ const Contact = () => {
 
     return (
         <div>
-            <Header />
+            <HeaderLogoutDesktop />
             <div className={s.container}>
                 <div className={s.container2}>
                     <div sx={{ mb: '100px' }}>
@@ -158,10 +158,10 @@ const Contact = () => {
                 </div>
             </div>
             <Snackbar open={openSnackbar} autoHideDuration={3500} onClose={handleCloseSnackbar}>
-        <MuiAlert icon={false} elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="info">
-        Email enviado com sucesso! <img src="images/borbo.png" alt="nivel" className={s.nivelButterfly} />
-        </MuiAlert>
-      </Snackbar>
+                <MuiAlert icon={false} elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="info">
+                    Email enviado com sucesso! <img src="images/borbo.png" alt="nivel" className={s.nivelButterfly} />
+                </MuiAlert>
+            </Snackbar>
             <Footer />
         </div>
     );

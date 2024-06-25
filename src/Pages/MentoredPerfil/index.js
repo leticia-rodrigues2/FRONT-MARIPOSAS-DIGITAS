@@ -215,7 +215,7 @@ const MentoredPerfil = () => {
                     value="mentor"
                   />
                   <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                    Desejo ser mentora
+                    Desejo ser madrinha
                   </label>
                 </div>
                 <div className={s.inputRow}>
@@ -227,7 +227,7 @@ const MentoredPerfil = () => {
                     value="mentee"
                   />
                   <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                    Desejo ser mentorada - receber apadrinhamento
+                    Desejo ser afilhada - receber apadrinhamento
                   </label>
                 </div>
               </div>
@@ -297,7 +297,7 @@ const MentoredPerfil = () => {
                           value='1'
                         />
                         <label htmlFor="oneMentee" className={`${s.checkboxLabel} ${s.text}`}>
-                          1 - UMA ÚNICA MENTORADA
+                          1 - UMA ÚNICA AFILHADA
                         </label>
                       </div>
                       <div className={s.inputRow}>
@@ -309,7 +309,7 @@ const MentoredPerfil = () => {
                           value='2'
                         />
                         <label htmlFor="twoMentees" className={`${s.checkboxLabel} ${s.text}`}>
-                          2 - DUAS MENTORADAS
+                          2 - DUAS AFILHADAS
                         </label>
                       </div>
                     </div>

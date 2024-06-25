@@ -2,6 +2,7 @@
 
 body {
     margin: 0;
+    padding: 0;
 }
 
 .home {
@@ -20,7 +21,6 @@ body {
     height: calc(100vh - 63px);
     background-image: url('../../../public/images/img-principal.png');
 }
-
 
 .container {
     background-color: #F0F0F0;

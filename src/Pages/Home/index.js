@@ -23,7 +23,7 @@ const Home = () => (
 
         <div className={Style.container}>
             <div className={Style['container-description']}>
-                <h1>Embarque na jornada de metamorfose e voe alto com o apoio das nossas mentoras!</h1>
+                <h1>Embarque na jornada de metamorfose e voe alto com o apoio das nossas madrinhas!</h1>
             </div>
 
             <div className={Style['content-info']}>
@@ -58,10 +58,10 @@ const Home = () => (
                             </div>
                             <CardContent>
                                 <Typography gutterBottom variant="body2" component="div">
-                                    <div className={Style.signup2} style={{ fontWeight: 'bold' }}>CONECTE-SE COM MENTORAS</div>
+                                    <div className={Style.signup2} style={{ fontWeight: 'bold' }}>COMPLETE SEU PERFIL</div>
                                 </Typography>
                                 <Typography variant="caption" color="text.secondary" fontSize="16px">
-                                    Visualize mentoras disponíveis e manifeste abertura para apadrinhamento.
+                                    Insira informações adicionais ao seu perfil e aguarde para ser apadrinhada.
                                 </Typography>
                             </CardContent>
                         </div>
@@ -80,7 +80,7 @@ const Home = () => (
                                     <div className={Style.signup2} style={{ fontWeight: 'bold' }}>OBTENHA APADRINHAMENTO</div>
                                 </Typography>
                                 <Typography variant="caption" color="text.secondary" fontSize="16px">
-                                    Seja apadrinhada e inicie sua jornada e tecnologia com apoio de sua mentora.
+                                    Seja apadrinhada e inicie sua jornada em tecnologia com apoio de uma madrinha.
                                 </Typography>
                             </CardContent>
                         </div>
@@ -99,7 +99,7 @@ const Home = () => (
 
 
         <div className={Style['contente-faq']}>
-            <Typography sx={{ textAlign: 'left', fontWeight: '800', color: 'white', marginBottom: 2 }}>
+            <Typography sx={{ textAlign: 'left', fontWeight: '800', fontSize: '20px', color: 'white', marginBottom: 10 }}>
                 FAQ | PERGUNTAS FREQUENTES
             </Typography>
 

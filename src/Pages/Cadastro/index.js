@@ -169,7 +169,7 @@ const Cadastro = () => {
                   color="secondary"
                   onChange={handleCheckboxChange}
                 />
-                <label htmlFor="madrinha" className="checkbox-label">Desejo ser mentora</label>
+                <label htmlFor="madrinha" className="checkbox-label">Desejo ser madrinha</label>
               </div>
               <div className={s['input-row4']}>
                 <Checkbox
@@ -178,7 +178,7 @@ const Cadastro = () => {
                   color="secondary"
                   onChange={handleCheckboxChange}
                 />
-                <label htmlFor="aluna" className="checkbox-label">Desejo ser mentorada - receber apadrinhamento</label>
+                <label htmlFor="aluna" className="checkbox-label">Desejo ser afilhada - receber apadrinhamento</label>
               </div>
 
               <TextField

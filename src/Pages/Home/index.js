@@ -2,10 +2,10 @@ import React from 'react';
 import Header from '../../Components/Header/Header';
 
 import { Grid } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { color } from 'style-value-types';
@@ -90,13 +90,8 @@ const Home = () => (
 
         </div>
         <div className={Style['content-video']}>
-            <video controls autoPlay muted>
-                <source src="https://docs.material-tailwind.com/demo.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+            <iframe style={{ aspectRatio: '16 / 9', width: '100%', maxWidth: '1270px'}} src="https://www.youtube.com/embed/pmY7wPp1L8E?si=40dD-Seg8NCVuh3M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
-
-
 
         <div id="section-faq" className={Style['contente-faq']}>
             <Typography sx={{ textAlign: 'left', fontWeight: '800', fontSize: '20px', color: 'white', marginBottom: 10 }}>

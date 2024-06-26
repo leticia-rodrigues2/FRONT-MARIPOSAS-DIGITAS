@@ -53,7 +53,7 @@ export function SecondFooter() {
     return (
         <Box component="footer" sx={{ width: '100%', bgcolor: '#80BBD9' }}>
             <Container
-                maxWidth="lg"
+                maxWidth={false}
                 sx={{
                     display: 'flex',
                     flexDirection: { xs: 'column', md: 'row' },

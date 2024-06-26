@@ -9,6 +9,7 @@ import "./style.module.css";
 import { AccountCircle } from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 import { Typography } from '@mui/material';
+import { HashLink } from 'react-router-hash-link';
 
 function HeaderLogoutDesktop() {
   const navigate = useNavigate();
@@ -30,12 +31,13 @@ function HeaderLogoutDesktop() {
               SOBRE
             </Button>
 
-            <Button
-              onClick={() => { navigate('/') }}
-              sx={{ my: 2, color: 'white', display: 'block', fontWeight: 'bold', marginRight: "30px", fontSize: '12px' }}
-            >
-              PERGUNTAS FREQUENTES
-            </Button>
+            <HashLink to="/#section-faq" style={{ textDecoration: 'none' }}>
+              <Button
+                sx={{ my: 2, color: 'white', display: 'block', fontWeight: 'bold', marginRight: "30px", fontSize: '12px' }}
+              >
+                PERGUNTAS FREQUENTES
+              </Button>
+            </HashLink>
 
             <Button
               onClick={() => { navigate('/contact') }}

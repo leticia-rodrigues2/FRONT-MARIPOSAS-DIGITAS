@@ -9,7 +9,11 @@ RUN npm i
 COPY . .
 
 ARG REACT_APP_API_URL=https://mariposas-digitais-back-bh67dloi7a-ue.a.run.app/api/md-user-service/v1
-RUN npm run build
 
-CMD npx serve@latest build
+# RUN npm run build
+
+# CMD npx serve@latest build
+
+# TODO: Fix routing problems to allow use of serve build
+CMD npm run prod
 

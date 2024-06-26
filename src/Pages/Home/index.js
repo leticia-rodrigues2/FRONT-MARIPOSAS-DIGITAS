@@ -98,7 +98,7 @@ const Home = () => (
 
 
 
-        <div className={Style['contente-faq']}>
+        <div id="section-faq" className={Style['contente-faq']}>
             <Typography sx={{ textAlign: 'left', fontWeight: '800', fontSize: '20px', color: 'white', marginBottom: 10 }}>
                 FAQ | PERGUNTAS FREQUENTES
             </Typography>

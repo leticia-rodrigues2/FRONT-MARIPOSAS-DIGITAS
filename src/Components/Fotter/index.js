@@ -5,6 +5,8 @@ import { Divider } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { HashLink } from 'react-router-hash-link';
+
 
 export function Footer() {
   return (
@@ -43,7 +45,7 @@ export function Footer() {
           </Box>
           <Box component="li">
             <Typography gutterBottom variant="body2" component="div">
-              <a href="/" style={{ fontWeight: 'bold', color: '#FFFFFF', textDecoration: 'none', fontSize: '12px' }}>PERGUNTAS FREQUENTES</a>
+              <HashLink to="/#section-faq" style={{ fontWeight: 'bold', color: '#FFFFFF', textDecoration: 'none', fontSize: '12px' }}>PERGUNTAS FREQUENTES</HashLink>
             </Typography>
           </Box>
           <Box component="li">

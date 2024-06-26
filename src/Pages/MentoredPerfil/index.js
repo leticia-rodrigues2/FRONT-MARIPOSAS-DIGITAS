@@ -88,6 +88,10 @@ const MentoredPerfil = () => {
     setProfile(event.target.value);
   };
 
+  const handleAgeChange = (event) => {
+    setAge(event.target.value);
+  };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -262,6 +266,9 @@ const MentoredPerfil = () => {
                     CARREGAR IMAGEM
                   </Button>
                 </label>
+
+
+
                 {preview && (
                   <ImagePreviewContainer>
                     <img src={preview} alt="Selected" style={{ width: "100%", height: "100%" }} />
@@ -271,6 +278,20 @@ const MentoredPerfil = () => {
                   </ImagePreviewContainer>
                 )}
               </div>
+
+
+              <TextField
+                sx={{ my: '20px' }}
+                id="age"
+                type="text"
+                label="Insira sua idade"
+                size="small"
+                color="secondary"
+                fullWidth
+                value={age}
+                onChange={handleAgeChange}
+        
+              />
               <div>
                 {isMentor && (
                   <>

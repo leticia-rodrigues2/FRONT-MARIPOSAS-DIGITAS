@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Checkbox, Button, IconButton } from "@mui/material";
+import { TextField, Checkbox, Button, IconButton,Box, CircularProgress, } from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import s from "./style.module.css";
@@ -24,6 +24,7 @@ const Cadastro = () => {
   const [phone, setPhone] = useState("");
   const [isMentor, setIsMentor] = useState(1);
   const [phoneError, setPhoneError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,6 +40,21 @@ const Cadastro = () => {
     }
     setShowAlert(false);
   };
+
+  if (loading) {
+    return (
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+            }}
+        >
+            <CircularProgress color="secondary" />
+        </Box>
+    );
+}
 
   const handleNameChange = (event) => {
     const name = event.target.value;
@@ -121,7 +137,7 @@ const Cadastro = () => {
       setShowAlert(true);
       return;
     }
-    
+    setLoading(true)
     try {
       const response = await fetch(`${baseUrl}/user`, {
         method: 'POST',

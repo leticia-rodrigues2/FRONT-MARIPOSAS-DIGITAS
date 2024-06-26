@@ -41,7 +41,7 @@ function Dashboard() {
 
         console.log(data); 
 
-        if(data.mensagem == false){
+        if(data.mensagem == "false"){
           navigate('/perfil-create');
         }
 

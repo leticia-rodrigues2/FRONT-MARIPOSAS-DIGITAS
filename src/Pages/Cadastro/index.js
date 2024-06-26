@@ -150,11 +150,16 @@ const Cadastro = () => {
       if (response.ok) {
         navigate('/login');
       } else {
+        const respj = await response.json()
+        const emailExists = respj._embedded.errors.some(({ message }) => message.search('User account already exists'));
+        if (emailExists) setEmailError('Já existe esse email cadastrado')
         setShowAlert(true);
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
       setShowAlert(true);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -166,9 +171,13 @@ const Cadastro = () => {
     setShowPasswordConfirmation(!showPasswordConfirmation);
   };
 
-  const handleCheckboxChange = (event) => {
-    setIsMentor(event.target.checked ? 1 : 2);
-  };
+  const mentorSelected = () => {
+    setIsMentor(1)
+  }
+
+  const menteeSelected = () => {
+    setIsMentor(2)
+  }
 
   return (
     <div>
@@ -183,7 +192,7 @@ const Cadastro = () => {
                   id="madrinha"
                   checked={isMentor === 1}
                   color="secondary"
-                  onChange={handleCheckboxChange}
+                  onChange={() => mentorSelected()}
                 />
                 <label htmlFor="madrinha" className="checkbox-label">Desejo ser madrinha</label>
               </div>
@@ -192,7 +201,7 @@ const Cadastro = () => {
                   id="aluna"
                   checked={isMentor === 2}
                   color="secondary"
-                  onChange={handleCheckboxChange}
+                  onChange={() => menteeSelected()}
                 />
                 <label htmlFor="aluna" className="checkbox-label">Desejo ser afilhada - receber apadrinhamento</label>
               </div>

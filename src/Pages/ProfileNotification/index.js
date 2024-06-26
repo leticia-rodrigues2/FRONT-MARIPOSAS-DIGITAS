@@ -190,8 +190,31 @@ export default function ProfileNotification() {
     }
   };
 
-  const handleClose = (index) => {
+  const handleClose = async (index) => {
     setVisibleStudents((prev) => prev.map((visible, i) => (i === index ? false : visible)));
+    try {
+      const response = await fetch(`${baseUrl}/sponsorship/invalid/mentee`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "token": token,
+          "email": email,
+        },
+        body: JSON.stringify([{
+          emailMentee: students[index].email,
+        }])
+      });
+      if (response.ok) {
+        const updatedStudents = [...students];
+        updatedStudents.splice(index, 1);
+        setStudents(protectFirstTwoPositions(updatedStudents));
+        await fetchSponsorshipMentee();
+      } else {
+        console.error('Erro ao remover aluno:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao remover aluno:', error);
+    }
   };
 
   const handleCloseSnackbar = () => {

@@ -79,7 +79,6 @@ export default function ProfileNotification() {
       }
 
       let data = await response.json();
-      console.log(data)
 
       if (Array.isArray(data)) {
         data = await Promise.all(data.map(async (s) => {
@@ -123,7 +122,7 @@ export default function ProfileNotification() {
 
       setIsSponsored(data.isSponsored);
       setMentee(data.menteeLevel === 'CASULO' || data.menteeLevel === 'LARGATA');
-
+      console.log(data)
       if (data.isSponsored === false) {
         setShowEmptyProfile(true);
         setMessage('VOCÊ AINDA NÃO POSSUI UMA MADRINHA!');
@@ -132,7 +131,7 @@ export default function ProfileNotification() {
         fetchDataIsSponsored();
         setShowEmptyProfile(true);
         setMessage('VOCÊ POSSUI UMA MADRINHA!');
-        setMessageSubTitle('MARIPOSA, FIQUE TRANQUILA! EM BREVE VOCÊ ESTARÁ CONECTADA!');
+        setMessageSubTitle('ENTRE NA ABA DE APADRINHAMENTO PARA VISUALIZAR AS INFORMAÇÕES DE CONTATO DE SUA MADRINHA!');
       }
 
     } catch (error) {

@@ -138,7 +138,7 @@ const Help = () => {
                                     color="secondary"
                                     onChange={() => handleUserTypeChange("MENTORA")}
                                 />
-                                <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser mentora</label>
+                                <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser madrinha</label>
                             </div>
                             <div className={s.inputRow4}>
                                 <Checkbox
@@ -147,7 +147,7 @@ const Help = () => {
                                     color="secondary"
                                     onChange={() => handleUserTypeChange("AFILHADA")}
                                 />
-                                <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser mentorada - receber apadrinhamento</label>
+                                <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>Desejo ser afilhada - receber apadrinhamento</label>
                             </div>
                             <Box sx={{ width: '100%', height: 200, marginTop: 2 }}>
                                 <TextField

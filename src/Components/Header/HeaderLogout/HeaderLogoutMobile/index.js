@@ -33,9 +33,9 @@ export default function HeaderMobile() {
     { text: 'PÁGINA INICIAL', icon: <HomeIcon />, route: '/dashboard' },
     { text: 'PERFIL', icon: <CoPresentRoundedIcon />, route: '/profile' },
     { text: 'AJUDA', icon: <HelpOutlineOutlinedIcon />, route: '/help' },
-    { 
-      text: isLoggedIn ? 'SAIR' : 'ENTRAR', 
-      icon: isLoggedIn ? <LogoutOutlinedIcon /> : <LoginIcon />, 
+    {
+      text: isLoggedIn ? 'SAIR' : 'ENTRAR',
+      icon: isLoggedIn ? <LogoutOutlinedIcon /> : <LoginIcon />,
       route: isLoggedIn ? '/login' : '/login' // Muda a rota se necessário
     }
   ];
@@ -61,7 +61,9 @@ export default function HeaderMobile() {
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: '#80BBD9', boxShadow: 'none', minHeight: "12px !imaprtant" }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <div className='logo' style={{ textAlign: 'center', margin: 'auto' }}>
-            <img src="images//LogoText.png" alt="Logo" className="logo" style={{ width: '150px' }} />
+            <a href="/">
+              <img src="images//LogoText.png" alt="Logo" className="logo" style={{ width: '150px' }} />
+            </a>
           </div>
           <IconButton
             size="large"

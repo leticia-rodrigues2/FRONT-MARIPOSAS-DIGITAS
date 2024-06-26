@@ -88,6 +88,10 @@ const MentoredPerfil = () => {
     setProfile(event.target.value);
   };
 
+  const handleAgeChange = (event) => {
+    setAge(event.target.value);
+  };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -215,7 +219,7 @@ const MentoredPerfil = () => {
                     value="mentor"
                   />
                   <label htmlFor="mentor" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                    Desejo ser mentora
+                    Desejo ser madrinha
                   </label>
                 </div>
                 <div className={s.inputRow}>
@@ -227,7 +231,7 @@ const MentoredPerfil = () => {
                     value="mentee"
                   />
                   <label htmlFor="mentee" className={`${s.checkboxLabel} ${s.customLabel}`}>
-                    Desejo ser mentorada - receber apadrinhamento
+                    Desejo ser afilhada - receber apadrinhamento
                   </label>
                 </div>
               </div>
@@ -262,6 +266,9 @@ const MentoredPerfil = () => {
                     CARREGAR IMAGEM
                   </Button>
                 </label>
+
+
+
                 {preview && (
                   <ImagePreviewContainer>
                     <img src={preview} alt="Selected" style={{ width: "100%", height: "100%" }} />
@@ -271,6 +278,20 @@ const MentoredPerfil = () => {
                   </ImagePreviewContainer>
                 )}
               </div>
+
+
+              <TextField
+                sx={{ my: '20px' }}
+                id="age"
+                type="text"
+                label="Insira sua idade"
+                size="small"
+                color="secondary"
+                fullWidth
+                value={age}
+                onChange={handleAgeChange}
+        
+              />
               <div>
                 {isMentor && (
                   <>
@@ -297,7 +318,7 @@ const MentoredPerfil = () => {
                           value='1'
                         />
                         <label htmlFor="oneMentee" className={`${s.checkboxLabel} ${s.text}`}>
-                          1 - UMA ÚNICA MENTORADA
+                          1 - UMA ÚNICA AFILHADA
                         </label>
                       </div>
                       <div className={s.inputRow}>
@@ -309,7 +330,7 @@ const MentoredPerfil = () => {
                           value='2'
                         />
                         <label htmlFor="twoMentees" className={`${s.checkboxLabel} ${s.text}`}>
-                          2 - DUAS MENTORADAS
+                          2 - DUAS AFILHADAS
                         </label>
                       </div>
                     </div>

@@ -5,7 +5,9 @@ import s from "./style.module.css";
 const DefaultHeader = () => {
   return (
     <header className={s["header"]}>
-      <img src="images//LogoText.png" alt="Logo" className={s["logo"]} />
+      <a href="/">
+        <img src="images//LogoText.png" alt="Logo" className={s["logo"]} />
+      </a>
     </header>
   );
 };

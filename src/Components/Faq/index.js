@@ -11,15 +11,15 @@ const faqsData = {
   "faqs": [
     {
       title: "O que é o Mariposas Digitais?",
-      content: "Mariposas Digitais é uma plataforma que visa facilitar a conexão entre mentoras e pessoas em busca de orientação e mentoria em diversas áreas do mundo digital. Funcionando como um meio de mentoramento, o Mariposas Digitais proporciona um ambiente onde mentoras experientes podem compartilhar seus conhecimentos, insights e experiências com aqueles que desejam aprender e se desenvolver nessas áreas. Essa troca de conhecimento e experiência ajuda a impulsionar o crescimento pessoal e profissional dos envolvidos, criando uma comunidade colaborativa onde todos têm a oportunidade de crescer e se destacar no mundo digital."
+      content: "Somos uma plataforma destinada a <b>facilitar a conexão entre mulheres atuantes na área de tecnologia (madrinhas) e meninas entre treze (13) e dezoito (18) anos interessadas em tecnologia (afilhadas)</b>. Atuando como <b>intermediadora</b>, visamos proporcionar um ambiente onde madrinhas possam compartilhar seus conhecimentos, insights e experiências com meninas que desejam conhecer, aprender e se desenvolver na área. Essa troca de conhecimento e direcionamento visa reduzir as lacunas de gênero existentes no setor, apresentando a tecnologia como uma opção de carreira e incentivando a aspiração de jovens nessa área."
     },
     {
       title: "Como faço para obter apadrinhamento?",
-      content: "Comece criando um perfil completo e informativo no Mariposas Digitais e selecione a opção <b>Desejo ser mentorada - receber apadrinhamento</b>. Isso ajudará as mentoras a entenderem seus interesses, habilidades e metas de aprendizado."
+      content: "Para obter apadrinhamento, basta seguir os passos:<br>1. <b>Cadastre-se</b> em nossa plataforma, inserindo seus dados básicos.</br>2. Selecione a opção <b>\"Desejo ser afilhada - receber apadrinhamento\"</b>.<br>3. <b>Complete seu perfil</b>, contando um pouco sobre você, seu nível de conhecimento na área e seus interesses e metas.</br>Isso ajudará as madrinhas a te conhecerem melhor e a realizarem o apadrinhamento.<br><br>Depois disso, basta aguardar a conexão de uma madrinha para iniciar a sua transformação!</br></br>"
     },
     {
-      title: "Como faço para me voluntariar enquanto mentora?",
-      content: "Criando um perfil completo e informativo no Mariposas Digitais e selecione a opção <b>Desejo ser mentora</b>."
+      title: "Como faço para me voluntariar como madrinha?",
+      content: "Para se tornar uma madrinha, basta seguir os passos:<br>1. <b>Cadastre-se</b> em nossa plataforma, inserindo seus dados básicos.</br>2. Selecione a opção <b>\"Desejo ser madrinha\"</b>.<br>3. <b>Complete seu perfil</b>, contando um pouco sobre sua área de atuação, disponibilidade, interesses e metas.</br>Isso ajudará a gerar identificação com sua afilhada no contato inicial.<br><br>Depois disso, visualize as diversas meninas disponíveis e oferte apadrinhamento!</br></br>"
     }
   ]
 };
